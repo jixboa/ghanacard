@@ -9,6 +9,7 @@ import { AppBar, Typography, Toolbar, makeStyles } from "@material-ui/core";
 const useStyle = makeStyles({
   root: {
     flexGrow: 1,
+    margin: "0px auto",
   },
   appbarStyle: {
     background: "#15710c",
@@ -35,7 +36,7 @@ const NavBar = () => {
     <>
       <AppBar position="static" className={classes.appbarStyle}>
         <Toolbar>
-          <Typography variant="h4" className={classes.root}>
+          <Typography variant="h5" className={classes.root}>
             <Link className={classes.linkStyle} to="/">
               GAP Ghana Card Update
             </Link>
