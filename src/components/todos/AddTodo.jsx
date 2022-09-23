@@ -53,6 +53,11 @@ const AddTodo = ({ todo, setTodo }) => {
     alt2: "Upload an Image",
   });
 
+  const [{ alt3, src3 }, setImg3] = useState({
+    src3: placeholder,
+    alt3: "Upload an Image",
+  });
+
   const handleImg = (e) => {
     if (e.target.files[0]) {
       setImg({
@@ -67,6 +72,15 @@ const AddTodo = ({ todo, setTodo }) => {
       setImg2({
         src2: URL.createObjectURL(e.target.files[0]),
         alt2: e.target.files[0].name,
+      });
+    }
+  };
+
+  const handleImg3 = (e) => {
+    if (e.target.files[0]) {
+      setImg3({
+        src3: URL.createObjectURL(e.target.files[0]),
+        alt3: e.target.files[0].name,
       });
     }
   };
@@ -103,7 +117,7 @@ const AddTodo = ({ todo, setTodo }) => {
                   required
                   fullWidth
                   id="accountNo"
-                  label="Your Account Number"
+                  label="GAP Account Number"
                   type={"tel"}
                 />
               </Grid>
@@ -213,6 +227,39 @@ const AddTodo = ({ todo, setTodo }) => {
                     <img
                       src={src2}
                       alt={alt2}
+                      className="form-img__img-preview"
+                    />
+                  </div>
+                </Item>
+              </Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={6}>
+                <Item>
+                  <div className="form__img-input-container">
+                    <input
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                      id="photo3"
+                      className="visually-hidden"
+                      onChange={handleImg3}
+                      label="Upload"
+                    />
+                    <label htmlFor="photo3" className="form-img__file-label">
+                      {alt !== "Upload an Image" ? (
+                        <>
+                          <Typography></Typography>
+                        </>
+                      ) : (
+                        <>
+                          <Typography style={{ marginTop: "20px" }}>
+                            Take a Selfie
+                          </Typography>
+                        </>
+                      )}
+                    </label>
+                    <img
+                      src={src3}
+                      alt={alt3}
                       className="form-img__img-preview"
                     />
                   </div>
