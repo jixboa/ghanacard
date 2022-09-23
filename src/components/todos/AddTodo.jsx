@@ -1,17 +1,10 @@
 import { React, useState } from "react";
 import { TextField, Button, Typography, Container } from "@material-ui/core";
-import { Send } from "@material-ui/icons";
-import {
-  makeStyles,
-  CssBaseline,
-  FormControlLabel,
-  Avatar,
-} from "@material-ui/core";
-import Box from "@material-ui/core";
+import { makeStyles, CssBaseline } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
-import { useDispatch } from "react-redux";
-import { addTodo, updateTodo } from "../../store/actions/todoActions";
+//import { useDispatch } from "react-redux";
+//import { addTodo, updateTodo } from "../../store/actions/todoActions";
 import placeholder from "../todos/placeholder.png";
 
 import "../todos/image.css";
@@ -36,7 +29,7 @@ const useStyle = makeStyles({
 
 const AddTodo = ({ todo, setTodo }) => {
   const classes = useStyle();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [{ alt, src }, setImg] = useState({
     src: placeholder,
@@ -66,57 +59,8 @@ const AddTodo = ({ todo, setTodo }) => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (todo._id) {
-      const id = todo._id;
-      const updatedTodo = {
-        name: todo.name,
-        isComplete: todo.isComplete,
-        date: todo.date,
-        author: todo.author,
-        uid: todo.uid,
-      };
-      dispatch(updateTodo(updatedTodo, id));
-    } else {
-      const newTodo = {
-        ...todo,
-        date: new Date(),
-      };
-      dispatch(addTodo(newTodo));
-    }
-
-    setTodo({
-      name: "",
-      isComplete: false,
-    });
-  };
-
   return (
     <>
-      {/* <form
-        noValidate
-        autoComplete="off"
-        className={classes.formStyle}
-        onSubmit={handleSubmit}>
-        <TextField
-          id="enter-todo"
-          variant="outlined"
-          autoFocus
-          fullWidth
-          label="enterTodo"
-          value={todo.name}
-          onChange={(e) => setTodo({ ...todo, name: e.target.value })}
-        />
-
-        <Button
-          className={classes.submitButtton}
-          color="primary"
-          variant="contained"
-          type="submit">
-          <Send />
-        </Button>
-      </form> */}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -203,7 +147,7 @@ const AddTodo = ({ todo, setTodo }) => {
                     label="Upload"
                   />
                   <label htmlFor="photo1" className="form-img__file-label">
-                    {alt != "Upload an Image" ? (
+                    {alt !== "Upload an Image" ? (
                       <>
                         <Typography></Typography>
                       </>
@@ -212,19 +156,6 @@ const AddTodo = ({ todo, setTodo }) => {
                         <Typography style={{ marginTop: "20px" }}>
                           Front Image
                         </Typography>
-                        {/* <svg
-                          width="100"
-                          height="100"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#56ceef"
-                          strokeWidth="1"
-                          strokeLinecap="round"
-                          strokeLinejoin="round">
-                          <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
-                          <circle cx="12" cy="10" r="3" />
-                          <circle cx="12" cy="12" r="10" />
-                        </svg> */}
                       </>
                     )}
                   </label>
@@ -248,7 +179,7 @@ const AddTodo = ({ todo, setTodo }) => {
                     label="Upload"
                   />
                   <label htmlFor="photo2" className="form-img__file-label">
-                    {alt != "Upload an Image" ? (
+                    {alt !== "Upload an Image" ? (
                       <>
                         <Typography></Typography>
                       </>
@@ -257,19 +188,6 @@ const AddTodo = ({ todo, setTodo }) => {
                         <Typography style={{ marginTop: "20px" }}>
                           Back Image
                         </Typography>
-                        {/* <svg
-                          width="100"
-                          height="100"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#56ceef"
-                          strokeWidth="1"
-                          strokeLinecap="round"
-                          strokeLinejoin="round">
-                          <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
-                          <circle cx="12" cy="10" r="3" />
-                          <circle cx="12" cy="12" r="10" />
-                        </svg> */}
                       </>
                     )}
                   </label>
