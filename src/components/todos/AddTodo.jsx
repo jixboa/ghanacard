@@ -153,7 +153,7 @@ const AddTodo = ({ todo, setTodo }) => {
               container
               rowSpacing={1}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-              <Grid item xs={5}>
+              <Grid item xs={6}>
                 <Item>
                   <div className="form__img-input-container">
                     <input
@@ -186,7 +186,7 @@ const AddTodo = ({ todo, setTodo }) => {
                   </div>
                 </Item>
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={6}>
                 <Item>
                   <div className="form__img-input-container">
                     <input
