@@ -12,6 +12,16 @@ import Paper from "@mui/material/Paper";
 import placeholder from "../todos/placeholder.png";
 
 import "../todos/image.css";
+
+const Div = styled("div")(({ theme }) => ({
+  ...theme.typography.button,
+  backgroundColor: "#20b113",
+  padding: theme.spacing(1),
+  marginBottom: "20px",
+  fontWeight: "bolder",
+  color: "whitesmoke",
+}));
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -90,9 +100,7 @@ const AddTodo = ({ todo, setTodo }) => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Customer Details
-          </Typography>
+          <Div>Customer Details</Div>
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
