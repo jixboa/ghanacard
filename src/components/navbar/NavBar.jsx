@@ -11,7 +11,7 @@ const useStyle = makeStyles({
     flexGrow: 1,
   },
   appbarStyle: {
-    color: "#15710c",
+    background: "#15710c",
   },
 
   linkStyle: {
@@ -37,7 +37,7 @@ const NavBar = () => {
         <Toolbar>
           <Typography variant="h4" className={classes.root}>
             <Link className={classes.linkStyle} to="/">
-              GAP Ghana Card Upload
+              GAP Ghana Card Update
             </Link>
           </Typography>
         </Toolbar>

@@ -1,7 +1,8 @@
 import { React, useState } from "react";
-import { TextField, Button, Typography, Container } from "@material-ui/core";
+import { TextField, Typography, Container } from "@material-ui/core";
 import { makeStyles, CssBaseline } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import Button from "@mui/material/Button";
 
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -34,6 +35,7 @@ const useStyle = makeStyles({
   },
   submit: {
     marginTop: "20px",
+    color: "success",
   },
 });
 
@@ -151,9 +153,7 @@ const AddTodo = ({ todo, setTodo }) => {
               container
               rowSpacing={1}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-              <Grid item xs={6}></Grid>
-              <Grid item xs={6}></Grid>
-              <Grid item xs={6}>
+              <Grid item xs={5}>
                 <Item>
                   <div className="form__img-input-container">
                     <input
@@ -186,7 +186,7 @@ const AddTodo = ({ todo, setTodo }) => {
                   </div>
                 </Item>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={5}>
                 <Item>
                   <div className="form__img-input-container">
                     <input
@@ -224,7 +224,7 @@ const AddTodo = ({ todo, setTodo }) => {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="success"
               className={classes.submit}>
               Submit Details
             </Button>
