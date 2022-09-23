@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import AddTodo from "./AddTodo";
-import ListTodos from "./ListTodos";
+//import ListTodos from "./ListTodos";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+//import { Navigate } from "react-router-dom";
 import PropagateLoader from "react-spinners/PropagateLoader";
 
 const Todos = () => {

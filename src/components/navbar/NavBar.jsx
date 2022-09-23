@@ -3,13 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut } from "../../store/actions/authAction";
 
-import {
-  AppBar,
-  Typography,
-  Toolbar,
-  Button,
-  makeStyles,
-} from "@material-ui/core";
+import { AppBar, Typography, Toolbar, makeStyles } from "@material-ui/core";
 // import ReactDOM from "react-dom";
 
 const useStyle = makeStyles({
@@ -31,18 +25,12 @@ const useStyle = makeStyles({
 
 const NavBar = () => {
   const classes = useStyle();
-  const auth = useSelector((state) => state.auth);
+  //const auth = useSelector((state) => state.auth);
 
   // console.log(state)
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  //const navigate = useNavigate();
+  //const dispatch = useDispatch();
 
-  const HandleSignOut = () => {
-    //signOut the user
-    dispatch(signOut());
-    console.log("signed Out");
-    navigate("/signin");
-  };
   return (
     <>
       <AppBar position="static" className={classes.appbarStyle}>
