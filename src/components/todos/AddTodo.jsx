@@ -3,11 +3,21 @@ import { TextField, Button, Typography, Container } from "@material-ui/core";
 import { makeStyles, CssBaseline } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+
 //import { useDispatch } from "react-redux";
 //import { addTodo, updateTodo } from "../../store/actions/todoActions";
 import placeholder from "../todos/placeholder.png";
 
 import "../todos/image.css";
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 const useStyle = makeStyles({
   formStyle: {
@@ -77,7 +87,8 @@ const AddTodo = ({ todo, setTodo }) => {
                   required
                   fullWidth
                   id="customerNames"
-                  label="First name - Other names -- Surname"
+                  label="First name -- Other names -- Surname"
+                  type={"text"}
                   autoFocus
                 />
               </Grid>
@@ -91,7 +102,7 @@ const AddTodo = ({ todo, setTodo }) => {
                   fullWidth
                   id="accountNo"
                   label="Your Account Number"
-                  autoFocus
+                  type={"tel"}
                 />
               </Grid>
 
@@ -104,7 +115,6 @@ const AddTodo = ({ todo, setTodo }) => {
                   fullWidth
                   id="phone"
                   label="Phone Number"
-                  autoFocus
                 />
               </Grid>
 
@@ -117,7 +127,6 @@ const AddTodo = ({ todo, setTodo }) => {
                   fullWidth
                   id="ghanaCardNo"
                   label="Ghana Card Number"
-                  autoFocus
                 />
               </Grid>
 
@@ -136,67 +145,78 @@ const AddTodo = ({ todo, setTodo }) => {
                   }}
                 />
               </Grid>
-              <Grid item xs={5} style={{ marginLeft: "35px" }}>
-                <div className="form__img-input-container">
-                  <input
-                    type="file"
-                    accept=".png, .jpg, .jpeg"
-                    id="photo1"
-                    className="visually-hidden"
-                    onChange={handleImg}
-                    label="Upload"
-                  />
-                  <label htmlFor="photo1" className="form-img__file-label">
-                    {alt !== "Upload an Image" ? (
-                      <>
-                        <Typography></Typography>
-                      </>
-                    ) : (
-                      <>
-                        <Typography style={{ marginTop: "20px" }}>
-                          Front Image
-                        </Typography>
-                      </>
-                    )}
-                  </label>
-                  <img
-                    src={src}
-                    alt={alt}
-                    className="form-img__img-preview"
-                    label="Upload"
-                  />
-                </div>
-              </Grid>
+            </Grid>
 
-              <Grid item xs={5}>
-                <div className="form__img-input-container">
-                  <input
-                    type="file"
-                    accept=".png, .jpg, .jpeg"
-                    id="photo2"
-                    className="visually-hidden"
-                    onChange={handleImg2}
-                    label="Upload"
-                  />
-                  <label htmlFor="photo2" className="form-img__file-label">
-                    {alt !== "Upload an Image" ? (
-                      <>
-                        <Typography></Typography>
-                      </>
-                    ) : (
-                      <>
-                        <Typography style={{ marginTop: "20px" }}>
-                          Back Image
-                        </Typography>
-                      </>
-                    )}
-                  </label>
-                  <img
-                    src={src2}
-                    alt={alt2}
-                    className="form-img__img-preview"
-                  />
-                </div>
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              <Grid item xs={6}></Grid>
+              <Grid item xs={6}></Grid>
+              <Grid item xs={6}>
+                <Item>
+                  <div className="form__img-input-container">
+                    <input
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                      id="photo1"
+                      className="visually-hidden"
+                      onChange={handleImg}
+                      label="Upload"
+                    />
+                    <label htmlFor="photo1" className="form-img__file-label">
+                      {alt !== "Upload an Image" ? (
+                        <>
+                          <Typography></Typography>
+                        </>
+                      ) : (
+                        <>
+                          <Typography style={{ marginTop: "20px" }}>
+                            Front Image
+                          </Typography>
+                        </>
+                      )}
+                    </label>
+                    <img
+                      src={src}
+                      alt={alt}
+                      className="form-img__img-preview"
+                      label="Upload"
+                    />
+                  </div>
+                </Item>
+              </Grid>
+              <Grid item xs={6}>
+                <Item>
+                  <div className="form__img-input-container">
+                    <input
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                      id="photo2"
+                      className="visually-hidden"
+                      onChange={handleImg2}
+                      label="Upload"
+                    />
+                    <label htmlFor="photo2" className="form-img__file-label">
+                      {alt !== "Upload an Image" ? (
+                        <>
+                          <Typography></Typography>
+                        </>
+                      ) : (
+                        <>
+                          <Typography style={{ marginTop: "20px" }}>
+                            Back Image
+                          </Typography>
+                        </>
+                      )}
+                    </label>
+                    <img
+                      src={src2}
+                      alt={alt2}
+                      className="form-img__img-preview"
+                    />
+                  </div>
+                </Item>
               </Grid>
             </Grid>
 
