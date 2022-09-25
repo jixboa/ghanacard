@@ -321,7 +321,7 @@ const AddTodo = ({ todo, setTodo }) => {
               variant="contained"
               color="success"
               className={classes.submit}>
-              Submit Details
+              Send Details
             </Button>
           </form>
         </div>
