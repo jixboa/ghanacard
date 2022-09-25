@@ -2,6 +2,9 @@ import { toast } from "react-toastify";
 
 const todoReducer = (state = [], action) => {
   switch (action.type) {
+    case "ADD_IMAGE":
+      return [action.image.data, ...state];
+
     case "ADD_TODO":
       toast.success(`${action.todo.data.name} todo Added Successfully`, {
         position: toast.POSITION.TOP_CENTER,

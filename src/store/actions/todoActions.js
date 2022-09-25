@@ -3,14 +3,15 @@ import API from "../../api/root";
 import { toast } from "react-toastify";
 import { setHeaders } from "../../api";
 
-export const getTodos = () => {
-  return (dispatch) => {
+export const addImage = (customer) => {
+  console.log(customer.image1);
+  return (dispatch, getState) => {
     API()
-      .get("/items", setHeaders())
-      .then((todos) => {
+      .post("/images", customer, setHeaders())
+      .then((image) => {
         dispatch({
-          type: "GET_TODOS",
-          todos,
+          type: "ADD_IMAGE",
+          image,
         });
       })
       .catch((error) => {
@@ -53,6 +54,24 @@ export const addTodo = (newTodo) => {
           position: toast.POSITION.TOP_CENTER,
         });
       }); */
+  };
+};
+export const getTodos = () => {
+  return (dispatch) => {
+    API()
+      .get("/items", setHeaders())
+      .then((todos) => {
+        dispatch({
+          type: "GET_TODOS",
+          todos,
+        });
+      })
+      .catch((error) => {
+        console.log(error.response);
+        toast.error(error.response?.data, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      });
   };
 };
 

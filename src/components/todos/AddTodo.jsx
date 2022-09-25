@@ -3,6 +3,8 @@ import { TextField, Typography, Container } from "@material-ui/core";
 import { makeStyles, CssBaseline } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "@mui/material/Button";
+import { useDispatch } from "react-redux";
+import { addImage } from "../../store/actions/todoActions";
 
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -51,21 +53,22 @@ const useStyle = makeStyles({
 
 const AddTodo = ({ todo, setTodo }) => {
   const classes = useStyle();
+  const dispatch = useDispatch();
   // const dispatch = useDispatch();
 
   const [{ alt, src }, setImg] = useState({
     src: placeholder,
-    alt: "Upload an Image",
+    alt: "",
   });
 
   const [{ alt2, src2 }, setImg2] = useState({
     src2: placeholder,
-    alt2: "Upload an Image",
+    alt2: "",
   });
 
   const [{ alt3, src3 }, setImg3] = useState({
     src3: placeholder,
-    alt3: "Upload an Image",
+    alt3: "",
   });
 
   const handleImg = (e) => {
@@ -75,6 +78,8 @@ const AddTodo = ({ todo, setTodo }) => {
         alt: e.target.files[0].name,
       });
     }
+    console.log({ alt });
+    console.log({ src });
   };
 
   const handleImg2 = (e) => {
@@ -93,6 +98,25 @@ const AddTodo = ({ todo, setTodo }) => {
         alt3: e.target.files[0].name,
       });
     }
+    console.log({ src3 });
+    console.log({ alt3 });
+    console.log(customer.image3);
+  };
+
+  const [customer, setCustomer] = useState({
+    fullname: "",
+    accountNo: "",
+    phone: "",
+    ghanacard: "",
+    dateOfbirth: "",
+    image1: src,
+    image2: src2,
+    image3: src3,
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addImage(customer));
   };
 
   return (
@@ -101,12 +125,12 @@ const AddTodo = ({ todo, setTodo }) => {
         <CssBaseline />
         <div className={classes.paper}>
           <Div>Customer Details</Div>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   autoComplete="Customer names"
-                  name="customerNames"
+                  name="fullname"
                   variant="outlined"
                   required
                   fullWidth
@@ -114,6 +138,9 @@ const AddTodo = ({ todo, setTodo }) => {
                   label="First name -- Other names -- Surname"
                   type={"text"}
                   autoFocus
+                  onChange={(e) =>
+                    setCustomer({ ...customer, fullname: e.target.value })
+                  }
                 />
               </Grid>
 
@@ -127,6 +154,9 @@ const AddTodo = ({ todo, setTodo }) => {
                   id="accountNo"
                   label="GAP Account Number"
                   type={"tel"}
+                  onChange={(e) =>
+                    setCustomer({ ...customer, accountNo: e.target.value })
+                  }
                 />
               </Grid>
 
@@ -139,23 +169,30 @@ const AddTodo = ({ todo, setTodo }) => {
                   fullWidth
                   id="phone"
                   label="Phone Number"
+                  onChange={(e) =>
+                    setCustomer({ ...customer, phone: e.target.value })
+                  }
                 />
               </Grid>
 
               <Grid item xs={12}>
                 <TextField
                   autoComplete="ghanaCardNo"
-                  name="ghanaCardNo"
+                  name="ghanacard"
                   variant="outlined"
                   required
                   fullWidth
-                  id="ghanaCardNo"
+                  id="ghanacard"
                   label="Ghana Card Number"
+                  onChange={(e) =>
+                    setCustomer({ ...customer, ghanacard: e.target.value })
+                  }
                 />
               </Grid>
 
               <Grid item xs={12}>
                 <TextField
+                  name="dateOfBirth"
                   id="dateOfBirth"
                   label="Date of birth"
                   type="date"
@@ -167,6 +204,9 @@ const AddTodo = ({ todo, setTodo }) => {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  onChange={(e) =>
+                    setCustomer({ ...customer, dateOfBirth: e.target.value })
+                  }
                 />
               </Grid>
             </Grid>
@@ -187,7 +227,7 @@ const AddTodo = ({ todo, setTodo }) => {
                       label="Upload"
                     />
                     <label htmlFor="photo1" className="form-img__file-label">
-                      {alt !== "Upload an Image" ? (
+                      {alt !== "" ? (
                         <>
                           <Typography></Typography>
                         </>
@@ -220,7 +260,7 @@ const AddTodo = ({ todo, setTodo }) => {
                       label="Upload"
                     />
                     <label htmlFor="photo2" className="form-img__file-label">
-                      {alt !== "Upload an Image" ? (
+                      {alt2 !== "" ? (
                         <>
                           <Typography></Typography>
                         </>
@@ -253,7 +293,7 @@ const AddTodo = ({ todo, setTodo }) => {
                       label="Upload"
                     />
                     <label htmlFor="photo3" className="form-img__file-label">
-                      {alt !== "Upload an Image" ? (
+                      {alt3 !== "" ? (
                         <>
                           <Typography></Typography>
                         </>
