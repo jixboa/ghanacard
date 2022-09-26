@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loadUser } from "./store/actions/authAction";
+import { getImages } from "./store/actions/imageAction";
 import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -23,6 +24,10 @@ const useStyles = makeStyles({
 function App() {
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(getImages());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(loadUser());

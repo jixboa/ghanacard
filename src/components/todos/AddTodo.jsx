@@ -4,7 +4,7 @@ import { makeStyles, CssBaseline } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { addImage } from "../../store/actions/todoActions";
+import { addImage } from "../../store/actions/imageAction";
 
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -77,9 +77,12 @@ const AddTodo = ({ todo, setTodo }) => {
         src: URL.createObjectURL(e.target.files[0]),
         alt: e.target.files[0].name,
       });
+
+      setCustomer({
+        ...customer,
+        image1: URL.createObjectURL(e.target.files[0]),
+      });
     }
-    console.log({ alt });
-    console.log({ src });
   };
 
   const handleImg2 = (e) => {
@@ -87,6 +90,10 @@ const AddTodo = ({ todo, setTodo }) => {
       setImg2({
         src2: URL.createObjectURL(e.target.files[0]),
         alt2: e.target.files[0].name,
+      });
+      setCustomer({
+        ...customer,
+        image2: URL.createObjectURL(e.target.files[0]),
       });
     }
   };
@@ -97,10 +104,12 @@ const AddTodo = ({ todo, setTodo }) => {
         src3: URL.createObjectURL(e.target.files[0]),
         alt3: e.target.files[0].name,
       });
+
+      setCustomer({
+        ...customer,
+        image3: URL.createObjectURL(e.target.files[0]),
+      });
     }
-    console.log({ src3 });
-    console.log({ alt3 });
-    console.log(customer.image3);
   };
 
   const [customer, setCustomer] = useState({
@@ -117,6 +126,16 @@ const AddTodo = ({ todo, setTodo }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addImage(customer));
+
+    setCustomer({
+      fullname: "",
+      accountNo: "",
+      phone: "",
+      ghanacard: "",
+      image1: placeholder,
+      image2: placeholder,
+      image3: placeholder,
+    });
   };
 
   return (
@@ -213,8 +232,8 @@ const AddTodo = ({ todo, setTodo }) => {
 
             <Grid
               container
-              rowSpacing={1}
-              columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              rowspacing={1}
+              columnspacing={{ xs: 1, sm: 2, md: 3 }}>
               <Grid item xs={6}>
                 <Item>
                   <div className="form__img-input-container">

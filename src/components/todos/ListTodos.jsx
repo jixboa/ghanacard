@@ -18,7 +18,8 @@ const ListTodos = ({ setTodo }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos);
-  const auth = useSelector((state) => state.auth);
+
+  //const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getTodos());
@@ -27,9 +28,7 @@ const ListTodos = ({ setTodo }) => {
   return (
     <>
       <div className={classes.todoStyle}>
-        <Typography>
-          {todos.length > 0 ? `Todos for ${auth.name}` : "No Todos yet"}
-        </Typography>
+        <Typography>{todos.length > 0 ? "Todos" : "No Todos yet"}</Typography>
         {todos &&
           todos.map((todo) => {
             return <Todo todo={todo} key={todo._id} setTodo={setTodo} />;
