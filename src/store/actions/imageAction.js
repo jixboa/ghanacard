@@ -7,7 +7,7 @@ export const addImage = (customer) => {
   console.log(customer.image1);
   return (dispatch, getState) => {
     API()
-      .post("/images", customer, setHeaders())
+      .post("/images", customer)
       .then((image) => {
         dispatch({
           type: "ADD_IMAGE",
