@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 //import { useSelector, useDispatch } from "react-redux";
 //import { signOut } from "../../store/actions/authAction";
+import Button from "@mui/material/Button";
 
 import { AppBar, Typography, Toolbar, makeStyles } from "@material-ui/core";
 // import ReactDOM from "react-dom";
@@ -41,6 +42,11 @@ const NavBar = () => {
               GAP Ghana Card Update
             </Link>
           </Typography>
+          <Button variant="text" color="inherit">
+            <Link className={classes.linkStyle} to="/signin">
+              Admin
+            </Link>
+          </Button>
         </Toolbar>
       </AppBar>
       {/* <Button variant="contained">Hello World</Button> */}

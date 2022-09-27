@@ -54,7 +54,7 @@ const SignIn = () => {
   //   </Backdrop>
   // </div>
 
-  if (auth._id) return <Navigate to="/" />;
+  if (auth._id) return <Navigate to="/viewimages" />;
 
   return (
     <>
@@ -95,8 +95,8 @@ const SignIn = () => {
           variant="text"
           color="primary"
           size="small">
-          <Link to="/signup" className={classes.linkStyle}>
-            OR Sign Up
+          <Link to="/" className={classes.linkStyle}>
+            OR Back to Customer
           </Link>
         </Button>
       </form>

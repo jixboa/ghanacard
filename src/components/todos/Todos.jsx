@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import AddTodo from "./AddTodo";
-//import ListTodos from "./ListTodos";
-import ListImages from "./ListImages";
 import { useSelector } from "react-redux";
 //import { Navigate } from "react-router-dom";
 import PropagateLoader from "react-spinners/PropagateLoader";
@@ -9,16 +7,6 @@ import PropagateLoader from "react-spinners/PropagateLoader";
 
 const Todos = () => {
   const auth = useSelector((state) => state.auth);
-  const images = useSelector((state) => state.images);
-
-  const [image, setImage] = useState({
-    fullname: images.fullname,
-    dateOfBirth: images.dateOfBirth,
-    ghanacard: images.ghanacard,
-    image1: images.image1,
-    image2: images.image2,
-    image3: images.image3,
-  });
 
   const [todo, setTodo] = useState({
     name: "",
@@ -32,7 +20,7 @@ const Todos = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 500);
   }, []);
 
   return (
@@ -42,8 +30,6 @@ const Todos = () => {
       ) : (
         <>
           <AddTodo todo={todo} setTodo={setTodo} />
-          {/* <ListTodos setTodo={setTodo} /> */}
-          <ListImages image={image} setImage={setImage} />
         </>
       )}
     </>

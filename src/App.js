@@ -7,6 +7,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import Todos from "./components/todos/Todos";
+import ViewImages from "./components/todos/ViewImages";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import NavBar from "./components/navbar/NavBar";
@@ -14,6 +15,7 @@ import { makeStyles } from "@material-ui/styles";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "@fontsource/roboto/500.css";
 
 const useStyles = makeStyles({
   contentStyle: {
@@ -37,15 +39,16 @@ function App() {
       <BrowserRouter>
         <ToastContainer />
 
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
           <NavBar />
-          <Container className={classes.contentStyle} maxWidth="sm">
+          <Container className={classes.contentStyle} maxWidth="lg">
             <Routes>
               {/* <Route path='/home' element={<Homescreen/>} /> */}
 
               <Route path="/signin" exact element={<SignIn />} />
               <Route path="/signup" exact element={<SignUp />} />
               <Route path="/" exact element={<Todos />} />
+              <Route path="/viewimages" exact element={<ViewImages />} />
             </Routes>
           </Container>
         </Container>
