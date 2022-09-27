@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 import jwtDecode from "jwt-decode";
 
 const initialState = {
@@ -14,9 +14,9 @@ const authReducer = (state = initialState, action) => {
     case "SIGN_IN":
     case "SIGN_UP":
       const user = jwtDecode(action.token);
-      toast(`Welcome ${user.name}`, {
+      /*  toast(`Welcome ${user.name}`, {
         position: toast.POSITION.TOP_CENTER,
-      });
+      }); */
       return {
         ...initialState,
         token: action.token,

@@ -126,16 +126,7 @@ const AddTodo = ({ todo, setTodo }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addImage(customer));
-
-    setCustomer({
-      fullname: "",
-      accountNo: "",
-      phone: "",
-      ghanacard: "",
-      image1: placeholder,
-      image2: placeholder,
-      image3: placeholder,
-    });
+    Window.location.reload();
   };
 
   return (

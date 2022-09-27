@@ -1,10 +1,9 @@
 //import axios from "axios"
 import API from "../../api/root";
 import { toast } from "react-toastify";
-import { setHeaders } from "../../api";
+//import { setHeaders } from "../../api";
 
 export const addImage = (customer) => {
-  console.log(customer.image1);
   return (dispatch, getState) => {
     API()
       .post("/images", customer)
@@ -26,7 +25,7 @@ export const addImage = (customer) => {
 export const getImages = () => {
   return (dispatch) => {
     API()
-      .get("/images", setHeaders())
+      .get("/images")
       .then((images) => {
         dispatch({
           type: "GET_IMAGES",

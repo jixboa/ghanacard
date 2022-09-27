@@ -35,7 +35,6 @@ const NavBar = () => {
   const HandleSignOut = () => {
     //signOut the user
     dispatch(signOut());
-    console.log("signed Out");
     navigate("/signin");
   };
   return (

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ListImages from "./ListImages";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import PropagateLoader from "react-spinners/PropagateLoader";
-import { getImages } from "../../store/actions/imageAction";
+// import { getImages } from "../../store/actions/imageAction";
 //import { Typography } from "@material-ui/core";
 
 const ViewImages = () => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
   const images = useSelector((state) => state.images);
@@ -21,9 +21,9 @@ const ViewImages = () => {
     image3: images.image3,
   });
 
-  useEffect(() => {
+  /*   useEffect(() => {
     dispatch(getImages());
-  }, [dispatch]);
+  }, [dispatch]); */
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
