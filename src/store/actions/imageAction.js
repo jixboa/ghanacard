@@ -26,7 +26,7 @@ export const addImage = (customer) => {
 export const getImages = () => {
   return (dispatch) => {
     API()
-      .get("/images")
+      .get("/images", setHeaders())
       .then((images) => {
         dispatch({
           type: "GET_IMAGES",
