@@ -40,7 +40,7 @@ export const addTodo = (newTodo) => {
 export const getTodos = () => {
   return (dispatch) => {
     API()
-      .get("/items")
+      .get("/items", setHeaders())
       .then((todos) => {
         dispatch({
           type: "GET_TODOS",

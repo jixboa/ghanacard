@@ -73,6 +73,7 @@ const SignIn = () => {
             fullWidth
             value={creds.email}
             onChange={(e) => setCreds({ ...creds, email: e.target.value })}
+            autoComplete="email"
           />
           <TextField
             className={classes.spacing}
@@ -83,6 +84,7 @@ const SignIn = () => {
             fullWidth
             value={creds.password}
             onChange={(e) => setCreds({ ...creds, password: e.target.value })}
+            autoComplete="off"
           />
           <Button
             className={classes.spacing}

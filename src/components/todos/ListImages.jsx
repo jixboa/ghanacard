@@ -73,9 +73,9 @@ const ListImages = ({ setImage }) => {
           <TableHead>
             <TableRow>
               <StyledTableCell>Customer name</StyledTableCell>
-              <StyledTableCell align="centre">Account Number</StyledTableCell>
-              <StyledTableCell align="centre">Ghana Card</StyledTableCell>
-              <StyledTableCell align="centre">Selfie</StyledTableCell>
+              <StyledTableCell align="center">Account Number</StyledTableCell>
+              <StyledTableCell align="center">Ghana Card</StyledTableCell>
+              <StyledTableCell align="left">Selfie</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -86,13 +86,13 @@ const ListImages = ({ setImage }) => {
                 <StyledTableCell component="th" scope="row">
                   {image.fullname}
                 </StyledTableCell>
-                <StyledTableCell align="centre">
+                <StyledTableCell align="center">
                   {image.accountNo}
                 </StyledTableCell>
-                <StyledTableCell align="centre">
+                <StyledTableCell align="center">
                   {image.ghanacard}
                 </StyledTableCell>
-                <StyledTableCell align="centre">
+                <StyledTableCell align="center">
                   <Stack direction="row" spacing={2}>
                     <Avatar alt="Remy Sharp" src={image.image3} />
                   </Stack>
