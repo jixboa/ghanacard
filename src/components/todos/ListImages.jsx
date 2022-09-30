@@ -127,7 +127,7 @@ const ListImages = ({ setImage }) => {
   const images = useSelector((state) => state.images);
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -157,6 +157,7 @@ const ListImages = ({ setImage }) => {
             );
           })}
       </div> */}
+
       <TableContainer component={Paper}>
         <Table
           stickyHeader
@@ -209,7 +210,7 @@ const ListImages = ({ setImage }) => {
           <TableFooter>
             <TableRow>
               <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                rowsPerPageOptions={[10, 15, 25, { label: "All", value: -1 }]}
                 colSpan={3}
                 count={images.length}
                 rowsPerPage={rowsPerPage}

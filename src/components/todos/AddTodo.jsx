@@ -125,7 +125,11 @@ const AddTodo = ({ todo, setTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addImage(customer));
+    const newCustomer = {
+      ...customer,
+      date: new Date(),
+    };
+    dispatch(addImage(newCustomer));
   };
 
   return (
