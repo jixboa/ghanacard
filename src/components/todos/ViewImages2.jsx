@@ -35,7 +35,7 @@ const ViewImages2 = (setMuiData) => {
           {/* <ListTodos setTodo={setTodo} /> */}
 
           <ListImages />
-          <ListImages3 />
+          {/* <ListImages3 /> */}
         </>
       )}
     </>

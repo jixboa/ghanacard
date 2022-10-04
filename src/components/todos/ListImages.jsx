@@ -155,7 +155,7 @@ const ListImages = ({ setImage }) => {
               <StyledTableCell>Customer name</StyledTableCell>
               <StyledTableCell align="center">Account Number</StyledTableCell>
               <StyledTableCell align="center">Ghana Card</StyledTableCell>
-              {/* <StyledTableCell align="left">Selfie</StyledTableCell> */}
+              <StyledTableCell align="left">Selfie</StyledTableCell>
             </TableRow>
           </TableHead>
 

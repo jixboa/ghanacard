@@ -33,7 +33,6 @@ const ListImages3 = ({ setImage }) => {
     imagee.accountNo,
     imagee.ghanacard,
     imagee.date,
-    imagee.image3,
   ]);
 
   const columns = [
@@ -41,7 +40,6 @@ const ListImages3 = ({ setImage }) => {
     "Account number",
     "Ghana card",
     "Date Created",
-    "Selfie",
   ];
   //const [muidata, setMuiData] = useState([]);
 
