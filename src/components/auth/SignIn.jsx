@@ -54,7 +54,7 @@ const SignIn = () => {
   //   </Backdrop>
   // </div>
 
-  if (auth._id) return <Navigate to="/viewimages" />;
+  if (auth._id) return <Navigate to="/viewimages2" />;
 
   return (
     <>

@@ -12,6 +12,7 @@ import Paper from "@mui/material/Paper";
 //import { useDispatch } from "react-redux";
 //import { addTodo, updateTodo } from "../../store/actions/todoActions";
 import placeholder from "../todos/placeholder.png";
+//import FileBase64 from "react-file-base64";
 
 import "../todos/image.css";
 
@@ -71,45 +72,59 @@ const AddTodo = ({ todo, setTodo }) => {
     alt3: "",
   });
 
-  const handleImg = (e) => {
-    if (e.target.files[0]) {
-      setImg({
-        src: URL.createObjectURL(e.target.files[0]),
-        alt: e.target.files[0].name,
-      });
+  const handleImg = async (e) => {
+    const file = e.target.files[0];
+    const base641 = await convertBase64(file);
 
-      setCustomer({
-        ...customer,
-        image1: URL.createObjectURL(e.target.files[0]),
-      });
-    }
+    setImg({
+      src: base641,
+      alt: e.target.files[0].name,
+    });
+    setCustomer({
+      ...customer,
+      image1: base641,
+    });
   };
 
-  const handleImg2 = (e) => {
-    if (e.target.files[0]) {
-      setImg2({
-        src2: URL.createObjectURL(e.target.files[0]),
-        alt2: e.target.files[0].name,
-      });
-      setCustomer({
-        ...customer,
-        image2: URL.createObjectURL(e.target.files[0]),
-      });
-    }
+  const handleImg2 = async (e) => {
+    const file = e.target.files[0];
+    const base642 = await convertBase64(file);
+    setImg2({
+      src2: base642,
+      alt2: e.target.files[0].name,
+    });
+    setCustomer({
+      ...customer,
+      image2: base642,
+    });
+  };
+  //encodeFileBase64(selectedFile[0]);
+  const handleImg3 = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+
+    setImg3({
+      src3: base64,
+      alt3: e.target.files[0].name,
+    });
+    setCustomer({
+      ...customer,
+      image3: base64,
+    });
   };
 
-  const handleImg3 = (e) => {
-    if (e.target.files[0]) {
-      setImg3({
-        src3: URL.createObjectURL(e.target.files[0]),
-        alt3: e.target.files[0].name,
-      });
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const FileReaders = new FileReader();
+      FileReaders.readAsDataURL(file);
 
-      setCustomer({
-        ...customer,
-        image3: URL.createObjectURL(e.target.files[0]),
-      });
-    }
+      FileReaders.onload = () => {
+        resolve(FileReaders.result);
+      };
+      FileReaders.onerror = (error) => {
+        reject(error);
+      };
+    });
   };
 
   const [customer, setCustomer] = useState({
@@ -125,6 +140,7 @@ const AddTodo = ({ todo, setTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const newCustomer = {
       ...customer,
       date: new Date(),
@@ -236,7 +252,9 @@ const AddTodo = ({ todo, setTodo }) => {
                       accept=".png, .jpg, .jpeg"
                       id="photo1"
                       className="visually-hidden"
-                      onChange={handleImg}
+                      onChange={(e) => {
+                        handleImg(e);
+                      }}
                       label="Upload"
                     />
                     <label htmlFor="photo1" className="form-img__file-label">
@@ -269,7 +287,9 @@ const AddTodo = ({ todo, setTodo }) => {
                       accept=".png, .jpg, .jpeg"
                       id="photo2"
                       className="visually-hidden"
-                      onChange={handleImg2}
+                      onChange={(e) => {
+                        handleImg2(e);
+                      }}
                       label="Upload"
                     />
                     <label htmlFor="photo2" className="form-img__file-label">
@@ -297,12 +317,22 @@ const AddTodo = ({ todo, setTodo }) => {
               <Grid item xs={6}>
                 <Item>
                   <div className="form__img-input-container">
+                    {/* <FileBase64
+                      multiple={false}
+                      onDone={({ base64 }) =>
+                        setImg3({
+                          src3: base64,
+                        })
+                      }
+                    /> */}
                     <input
                       type="file"
                       accept=".png, .jpg, .jpeg"
                       id="photo3"
                       className="visually-hidden"
-                      onChange={handleImg3}
+                      onChange={(e) => {
+                        handleImg3(e);
+                      }}
                       label="Upload"
                     />
                     <label htmlFor="photo3" className="form-img__file-label">

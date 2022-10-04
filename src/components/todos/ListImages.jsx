@@ -144,20 +144,6 @@ const ListImages = ({ setImage }) => {
 
   return (
     <>
-      {/*  <div className={classes.todoStyle}>
-        <Typography>
-          {images.length > 0
-            ? `${images.length} Records received`
-            : "No Records yet"}
-        </Typography>
-        {images &&
-          images.map((image) => {
-            return (
-              <ImageFile image={image} key={image._id} setImage={setImage} />
-            );
-          })}
-      </div> */}
-
       <TableContainer component={Paper}>
         <Table
           stickyHeader
@@ -169,7 +155,7 @@ const ListImages = ({ setImage }) => {
               <StyledTableCell>Customer name</StyledTableCell>
               <StyledTableCell align="center">Account Number</StyledTableCell>
               <StyledTableCell align="center">Ghana Card</StyledTableCell>
-              <StyledTableCell align="left">Selfie</StyledTableCell>
+              {/* <StyledTableCell align="left">Selfie</StyledTableCell> */}
             </TableRow>
           </TableHead>
 

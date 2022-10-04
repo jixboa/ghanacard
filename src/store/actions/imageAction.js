@@ -34,6 +34,7 @@ export const getImages = () => {
       })
       .catch((error) => {
         console.log(error.response);
+
         toast.error(error.response?.data, {
           position: toast.POSITION.TOP_CENTER,
         });

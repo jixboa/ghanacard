@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import Todos from "./components/todos/Todos";
 import ViewImages from "./components/todos/ViewImages";
+import ViewImages2 from "./components/todos/ViewImages2";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import NavBar from "./components/navbar/NavBar";
@@ -50,6 +51,7 @@ function App() {
               <Route path="/signup" exact element={<SignUp />} />
               <Route path="/" exact element={<Todos />} />
               <Route path="/viewimages" exact element={<ViewImages />} />
+              <Route path="/viewimages2" exact element={<ViewImages2 />} />
             </Routes>
           </Container>
         </Container>

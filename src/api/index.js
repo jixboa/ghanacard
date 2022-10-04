@@ -4,9 +4,8 @@ export const url = "https://jix-todo-app.herokuapp.com/api";
 export const setHeaders = () => {
   const header = {
     headers: {
-      "x-auth-token": localStorage.getItem(""),
+      "x-auth-token": localStorage.getItem("token"),
     },
   };
-  token;
   return header;
 };
