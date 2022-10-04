@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { addImage } from "../../store/actions/imageAction";
+import { useNavigate } from "react-router-dom";
 
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -15,6 +16,7 @@ import placeholder from "../todos/placeholder.png";
 //import FileBase64 from "react-file-base64";
 
 import "../todos/image.css";
+//import { Navigate } from "react-router-dom";
 
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.button,
@@ -52,9 +54,10 @@ const useStyle = makeStyles({
   },
 });
 
-const AddTodo = ({ todo, setTodo }) => {
+const AddTodo = ({ customer, setCustomer }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
 
   const [{ alt, src }, setImg] = useState({
@@ -127,25 +130,41 @@ const AddTodo = ({ todo, setTodo }) => {
     });
   };
 
-  const [customer, setCustomer] = useState({
-    fullname: "",
-    accountNo: "",
-    phone: "",
-    ghanacard: "",
-    dateOfbirth: "",
-    image1: src,
-    image2: src2,
-    image3: src3,
-  });
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newCustomer = {
+    if (customer.fullname) {
+      const newCustomer = {
+        ...customer,
+        date: new Date(),
+      };
+      dispatch(addImage(newCustomer));
+    }
+    setCustomer({
       ...customer,
-      date: new Date(),
-    };
-    dispatch(addImage(newCustomer));
+      fullname: "",
+      accountNo: "",
+      phone: "",
+      ghanacard: "",
+      dateOfbirth: "",
+      image1: "",
+      image2: "",
+      image3: "",
+    });
+
+    setImg({
+      src: placeholder,
+      alt: "",
+    });
+    setImg2({
+      src2: placeholder,
+      alt2: "",
+    });
+    setImg3({
+      src3: placeholder,
+      alt3: "",
+    });
+    navigate("/");
   };
 
   return (
@@ -167,6 +186,7 @@ const AddTodo = ({ todo, setTodo }) => {
                   label="First name -- Other names -- Surname"
                   type={"text"}
                   autoFocus
+                  value={customer.fullname}
                   onChange={(e) =>
                     setCustomer({ ...customer, fullname: e.target.value })
                   }
@@ -183,6 +203,7 @@ const AddTodo = ({ todo, setTodo }) => {
                   id="accountNo"
                   label="GAP Account Number"
                   type={"tel"}
+                  value={customer.accountNo}
                   onChange={(e) =>
                     setCustomer({ ...customer, accountNo: e.target.value })
                   }
@@ -198,6 +219,7 @@ const AddTodo = ({ todo, setTodo }) => {
                   fullWidth
                   id="phone"
                   label="Phone Number"
+                  value={customer.phone}
                   onChange={(e) =>
                     setCustomer({ ...customer, phone: e.target.value })
                   }
@@ -213,6 +235,7 @@ const AddTodo = ({ todo, setTodo }) => {
                   fullWidth
                   id="ghanacard"
                   label="Ghana Card Number"
+                  value={customer.ghanacard}
                   onChange={(e) =>
                     setCustomer({ ...customer, ghanacard: e.target.value })
                   }
@@ -233,6 +256,7 @@ const AddTodo = ({ todo, setTodo }) => {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  value={customer.date}
                   onChange={(e) =>
                     setCustomer({ ...customer, dateOfBirth: e.target.value })
                   }
