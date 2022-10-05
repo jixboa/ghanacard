@@ -7,6 +7,7 @@ import { signIn } from "../../store/actions/authAction";
 
 import { Typography, TextField, Button, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import Zoom from "react-reveal/Zoom";
 
 const useStyle = makeStyles({
   formStyle: {
@@ -58,52 +59,54 @@ const SignIn = () => {
 
   return (
     <>
-      <Container component="main" maxWidth="xs">
-        <form
-          className={classes.formStyle}
-          noValidate
-          autoComplete="off"
-          onSubmit={handleSubmit}>
-          <Typography variant="h5">Sign In</Typography>
-          <TextField
-            className={classes.spacing}
-            id="enter-email"
-            label="Enter email"
-            variant="outlined"
-            fullWidth
-            value={creds.email}
-            onChange={(e) => setCreds({ ...creds, email: e.target.value })}
-            autoComplete="email"
-          />
-          <TextField
-            className={classes.spacing}
-            id="enter-password"
-            label="Enter password"
-            variant="outlined"
-            type="password"
-            fullWidth
-            value={creds.password}
-            onChange={(e) => setCreds({ ...creds, password: e.target.value })}
+      <Zoom left>
+        <Container component="main" maxWidth="xs">
+          <form
+            className={classes.formStyle}
+            noValidate
             autoComplete="off"
-          />
-          <Button
-            className={classes.spacing}
-            variant="contained"
-            color="primary"
-            type="submit">
-            Sign In
-          </Button>
-          <Button
-            className={classes.spacing}
-            variant="text"
-            color="primary"
-            size="small">
-            <Link to="/" className={classes.linkStyle}>
-              OR Back to Customer
-            </Link>
-          </Button>
-        </form>
-      </Container>
+            onSubmit={handleSubmit}>
+            <Typography variant="h5">Sign In</Typography>
+            <TextField
+              className={classes.spacing}
+              id="enter-email"
+              label="Enter email"
+              variant="outlined"
+              fullWidth
+              value={creds.email}
+              onChange={(e) => setCreds({ ...creds, email: e.target.value })}
+              autoComplete="email"
+            />
+            <TextField
+              className={classes.spacing}
+              id="enter-password"
+              label="Enter password"
+              variant="outlined"
+              type="password"
+              fullWidth
+              value={creds.password}
+              onChange={(e) => setCreds({ ...creds, password: e.target.value })}
+              autoComplete="off"
+            />
+            <Button
+              className={classes.spacing}
+              variant="contained"
+              color="primary"
+              type="submit">
+              Sign In
+            </Button>
+            <Button
+              className={classes.spacing}
+              variant="text"
+              color="primary"
+              size="small">
+              <Link to="/" className={classes.linkStyle}>
+                OR Back to Customer
+              </Link>
+            </Button>
+          </form>
+        </Container>
+      </Zoom>
     </>
   );
 };

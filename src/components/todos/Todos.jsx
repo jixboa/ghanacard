@@ -5,6 +5,8 @@ import AddTodo from "./AddTodo";
 //import PropagateLoader from "react-spinners/PropagateLoader";
 //import { Typography } from "@material-ui/core";
 
+import Fade from "react-reveal/Fade";
+
 const Todos = () => {
   //const auth = useSelector((state) => state.auth);
 
@@ -33,7 +35,9 @@ const Todos = () => {
         <PropagateLoader color={"#31CFB1"} loading={loading} size={15} />
       ) : ( */
     <>
-      <AddTodo customer={customer} setCustomer={setCustomer} />
+      <Fade right>
+        <AddTodo customer={customer} setCustomer={setCustomer} />
+      </Fade>
     </>
     /*  )}
     </> */

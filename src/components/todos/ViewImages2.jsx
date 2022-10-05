@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 import ListImages from "./ListImages";
 //import ListImages3 from "./ListImages3";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import PropagateLoader from "react-spinners/PropagateLoader";
+//import PropagateLoader from "react-spinners/PropagateLoader";
 // import { getImages } from "../../store/actions/imageAction";
 //import { Typography } from "@material-ui/core";
+import Pulse from "react-reveal/Pulse";
 
 const ViewImages2 = (setMuiData) => {
   //const dispatch = useDispatch();
@@ -15,30 +16,31 @@ const ViewImages2 = (setMuiData) => {
 
   //const [image, setImage] = useState({});
 
-  const [loading, setLoading] = useState(false);
+  /*  const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1500);
-  }, []);
+  }, []); */
 
   if (!auth._id) return <Navigate to="/signin" />;
 
   return (
     <>
-      {loading ? (
+      {/*  {loading ? (
         <PropagateLoader color={"#31CFB1"} loading={loading} size={15} />
       ) : (
-        <>
-          {/* <AddTodo todo={todo} setTodo={setTodo} /> */}
-          {/* <ListTodos setTodo={setTodo} /> */}
-
-          <ListImages />
-          {/* <ListImages3 /> */}
-        </>
-      )}
+        <> */}
+      {/* <AddTodo todo={todo} setTodo={setTodo} /> */}
+      {/* <ListTodos setTodo={setTodo} /> */}
+      <Pulse>
+        <ListImages />
+        {/* <ListImages3 /> */}
+      </Pulse>
     </>
+    /*   )}
+    </> */
   );
 };
 
