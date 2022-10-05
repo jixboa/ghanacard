@@ -201,7 +201,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                   fullWidth
                   id="accountNo"
                   label="GAP Account Number"
-                  type={"number"}
+                  type={"tel"}
                   value={customer.accountNo}
                   onChange={(e) =>
                     setCustomer({ ...customer, accountNo: e.target.value })
