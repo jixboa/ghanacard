@@ -3,9 +3,12 @@ import { toast } from "react-toastify";
 const imageReducer = (state = [], action) => {
   switch (action.type) {
     case "ADD_IMAGE":
-      toast.success(`${action.image.data.fullname} ID Added Successfully`, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      toast.success(
+        "Your Ghana Card details have been submitted Successfully",
+        {
+          position: toast.POSITION.TOP_CENTER,
+        }
+      );
       return [action.image.data, ...state];
 
     case "GET_IMAGES":

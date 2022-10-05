@@ -1,9 +1,9 @@
-//import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ListImages from "./ListImages";
 //import ListImages3 from "./ListImages3";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-//import PropagateLoader from "react-spinners/PropagateLoader";
+import DotLoader from "react-spinners/DotLoader";
 // import { getImages } from "../../store/actions/imageAction";
 //import { Typography } from "@material-ui/core";
 import { Slide } from "react-awesome-reveal";
@@ -16,31 +16,40 @@ const ViewImages2 = (setMuiData) => {
 
   //const [image, setImage] = useState({});
 
-  /*  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
-  }, []); */
+    }, 6000);
+  }, []);
+
+  const style = {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  };
 
   if (!auth._id) return <Navigate to="/signin" />;
 
   return (
     <>
-      {/*  {loading ? (
-        <PropagateLoader color={"#31CFB1"} loading={loading} size={15} />
+      {loading ? (
+        <div style={style}>
+          <DotLoader color={"#31CFB1"} loading={loading} size={25} />
+        </div>
       ) : (
-        <> */}
-      {/* <AddTodo todo={todo} setTodo={setTodo} /> */}
-      {/* <ListTodos setTodo={setTodo} /> */}
-      <Slide>
-        <ListImages />
-        {/* <ListImages3 /> */}
-      </Slide>
+        <>
+          {/* <AddTodo todo={todo} setTodo={setTodo} /> */}
+          {/* <ListTodos setTodo={setTodo} /> */}
+          <Slide>
+            <ListImages />
+            {/* <ListImages3 /> */}
+          </Slide>
+        </>
+      )}
     </>
-    /*   )}
-    </> */
   );
 };
 
