@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 //import PropagateLoader from "react-spinners/PropagateLoader";
 // import { getImages } from "../../store/actions/imageAction";
 //import { Typography } from "@material-ui/core";
-import Pulse from "react-reveal/Pulse";
+import { Slide } from "react-awesome-reveal";
 
 const ViewImages2 = (setMuiData) => {
   //const dispatch = useDispatch();
@@ -34,10 +34,10 @@ const ViewImages2 = (setMuiData) => {
         <> */}
       {/* <AddTodo todo={todo} setTodo={setTodo} /> */}
       {/* <ListTodos setTodo={setTodo} /> */}
-      <Pulse>
+      <Slide>
         <ListImages />
         {/* <ListImages3 /> */}
-      </Pulse>
+      </Slide>
     </>
     /*   )}
     </> */

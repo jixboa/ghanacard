@@ -7,7 +7,7 @@ import { signIn } from "../../store/actions/authAction";
 
 import { Typography, TextField, Button, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import Zoom from "react-reveal/Zoom";
+import { Zoom } from "react-awesome-reveal";
 
 const useStyle = makeStyles({
   formStyle: {
