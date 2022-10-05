@@ -133,13 +133,12 @@ const AddTodo = ({ customer, setCustomer }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (customer.fullname) {
-      const newCustomer = {
-        ...customer,
-        date: new Date(),
-      };
-      dispatch(addImage(newCustomer));
-    }
+    const newCustomer = {
+      ...customer,
+      date: new Date(),
+    };
+    dispatch(addImage(newCustomer));
+
     setCustomer({
       ...customer,
       fullname: "",
@@ -202,7 +201,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                   fullWidth
                   id="accountNo"
                   label="GAP Account Number"
-                  type={"tel"}
+                  type={"number"}
                   value={customer.accountNo}
                   onChange={(e) =>
                     setCustomer({ ...customer, accountNo: e.target.value })
@@ -218,6 +217,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                   required
                   fullWidth
                   id="phone"
+                  type={"tel"}
                   label="Phone Number"
                   value={customer.phone}
                   onChange={(e) =>
