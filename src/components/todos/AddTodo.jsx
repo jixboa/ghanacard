@@ -145,7 +145,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       accountNo: "",
       phone: "",
       ghanacard: "",
-      dateOfbirth: "",
+      dateOfBirth: "",
       image1: "",
       image2: "",
       image3: "",
@@ -244,8 +244,8 @@ const AddTodo = ({ customer, setCustomer }) => {
 
               <Grid item xs={12}>
                 <TextField
-                  name="dateOfBirth"
-                  id="dateOfBirth"
+                  name="Date Of Birth"
+                  id="date"
                   label="Date of birth"
                   type="date"
                   variant="outlined"

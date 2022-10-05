@@ -14,7 +14,7 @@ export const addImage = (customer) => {
         });
       })
       .catch((error) => {
-        console.log(error.response);
+        //console.log(error.response);
         toast.error(error.response?.data, {
           position: toast.POSITION.TOP_CENTER,
         });
@@ -33,7 +33,7 @@ export const getImages = () => {
         });
       })
       .catch((error) => {
-        console.log(error.response);
+        //console.log(error.response);
 
         toast.error(error.response?.data, {
           position: toast.POSITION.TOP_CENTER,

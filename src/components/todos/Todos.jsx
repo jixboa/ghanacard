@@ -15,7 +15,7 @@ const Todos = () => {
     accountNo: "",
     phone: "",
     ghanacard: "",
-    dateOfbirth: "",
+    dateOfBirth: "",
     image1: "",
     image2: "",
     image3: "",
