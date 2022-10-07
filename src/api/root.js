@@ -6,7 +6,7 @@ export const TEST_URL = "https://api-test.maximnyansa.com/api/v1";
 
 const root = () => {
   return axios.create({
-    baseURL: IP_URL,
+    baseURL: BASE_URL,
     withCredentials: true,
     headers: {
       "Access-Control-Allow-Origin": "*",

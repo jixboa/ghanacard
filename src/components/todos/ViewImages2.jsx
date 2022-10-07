@@ -37,7 +37,7 @@ const ViewImages2 = (setMuiData) => {
     <>
       {loading ? (
         <div style={style}>
-          <DotLoader color={"#31CFB1"} loading={loading} size={25} />
+          <DotLoader color={"#31CFB1"} loading={loading} size={60} />
         </div>
       ) : (
         <>
