@@ -2,13 +2,17 @@ import { React, useState } from "react";
 import { TextField, Typography, Container } from "@material-ui/core";
 import { makeStyles, CssBaseline } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { addImage } from "../../store/actions/imageAction";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+
+import { useForm } from "react-hook-form";
+import { LoadingButton } from "@mui/lab";
+import SendIcon from "@mui/icons-material/Send";
 
 //import { useDispatch } from "react-redux";
 //import { addTodo, updateTodo } from "../../store/actions/todoActions";
@@ -57,8 +61,14 @@ const useStyle = makeStyles({
 const AddTodo = ({ customer, setCustomer }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   // const dispatch = useDispatch();
+  //const errors = useSelector((state) => state.errors);
+
+  const { handleSubmit, formState } = useForm();
+  const { isSubmitting } = formState;
+
+  //const { register, handleSubmit, errors } = useForm();
 
   const [{ alt, src }, setImg] = useState({
     src: placeholder,
@@ -130,7 +140,46 @@ const AddTodo = ({ customer, setCustomer }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const onSubmit = (data) => {
+    const newCustomer = {
+      ...customer,
+      date: new Date(),
+    };
+    dispatch(addImage(newCustomer)).then(() => {
+      console.log("Success");
+      setCustomer({
+        ...customer,
+        fullname: "",
+        accountNo: "",
+        phone: "",
+        ghanacard: "",
+        dateOfBirth: "",
+        image1: "",
+        image2: "",
+        image3: "",
+      });
+      setImg({
+        src: placeholder,
+        alt: "",
+      });
+      setImg2({
+        src2: placeholder,
+        alt2: "",
+      });
+      setImg3({
+        src3: placeholder,
+        alt3: "",
+      });
+    });
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 6500);
+    });
+  };
+
+  /* const handleSubmit = (e) => {
     e.preventDefault();
 
     const newCustomer = {
@@ -164,7 +213,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       alt3: "",
     });
     navigate("/");
-  };
+  }; */
 
   return (
     <>
@@ -172,14 +221,17 @@ const AddTodo = ({ customer, setCustomer }) => {
         <CssBaseline />
         <div className={classes.paper}>
           <Div>Customer Details</Div>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  required={true}
                   autoComplete="fullname"
                   name="fullname"
                   variant="outlined"
-                  required
                   fullWidth
                   id="customerNames"
                   label="First name -- Other names -- Surname"
@@ -382,14 +434,16 @@ const AddTodo = ({ customer, setCustomer }) => {
               </Grid>
             </Grid>
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="success"
-              className={classes.submit}>
-              Send Details
-            </Button>
+            <LoadingButton
+              style={{ marginTop: "20px" }}
+              size="large"
+              onClick={handleSubmit(onSubmit)}
+              endIcon={<SendIcon />}
+              loading={isSubmitting}
+              loadingPosition="end"
+              variant="contained">
+              Submit
+            </LoadingButton>
           </form>
         </div>
       </Container>

@@ -13,6 +13,7 @@ import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import NavBar from "./components/navbar/NavBar";
 import { makeStyles } from "@material-ui/styles";
+//import GET_IMAGE_ERROR from "../src/store/reducers/errorReducer";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,6 +29,10 @@ function App() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
+  /*   useEffect(() => {
+    dispatch(GET_IMAGE_ERROR);
+  }, [dispatch]);
+ */
   useEffect(() => {
     dispatch(getImages());
   }, [dispatch]);
