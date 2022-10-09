@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 import { addImage } from "../../store/actions/imageAction";
 //import { useNavigate } from "react-router-dom";
 
+import FormHelperText from "@mui/material/FormHelperText";
+import Alert from "@mui/material/Alert";
+
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
@@ -65,8 +68,9 @@ const AddTodo = ({ customer, setCustomer }) => {
   // const dispatch = useDispatch();
   //const errors = useSelector((state) => state.errors);
 
-  const { handleSubmit, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm();
   const { isSubmitting } = formState;
+  const { errors } = formState;
 
   //const { register, handleSubmit, errors } = useForm();
 
@@ -146,7 +150,6 @@ const AddTodo = ({ customer, setCustomer }) => {
       date: new Date(),
     };
     dispatch(addImage(newCustomer)).then(() => {
-      console.log("Success");
       setCustomer({
         ...customer,
         fullname: "",
@@ -174,46 +177,10 @@ const AddTodo = ({ customer, setCustomer }) => {
 
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve();
+        resolve(isSubmitting);
       }, 6500);
     });
   };
-
-  /* const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const newCustomer = {
-      ...customer,
-      date: new Date(),
-    };
-    dispatch(addImage(newCustomer));
-
-    setCustomer({
-      ...customer,
-      fullname: "",
-      accountNo: "",
-      phone: "",
-      ghanacard: "",
-      dateOfBirth: "",
-      image1: "",
-      image2: "",
-      image3: "",
-    });
-
-    setImg({
-      src: placeholder,
-      alt: "",
-    });
-    setImg2({
-      src2: placeholder,
-      alt2: "",
-    });
-    setImg3({
-      src3: placeholder,
-      alt3: "",
-    });
-    navigate("/");
-  }; */
 
   return (
     <>
@@ -228,6 +195,13 @@ const AddTodo = ({ customer, setCustomer }) => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  {...register("fullname", {
+                    required: "Please Enter your Full name",
+                    minLength: {
+                      value: 3,
+                      message: "Full name must have more characters",
+                    },
+                  })}
                   required={true}
                   autoComplete="fullname"
                   name="fullname"
@@ -242,10 +216,23 @@ const AddTodo = ({ customer, setCustomer }) => {
                     setCustomer({ ...customer, fullname: e.target.value })
                   }
                 />
+                {errors.fullname && (
+                  <Alert variant="outlined" severity="error">
+                    {errors.fullname.message}
+                  </Alert>
+                )}
               </Grid>
 
               <Grid item xs={12}>
                 <TextField
+                  {...register("accountNo", {
+                    required: "Please Enter your Account Number here",
+                    minLength: {
+                      value: 10,
+                      message:
+                        "Account number cannot be less than ten characters",
+                    },
+                  })}
                   autoComplete="Account No."
                   name="accountNo"
                   variant="outlined"
@@ -259,10 +246,22 @@ const AddTodo = ({ customer, setCustomer }) => {
                     setCustomer({ ...customer, accountNo: e.target.value })
                   }
                 />
+                {errors.accountNo && (
+                  <Alert variant="outlined" severity="error">
+                    {errors.accountNo.message}
+                  </Alert>
+                )}
               </Grid>
 
               <Grid item xs={12}>
                 <TextField
+                  {...register("phone", {
+                    required: "Please Enter your Phone number here",
+                    minLength: {
+                      value: 9,
+                      message: "Phone number must be at least 9 charactors",
+                    },
+                  })}
                   autoComplete="Phone"
                   name="phone"
                   variant="outlined"
@@ -276,10 +275,23 @@ const AddTodo = ({ customer, setCustomer }) => {
                     setCustomer({ ...customer, phone: e.target.value })
                   }
                 />
+                {errors.phone && (
+                  <Alert variant="outlined" severity="error">
+                    {errors.phone.message}
+                  </Alert>
+                )}
               </Grid>
 
               <Grid item xs={12}>
                 <TextField
+                  {...register("ghanacard", {
+                    required: "Please Enter your Ghana card number here",
+                    minLength: {
+                      value: 10,
+                      message:
+                        "Ghana card number must be at least 10 charactors",
+                    },
+                  })}
                   autoComplete="ghanaCardNo"
                   name="ghanacard"
                   variant="outlined"
@@ -292,11 +304,19 @@ const AddTodo = ({ customer, setCustomer }) => {
                     setCustomer({ ...customer, ghanacard: e.target.value })
                   }
                 />
+                {errors.ghanacard && (
+                  <Alert variant="outlined" severity="error">
+                    {errors.ghanacard.message}
+                  </Alert>
+                )}
               </Grid>
 
               <Grid item xs={12}>
                 <TextField
-                  name="Date Of Birth"
+                  {...register("dateOfBirth", {
+                    required: "Reselect your Date of Birth",
+                  })}
+                  name="dateOfBirth"
                   id="date"
                   label="Date of birth"
                   type="date"
@@ -313,10 +333,21 @@ const AddTodo = ({ customer, setCustomer }) => {
                     setCustomer({ ...customer, dateOfBirth: e.target.value })
                   }
                 />
+                {customer.dateOfBirth === "" && (
+                  <Alert variant="outlined" severity="info">
+                    Reselect your Date of Birth
+                  </Alert>
+                )}
+                {errors.dateOfBirth && (
+                  <FormHelperText error>
+                    {errors.dateOfBirth.message}
+                  </FormHelperText>
+                )}
               </Grid>
             </Grid>
 
             <Grid
+              style={{ marginTop: "20px" }}
               container
               rowspacing={1}
               columnspacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -324,6 +355,11 @@ const AddTodo = ({ customer, setCustomer }) => {
                 <Item>
                   <div className="form__img-input-container">
                     <input
+                      {...register("image1", {
+                        required:
+                          "Select Front picture of your Ghana card here",
+                      })}
+                      name="image1"
                       type="file"
                       accept=".png, .jpg, .jpeg"
                       id="photo1"
@@ -333,6 +369,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                       }}
                       label="Upload"
                     />
+
                     <label htmlFor="photo1" className="form-img__file-label">
                       {alt !== "" ? (
                         <>
@@ -343,6 +380,13 @@ const AddTodo = ({ customer, setCustomer }) => {
                           <Typography style={{ marginTop: "20px" }}>
                             Front Image
                           </Typography>
+                          {errors.image1 && (
+                            <FormHelperText
+                              error
+                              style={{ marginLeft: "12px" }}>
+                              {errors.image1.message}
+                            </FormHelperText>
+                          )}
                         </>
                       )}
                     </label>
@@ -359,6 +403,10 @@ const AddTodo = ({ customer, setCustomer }) => {
                 <Item>
                   <div className="form__img-input-container">
                     <input
+                      {...register("image2", {
+                        required: "Select Back picture of your Ghana card here",
+                      })}
+                      name="image2"
                       type="file"
                       accept=".png, .jpg, .jpeg"
                       id="photo2"
@@ -378,6 +426,13 @@ const AddTodo = ({ customer, setCustomer }) => {
                           <Typography style={{ marginTop: "20px" }}>
                             Back Image
                           </Typography>
+                          {errors.image2 && (
+                            <FormHelperText
+                              error
+                              style={{ marginLeft: "12px" }}>
+                              {errors.image2.message}
+                            </FormHelperText>
+                          )}
                         </>
                       )}
                     </label>
@@ -402,6 +457,10 @@ const AddTodo = ({ customer, setCustomer }) => {
                       }
                     /> */}
                     <input
+                      {...register("image3", {
+                        required: "Click here to Select or Take new Selfie",
+                      })}
+                      name="image3"
                       type="file"
                       accept=".png, .jpg, .jpeg"
                       id="photo3"
@@ -421,6 +480,13 @@ const AddTodo = ({ customer, setCustomer }) => {
                           <Typography style={{ marginTop: "20px" }}>
                             Take a Selfie
                           </Typography>
+                          {errors.image3 && (
+                            <FormHelperText
+                              error
+                              style={{ marginLeft: "12px" }}>
+                              {errors.image3.message}
+                            </FormHelperText>
+                          )}
                         </>
                       )}
                     </label>
