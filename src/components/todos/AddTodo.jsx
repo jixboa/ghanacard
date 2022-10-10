@@ -20,10 +20,8 @@ import SendIcon from "@mui/icons-material/Send";
 //import { useDispatch } from "react-redux";
 //import { addTodo, updateTodo } from "../../store/actions/todoActions";
 import placeholder from "../todos/placeholder.png";
-//import FileBase64 from "react-file-base64";
 
 import "../todos/image.css";
-//import { Navigate } from "react-router-dom";
 
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.button,
@@ -64,15 +62,10 @@ const useStyle = makeStyles({
 const AddTodo = ({ customer, setCustomer }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
-  //const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  //const errors = useSelector((state) => state.errors);
 
-  const { register, handleSubmit, formState } = useForm();
+  const { register, resetField, handleSubmit, formState } = useForm();
   const { isSubmitting } = formState;
   const { errors } = formState;
-
-  //const { register, handleSubmit, errors } = useForm();
 
   const [{ alt, src }, setImg] = useState({
     src: placeholder,
@@ -115,7 +108,6 @@ const AddTodo = ({ customer, setCustomer }) => {
       image2: base642,
     });
   };
-  //encodeFileBase64(selectedFile[0]);
   const handleImg3 = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
@@ -150,6 +142,14 @@ const AddTodo = ({ customer, setCustomer }) => {
       date: new Date(),
     };
     dispatch(addImage(newCustomer)).then(() => {
+      resetField("fullname");
+      resetField("accountNo");
+      resetField("phone");
+      resetField("ghanacard");
+      resetField("dateOfBirth");
+      resetField("image1");
+      resetField("image2");
+      resetField("image3");
       setCustomer({
         ...customer,
         fullname: "",
@@ -177,11 +177,13 @@ const AddTodo = ({ customer, setCustomer }) => {
 
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(isSubmitting);
+        resolve();
       }, 6500);
     });
   };
-
+  /* const filterBySize = (file) => {
+    return file.size <= 4096000;
+  }; */
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -201,11 +203,16 @@ const AddTodo = ({ customer, setCustomer }) => {
                       value: 3,
                       message: "Full name must have more characters",
                     },
+                    /*  pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "Does not accept numbers on Name fields",
+                    }, */
                   })}
                   required={true}
                   autoComplete="fullname"
                   name="fullname"
                   variant="outlined"
+                  className="form-control"
                   fullWidth
                   id="customerNames"
                   label="First name -- Other names -- Surname"
@@ -314,7 +321,7 @@ const AddTodo = ({ customer, setCustomer }) => {
               <Grid item xs={12}>
                 <TextField
                   {...register("dateOfBirth", {
-                    required: "Reselect your Date of Birth",
+                    required: "Select your Date of Birth",
                   })}
                   name="dateOfBirth"
                   id="date"
@@ -323,7 +330,6 @@ const AddTodo = ({ customer, setCustomer }) => {
                   variant="outlined"
                   required
                   fullWidth
-                  defaultValue="1990-05-24"
                   sx={{ width: 220 }}
                   InputLabelProps={{
                     shrink: true,
@@ -333,15 +339,11 @@ const AddTodo = ({ customer, setCustomer }) => {
                     setCustomer({ ...customer, dateOfBirth: e.target.value })
                   }
                 />
-                {customer.dateOfBirth === "" && (
-                  <Alert variant="outlined" severity="info">
-                    Reselect your Date of Birth
-                  </Alert>
-                )}
+
                 {errors.dateOfBirth && (
-                  <FormHelperText error>
+                  <Alert variant="outlined" severity="error">
                     {errors.dateOfBirth.message}
-                  </FormHelperText>
+                  </Alert>
                 )}
               </Grid>
             </Grid>
@@ -405,6 +407,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                     <input
                       {...register("image2", {
                         required: "Select Back picture of your Ghana card here",
+                        max: { value: 512000, message: "File too Big" },
                       })}
                       name="image2"
                       type="file"
@@ -448,14 +451,6 @@ const AddTodo = ({ customer, setCustomer }) => {
               <Grid item xs={6}>
                 <Item>
                   <div className="form__img-input-container">
-                    {/* <FileBase64
-                      multiple={false}
-                      onDone={({ base64 }) =>
-                        setImg3({
-                          src3: base64,
-                        })
-                      }
-                    /> */}
                     <input
                       {...register("image3", {
                         required: "Click here to Select or Take new Selfie",
