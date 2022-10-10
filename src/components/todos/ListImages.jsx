@@ -2,6 +2,7 @@
 //import { makeStyles } from "@material-ui/styles";
 //import { Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 import * as React from "react";
 import Table from "@mui/material/Table";
@@ -26,7 +27,25 @@ import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import TablePagination from "@mui/material/TablePagination";
 
+import SearchBar from "material-ui-search-bar";
+import Modal from "@mui/material/Modal";
+
 import { styled } from "@mui/material/styles";
+
+//import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 /* const useStyle = makeStyles({
   todoStyle: {
@@ -124,7 +143,33 @@ TablePaginationActions.propTypes = {
 
 const ListImages = ({ setImage }) => {
   //const classes = useStyle();
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
+  const [searched, setSearched] = useState("");
+
   const images = useSelector((state) => state.images);
+
+  const handleOpen = (oneID) => {
+    setOpen(true);
+    const personId = oneID;
+    console.log(personId);
+  };
+
+  const [rows, setRows] = useState(images);
+
+  const requestSearch = (searchedVal = { String }) => {
+    const filteredRows = rows.filter((row) => {
+      return row.fullname.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+    setRows(filteredRows);
+  };
+
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+    setRows(rows);
+  };
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -141,9 +186,17 @@ const ListImages = ({ setImage }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  /*  const handleImages = (id) => {
+    dispatch(deleteTodo(id));
+  }; */
 
   return (
     <>
+      <SearchBar
+        value={searched}
+        onChange={(searchVal) => requestSearch(searchVal)}
+        onCancelSearch={() => cancelSearch()}
+      />
       <TableContainer component={Paper}>
         <Table
           stickyHeader
@@ -161,11 +214,8 @@ const ListImages = ({ setImage }) => {
 
           <TableBody>
             {(rowsPerPage > 0
-              ? images.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : images
+              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : rows
             ).map((image) => (
               <StyledTableRow
                 key={image._id}
@@ -181,7 +231,11 @@ const ListImages = ({ setImage }) => {
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <Stack direction="row" spacing={2}>
-                    <Avatar alt="Remy Sharp" src={image.image3} />
+                    <Avatar
+                      onClick={() => handleOpen(image._id)}
+                      alt="Remy Sharp"
+                      src={image.image3}
+                    />
                   </Stack>
                 </StyledTableCell>
               </StyledTableRow>
@@ -215,6 +269,22 @@ const ListImages = ({ setImage }) => {
           </TableFooter>
         </Table>
       </TableContainer>
+
+      <Modal
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description">
+        <Box sx={style}>
+          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
     </>
   );
 };

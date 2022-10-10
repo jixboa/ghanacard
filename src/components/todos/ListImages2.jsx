@@ -42,40 +42,19 @@ const ListImages2 = ({ setImage }) => {
     responsive,
   };
 
-  //const images = useSelector((state) => state.images);
   const images = useSelector((state) => state.images);
 
-  const [muidata, setMuiData] = useState([]);
+  //const [muidata, setMuiData] = useState([]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     setMuiData(images);
-  }, [images]);
+  }, []); */
 
   const rows = useMemo(
-    () => muidata.map((row, index) => ({ ...row, id: row._id })),
-    [muidata]
+    () => images.map((row, index) => ({ ...row, id: row._id })),
+    [images]
   );
-  //console.log(images);
 
-  /*  const data = [
-    ["Gabby George", "Business Analyst", "Minneapolis"],
-    [
-      "Aiden Lloyd",
-      "Business Consultant for an International Company and CEO of Tony's Burger Palace",
-      "Dallas",
-    ],
-    ["Jaden Collins", "Attorney", "Santa Ana"],
-    ["Franky Rees", "Business Analyst", "St. Petersburg"],
-    ["Aaren Rose", null, "Toledo"],
-    ["Johnny Jones", "Business Analyst", "St. Petersburg"],
-    ["Jimmy Johns", "Business Analyst", "Baltimore"],
-    ["Jack Jackson", "Business Analyst", "El Paso"],
-    ["Joe Jones", "Computer Programmer", "El Paso"],
-    ["Jacky Jackson", "Business Consultant", "Baltimore"],
-    ["Jo Jo", "Software Developer", "Washington DC"],
-    ["Donna Marie", "Business Manager", "Annapolis"],
-  ];
- */
   return (
     <>
       <CacheProvider value={muiCache}>

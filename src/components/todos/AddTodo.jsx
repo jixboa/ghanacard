@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { useDispatch } from "react-redux";
 import { addImage } from "../../store/actions/imageAction";
 //import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import FormHelperText from "@mui/material/FormHelperText";
 import Alert from "@mui/material/Alert";
@@ -84,42 +85,64 @@ const AddTodo = ({ customer, setCustomer }) => {
 
   const handleImg = async (e) => {
     const file = e.target.files[0];
-    const base641 = await convertBase64(file);
+    if (file.size < 51000) {
+      const base641 = await convertBase64(file);
 
-    setImg({
-      src: base641,
-      alt: e.target.files[0].name,
-    });
-    setCustomer({
-      ...customer,
-      image1: base641,
-    });
+      setImg({
+        src: base641,
+        alt: e.target.files[0].name,
+      });
+      setCustomer({
+        ...customer,
+        image1: base641,
+      });
+    } else {
+      toast.info("Image size should not exceed 500kb", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      resetField("image1");
+    }
   };
 
   const handleImg2 = async (e) => {
     const file = e.target.files[0];
-    const base642 = await convertBase64(file);
-    setImg2({
-      src2: base642,
-      alt2: e.target.files[0].name,
-    });
-    setCustomer({
-      ...customer,
-      image2: base642,
-    });
+    if (file.size < 51000) {
+      const base642 = await convertBase64(file);
+      setImg2({
+        src2: base642,
+        alt2: e.target.files[0].name,
+      });
+      setCustomer({
+        ...customer,
+        image2: base642,
+      });
+    } else {
+      toast.info("Image size should not exceed 500kb", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      resetField("image2");
+    }
   };
   const handleImg3 = async (e) => {
     const file = e.target.files[0];
-    const base64 = await convertBase64(file);
 
-    setImg3({
-      src3: base64,
-      alt3: e.target.files[0].name,
-    });
-    setCustomer({
-      ...customer,
-      image3: base64,
-    });
+    if (file.size < 101000) {
+      const base64 = await convertBase64(file);
+
+      setImg3({
+        src3: base64,
+        alt3: e.target.files[0].name,
+      });
+      setCustomer({
+        ...customer,
+        image3: base64,
+      });
+    } else {
+      toast.info("Selfie size must not exceed 1Mb", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      resetField("image3");
+    }
   };
 
   const convertBase64 = (file) => {
