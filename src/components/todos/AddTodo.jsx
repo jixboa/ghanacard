@@ -26,7 +26,7 @@ import { CardActionArea } from "@mui/material";
 //import { useDispatch } from "react-redux";
 //import { addTodo, updateTodo } from "../../store/actions/todoActions";
 import placeholder from "../todos/placeholder.png";
-import sending1 from "../todos/sending1.jpg";
+import sending1 from "../todos/sending12.jpg";
 
 import "../todos/image.css";
 
