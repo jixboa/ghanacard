@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import ListImages from "./ListImages";
 //import ListImages3 from "./ListImages3";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
-// import { getImages } from "../../store/actions/imageAction";
+import { getImages } from "../../store/actions/imageAction";
 //import { Typography } from "@material-ui/core";
 import { Slide } from "react-awesome-reveal";
 
 const ViewImages2 = (setMuiData) => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
   // const images = useSelector((state) => state.images);
@@ -23,6 +24,10 @@ const ViewImages2 = (setMuiData) => {
       setLoading(false);
     }, 6000);
   }, []);
+
+  useEffect(() => {
+    dispatch(getImages());
+  }, [dispatch]);
 
   const style = {
     position: "fixed",

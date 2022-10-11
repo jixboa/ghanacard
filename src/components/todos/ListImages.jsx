@@ -159,7 +159,7 @@ const ListImages = ({ setImage }) => {
   const [rows, setRows] = useState(images);
 
   const requestSearch = (searchedVal = { String }) => {
-    const filteredRows = rows.filter((row) => {
+    const filteredRows = images.filter((row) => {
       return row.fullname.toLowerCase().includes(searchedVal.toLowerCase());
     });
     setRows(filteredRows);
@@ -168,7 +168,6 @@ const ListImages = ({ setImage }) => {
   const cancelSearch = () => {
     setSearched("");
     requestSearch(searched);
-    setRows(rows);
   };
 
   const [page, setPage] = React.useState(0);

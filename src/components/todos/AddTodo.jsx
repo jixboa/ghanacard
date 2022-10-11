@@ -18,14 +18,20 @@ import { useForm } from "react-hook-form";
 import { LoadingButton } from "@mui/lab";
 import SendIcon from "@mui/icons-material/Send";
 
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea } from "@mui/material";
+
 //import { useDispatch } from "react-redux";
 //import { addTodo, updateTodo } from "../../store/actions/todoActions";
 import placeholder from "../todos/placeholder.png";
+import sending1 from "../todos/sending1.jpg";
 
 import "../todos/image.css";
 
 const Div = styled("div")(({ theme }) => ({
-  ...theme.typography.button,
+  ...theme.typography.body1,
   backgroundColor: "#20b113",
   padding: theme.spacing(1),
   marginBottom: "20px",
@@ -209,326 +215,367 @@ const AddTodo = ({ customer, setCustomer }) => {
   }; */
   return (
     <>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="md">
         <CssBaseline />
         <div className={classes.paper}>
-          <Div>Customer Details</Div>
-          <form
-            className={classes.form}
-            noValidate
-            onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  {...register("fullname", {
-                    required: "Please Enter your Full name",
-                    minLength: {
-                      value: 3,
-                      message: "Full name must have more characters",
-                    },
-                    /*  pattern: {
-                      value: /^[A-Za-z]+$/i,
-                      message: "Does not accept numbers on Name fields",
-                    }, */
-                  })}
-                  required={true}
-                  autoComplete="fullname"
-                  name="fullname"
-                  variant="outlined"
-                  className="form-control"
-                  fullWidth
-                  id="customerNames"
-                  label="First name -- Other names -- Surname"
-                  type={"text"}
-                  autoFocus
-                  value={customer.fullname}
-                  onChange={(e) =>
-                    setCustomer({ ...customer, fullname: e.target.value })
-                  }
-                />
-                {errors.fullname && (
-                  <Alert variant="outlined" severity="error">
-                    {errors.fullname.message}
-                  </Alert>
-                )}
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  {...register("accountNo", {
-                    required: "Please Enter your Account Number here",
-                    minLength: {
-                      value: 10,
-                      message:
-                        "Account number cannot be less than ten characters",
-                    },
-                  })}
-                  autoComplete="Account No."
-                  name="accountNo"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="accountNo"
-                  label="GAP Account Number"
-                  type={"tel"}
-                  value={customer.accountNo}
-                  onChange={(e) =>
-                    setCustomer({ ...customer, accountNo: e.target.value })
-                  }
-                />
-                {errors.accountNo && (
-                  <Alert variant="outlined" severity="error">
-                    {errors.accountNo.message}
-                  </Alert>
-                )}
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  {...register("phone", {
-                    required: "Please Enter your Phone number here",
-                    minLength: {
-                      value: 9,
-                      message: "Phone number must be at least 9 charactors",
-                    },
-                  })}
-                  autoComplete="Phone"
-                  name="phone"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="phone"
-                  type={"tel"}
-                  label="Phone Number"
-                  value={customer.phone}
-                  onChange={(e) =>
-                    setCustomer({ ...customer, phone: e.target.value })
-                  }
-                />
-                {errors.phone && (
-                  <Alert variant="outlined" severity="error">
-                    {errors.phone.message}
-                  </Alert>
-                )}
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  {...register("ghanacard", {
-                    required: "Please Enter your Ghana card number here",
-                    minLength: {
-                      value: 10,
-                      message:
-                        "Ghana card number must be at least 10 charactors",
-                    },
-                  })}
-                  autoComplete="ghanaCardNo"
-                  name="ghanacard"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="ghanacard"
-                  label="Ghana Card Number"
-                  value={customer.ghanacard}
-                  onChange={(e) =>
-                    setCustomer({ ...customer, ghanacard: e.target.value })
-                  }
-                />
-                {errors.ghanacard && (
-                  <Alert variant="outlined" severity="error">
-                    {errors.ghanacard.message}
-                  </Alert>
-                )}
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  {...register("dateOfBirth", {
-                    required: "Select your Date of Birth",
-                  })}
-                  name="dateOfBirth"
-                  id="date"
-                  label="Date of birth"
-                  type="date"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  sx={{ width: 220 }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  value={customer.date}
-                  onChange={(e) =>
-                    setCustomer({ ...customer, dateOfBirth: e.target.value })
-                  }
-                />
-
-                {errors.dateOfBirth && (
-                  <Alert variant="outlined" severity="error">
-                    {errors.dateOfBirth.message}
-                  </Alert>
-                )}
-              </Grid>
+          <Grid container spacing={2}>
+            <Grid item md={6}>
+              <Card md={{ maxWidth: 345 }}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={sending1}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Keep the following Steps
+                    </Typography>
+                    <Typography variant="body2">
+                      1. Complete the form here<br></br>
+                      2. Click on Submit to submit your details<br></br>
+                      Note: Image size for Ghanacard must not exceed 500kb
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
             </Grid>
 
-            <Grid
-              style={{ marginTop: "20px" }}
-              container
-              rowspacing={1}
-              columnspacing={{ xs: 1, sm: 2, md: 3 }}>
-              <Grid item xs={6}>
-                <Item>
-                  <div className="form__img-input-container">
-                    <input
-                      {...register("image1", {
-                        required:
-                          "Select Front picture of your Ghana card here",
+            <Grid item md={6}>
+              <Div style={{ marginBottom: "10px" }}>
+                Complete the form below to proceed
+              </Div>
+              <form
+                className={classes.form}
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      {...register("fullname", {
+                        required: "Please Enter your Full name",
+                        minLength: {
+                          value: 3,
+                          message: "Full name must have more characters",
+                        },
+                        pattern: {
+                          value: /^[A-Za-z]+$/i,
+                          message: "Does not accept numbers on Name fields",
+                        },
                       })}
-                      name="image1"
-                      type="file"
-                      accept=".png, .jpg, .jpeg"
-                      id="photo1"
-                      className="visually-hidden"
-                      onChange={(e) => {
-                        handleImg(e);
+                      required={true}
+                      autoComplete="fullname"
+                      name="fullname"
+                      variant="outlined"
+                      className="form-control"
+                      fullWidth
+                      id="customerNames"
+                      label="First name -- Other names -- Surname"
+                      type={"text"}
+                      autoFocus
+                      value={customer.fullname}
+                      onChange={(e) =>
+                        setCustomer({ ...customer, fullname: e.target.value })
+                      }
+                    />
+                    {errors.fullname && (
+                      <Alert variant="outlined" severity="error">
+                        {errors.fullname.message}
+                      </Alert>
+                    )}
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextField
+                      {...register("accountNo", {
+                        required: "Please Enter your Account Number here",
+                        minLength: {
+                          value: 10,
+                          message:
+                            "Account number cannot be less than ten characters",
+                          pattern: {
+                            value: /^[1-9]\d*(\d+)?$/i,
+                            message: "Only numbers are accepted on this field",
+                          },
+                        },
+                      })}
+                      autoComplete="Account No."
+                      name="accountNo"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="accountNo"
+                      label="GAP Account Number"
+                      type={"tel"}
+                      value={customer.accountNo}
+                      onChange={(e) =>
+                        setCustomer({ ...customer, accountNo: e.target.value })
+                      }
+                    />
+                    {errors.accountNo && (
+                      <Alert variant="outlined" severity="error">
+                        {errors.accountNo.message}
+                      </Alert>
+                    )}
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextField
+                      {...register("ghanacard", {
+                        required: "Please Enter your Ghana card number here",
+                        minLength: {
+                          value: 10,
+                          message:
+                            "Ghana card number must be at least 10 charactors",
+                        },
+                      })}
+                      autoComplete="ghanaCardNo"
+                      name="ghanacard"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="ghanacard"
+                      label="Ghana Card Number"
+                      value={customer.ghanacard}
+                      onChange={(e) =>
+                        setCustomer({ ...customer, ghanacard: e.target.value })
+                      }
+                    />
+                    {errors.ghanacard && (
+                      <Alert variant="outlined" severity="error">
+                        {errors.ghanacard.message}
+                      </Alert>
+                    )}
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      {...register("phone", {
+                        required: "Please Enter your Phone number here",
+                        minLength: {
+                          value: 9,
+                          message: "Phone number must be at least 9 charactors",
+                        },
+                      })}
+                      autoComplete="Phone"
+                      name="phone"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="phone"
+                      type={"tel"}
+                      label="Phone Number"
+                      value={customer.phone}
+                      onChange={(e) =>
+                        setCustomer({ ...customer, phone: e.target.value })
+                      }
+                    />
+                    {errors.phone && (
+                      <Alert variant="outlined" severity="error">
+                        {errors.phone.message}
+                      </Alert>
+                    )}
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextField
+                      {...register("dateOfBirth", {
+                        required: "Select your Date of Birth",
+                      })}
+                      name="dateOfBirth"
+                      id="date"
+                      label="Date of birth"
+                      type="date"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      sx={{ width: 220 }}
+                      InputLabelProps={{
+                        shrink: true,
                       }}
-                      label="Upload"
+                      value={customer.date}
+                      onChange={(e) =>
+                        setCustomer({
+                          ...customer,
+                          dateOfBirth: e.target.value,
+                        })
+                      }
                     />
 
-                    <label htmlFor="photo1" className="form-img__file-label">
-                      {alt !== "" ? (
-                        <>
-                          <Typography></Typography>
-                        </>
-                      ) : (
-                        <>
-                          <Typography style={{ marginTop: "20px" }}>
-                            Front Image
-                          </Typography>
-                          {errors.image1 && (
-                            <FormHelperText
-                              error
-                              style={{ marginLeft: "12px" }}>
-                              {errors.image1.message}
-                            </FormHelperText>
+                    {errors.dateOfBirth && (
+                      <Alert variant="outlined" severity="error">
+                        {errors.dateOfBirth.message}
+                      </Alert>
+                    )}
+                  </Grid>
+                </Grid>
+
+                <Grid
+                  style={{ marginTop: "20px" }}
+                  container
+                  rowspacing={1}
+                  columnspacing={{ xs: 1, sm: 2, md: 3 }}>
+                  <Grid item xs={6}>
+                    <Item>
+                      <div className="form__img-input-container">
+                        <input
+                          {...register("image1", {
+                            required:
+                              "Select Front picture of your Ghana card here",
+                          })}
+                          name="image1"
+                          type="file"
+                          accept=".png, .jpg, .jpeg"
+                          id="photo1"
+                          className="visually-hidden"
+                          onChange={(e) => {
+                            handleImg(e);
+                          }}
+                          label="Upload"
+                        />
+
+                        <label
+                          htmlFor="photo1"
+                          className="form-img__file-label">
+                          {alt !== "" ? (
+                            <>
+                              <Typography></Typography>
+                            </>
+                          ) : (
+                            <>
+                              <Typography style={{ marginTop: "20px" }}>
+                                Front Image
+                              </Typography>
+                              {errors.image1 && (
+                                <FormHelperText
+                                  error
+                                  style={{ marginLeft: "12px" }}>
+                                  {errors.image1.message}
+                                </FormHelperText>
+                              )}
+                            </>
                           )}
-                        </>
-                      )}
-                    </label>
-                    <img
-                      src={src}
-                      alt={alt}
-                      className="form-img__img-preview"
-                      label="Upload"
-                    />
-                  </div>
-                </Item>
-              </Grid>
-              <Grid item xs={6}>
-                <Item>
-                  <div className="form__img-input-container">
-                    <input
-                      {...register("image2", {
-                        required: "Select Back picture of your Ghana card here",
-                        max: { value: 512000, message: "File too Big" },
-                      })}
-                      name="image2"
-                      type="file"
-                      accept=".png, .jpg, .jpeg"
-                      id="photo2"
-                      className="visually-hidden"
-                      onChange={(e) => {
-                        handleImg2(e);
-                      }}
-                      label="Upload"
-                    />
-                    <label htmlFor="photo2" className="form-img__file-label">
-                      {alt2 !== "" ? (
-                        <>
-                          <Typography></Typography>
-                        </>
-                      ) : (
-                        <>
-                          <Typography style={{ marginTop: "20px" }}>
-                            Back Image
-                          </Typography>
-                          {errors.image2 && (
-                            <FormHelperText
-                              error
-                              style={{ marginLeft: "12px" }}>
-                              {errors.image2.message}
-                            </FormHelperText>
+                        </label>
+                        <img
+                          src={src}
+                          alt={alt}
+                          className="form-img__img-preview"
+                          label="Upload"
+                        />
+                      </div>
+                    </Item>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Item>
+                      <div className="form__img-input-container">
+                        <input
+                          {...register("image2", {
+                            required:
+                              "Select Back picture of your Ghana card here",
+                          })}
+                          name="image2"
+                          type="file"
+                          accept=".png, .jpg, .jpeg"
+                          id="photo2"
+                          className="visually-hidden"
+                          onChange={(e) => {
+                            handleImg2(e);
+                          }}
+                          label="Upload"
+                        />
+                        <label
+                          htmlFor="photo2"
+                          className="form-img__file-label">
+                          {alt2 !== "" ? (
+                            <>
+                              <Typography></Typography>
+                            </>
+                          ) : (
+                            <>
+                              <Typography style={{ marginTop: "20px" }}>
+                                Back Image
+                              </Typography>
+                              {errors.image2 && (
+                                <FormHelperText
+                                  error
+                                  style={{ marginLeft: "12px" }}>
+                                  {errors.image2.message}
+                                </FormHelperText>
+                              )}
+                            </>
                           )}
-                        </>
-                      )}
-                    </label>
-                    <img
-                      src={src2}
-                      alt={alt2}
-                      className="form-img__img-preview"
-                    />
-                  </div>
-                </Item>
-              </Grid>
-              <Grid item xs={3}></Grid>
-              <Grid item xs={6}>
-                <Item>
-                  <div className="form__img-input-container">
-                    <input
-                      {...register("image3", {
-                        required: "Click here to Select or Take new Selfie",
-                      })}
-                      name="image3"
-                      type="file"
-                      accept=".png, .jpg, .jpeg"
-                      id="photo3"
-                      className="visually-hidden"
-                      onChange={(e) => {
-                        handleImg3(e);
-                      }}
-                      label="Upload"
-                    />
-                    <label htmlFor="photo3" className="form-img__file-label">
-                      {alt3 !== "" ? (
-                        <>
-                          <Typography></Typography>
-                        </>
-                      ) : (
-                        <>
-                          <Typography style={{ marginTop: "20px" }}>
-                            Take a Selfie
-                          </Typography>
-                          {errors.image3 && (
-                            <FormHelperText
-                              error
-                              style={{ marginLeft: "12px" }}>
-                              {errors.image3.message}
-                            </FormHelperText>
+                        </label>
+                        <img
+                          src={src2}
+                          alt={alt2}
+                          className="form-img__img-preview"
+                        />
+                      </div>
+                    </Item>
+                  </Grid>
+                  <Grid item xs={3}></Grid>
+                  <Grid item xs={6}>
+                    <Item>
+                      <div className="form__img-input-container">
+                        <input
+                          {...register("image3", {
+                            required: "Click here to Select or Take new Selfie",
+                          })}
+                          name="image3"
+                          type="file"
+                          accept=".png, .jpg, .jpeg"
+                          id="photo3"
+                          className="visually-hidden"
+                          onChange={(e) => {
+                            handleImg3(e);
+                          }}
+                          label="Upload"
+                        />
+                        <label
+                          htmlFor="photo3"
+                          className="form-img__file-label">
+                          {alt3 !== "" ? (
+                            <>
+                              <Typography></Typography>
+                            </>
+                          ) : (
+                            <>
+                              <Typography style={{ marginTop: "20px" }}>
+                                Take a Selfie
+                              </Typography>
+                              {errors.image3 && (
+                                <FormHelperText
+                                  error
+                                  style={{ marginLeft: "12px" }}>
+                                  {errors.image3.message}
+                                </FormHelperText>
+                              )}
+                            </>
                           )}
-                        </>
-                      )}
-                    </label>
-                    <img
-                      src={src3}
-                      alt={alt3}
-                      className="form-img__img-preview"
-                    />
-                  </div>
-                </Item>
-              </Grid>
+                        </label>
+                        <img
+                          src={src3}
+                          alt={alt3}
+                          className="form-img__img-preview"
+                        />
+                      </div>
+                    </Item>
+                  </Grid>
+                </Grid>
+
+                <LoadingButton
+                  style={{ marginTop: "20px" }}
+                  size="large"
+                  onClick={handleSubmit(onSubmit)}
+                  endIcon={<SendIcon />}
+                  loading={isSubmitting}
+                  loadingPosition="end"
+                  variant="contained">
+                  Submit
+                </LoadingButton>
+              </form>
             </Grid>
-
-            <LoadingButton
-              style={{ marginTop: "20px" }}
-              size="large"
-              onClick={handleSubmit(onSubmit)}
-              endIcon={<SendIcon />}
-              loading={isSubmitting}
-              loadingPosition="end"
-              variant="contained">
-              Submit
-            </LoadingButton>
-          </form>
+          </Grid>
         </div>
       </Container>
     </>
