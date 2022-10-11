@@ -12,6 +12,7 @@ import ViewImages2 from "./components/todos/ViewImages2";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import NavBar from "./components/navbar/NavBar";
+//import Footer from "./components/navbar/Footer";
 import { makeStyles } from "@material-ui/styles";
 //import GET_IMAGE_ERROR from "../src/store/reducers/errorReducer";
 
@@ -59,6 +60,7 @@ function App() {
               <Route path="/viewimages2" exact element={<ViewImages2 />} />
             </Routes>
           </Container>
+          {/* <Footer /> */}
         </Container>
       </BrowserRouter>
     </div>

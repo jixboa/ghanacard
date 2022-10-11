@@ -259,10 +259,6 @@ const AddTodo = ({ customer, setCustomer }) => {
                           value: 3,
                           message: "Full name must have more characters",
                         },
-                        pattern: {
-                          value: /^[A-Za-z]+$/i,
-                          message: "Does not accept numbers on Name fields",
-                        },
                       })}
                       required={true}
                       autoComplete="fullname"
