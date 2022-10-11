@@ -234,7 +234,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                     </Typography>
                     <Typography variant="body2">
                       1. Complete the form here<br></br>
-                      2. Click on Submit to submit your details<br></br>
+                      2. Click on Submit to send your details<br></br>
                       Note: Image size for Ghanacard must not exceed 500kb
                     </Typography>
                   </CardContent>
