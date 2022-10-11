@@ -91,7 +91,7 @@ const AddTodo = ({ customer, setCustomer }) => {
 
   const handleImg = async (e) => {
     const file = e.target.files[0];
-    if (file.size < 51000) {
+    if (file.size < 510000) {
       const base641 = await convertBase64(file);
 
       setImg({
@@ -112,7 +112,7 @@ const AddTodo = ({ customer, setCustomer }) => {
 
   const handleImg2 = async (e) => {
     const file = e.target.files[0];
-    if (file.size < 51000) {
+    if (file.size < 510000) {
       const base642 = await convertBase64(file);
       setImg2({
         src2: base642,
@@ -132,7 +132,7 @@ const AddTodo = ({ customer, setCustomer }) => {
   const handleImg3 = async (e) => {
     const file = e.target.files[0];
 
-    if (file.size < 101000) {
+    if (file.size < 1010000) {
       const base64 = await convertBase64(file);
 
       setImg3({
