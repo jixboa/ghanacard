@@ -23,10 +23,10 @@ export const getImages = () => {
   };
 };
 
-export const addImage = (customer) => (dispatch, getState) =>
+export const addImage = (formData) => (dispatch, getState) =>
   new Promise((resolve, reject) => {
     API()
-      .post("/images", customer)
+      .post("/images", formData)
       .then((image) => {
         dispatch({
           type: "ADD_IMAGE",

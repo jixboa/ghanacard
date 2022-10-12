@@ -20,9 +20,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "@fontsource/roboto/500.css";
 
+import backgroundImage from "../src/background-main.jpg";
+
 const useStyles = makeStyles({
   contentStyle: {
     margin: "30px auto",
+    backgroundImage: { backgroundImage },
   },
 });
 

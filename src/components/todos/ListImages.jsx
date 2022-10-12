@@ -35,6 +35,8 @@ import { styled } from "@mui/material/styles";
 //import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
+//import newImg from "../../uploads/1665582999154-982142665_download.jpg";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -233,7 +235,7 @@ const ListImages = ({ setImage }) => {
                     <Avatar
                       onClick={() => handleOpen(image._id)}
                       alt="Remy Sharp"
-                      src={image.image3}
+                      src={require(`../../uploads/${image.image3}`)}
                     />
                   </Stack>
                 </StyledTableCell>

@@ -9,7 +9,7 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
 import { useSelector } from "react-redux";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 import * as React from "react";
 import { useState } from "react";

@@ -70,6 +70,15 @@ const AddTodo = ({ customer, setCustomer }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
 
+  const [image1, setImage1] = useState("");
+  const [image2, setImage2] = useState("");
+  const [image3, setImage3] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [accountNo, setAccountNo] = useState("");
+  const [ghanacard, setGhanacard] = useState("");
+  const [phone, setPhone] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+
   const { register, resetField, handleSubmit, formState } = useForm();
   const { isSubmitting } = formState;
   const { errors } = formState;
@@ -98,10 +107,7 @@ const AddTodo = ({ customer, setCustomer }) => {
         src: base641,
         alt: e.target.files[0].name,
       });
-      setCustomer({
-        ...customer,
-        image1: base641,
-      });
+      setImage1(file);
     } else {
       toast.info("Image size should not exceed 500kb", {
         position: toast.POSITION.TOP_CENTER,
@@ -118,10 +124,7 @@ const AddTodo = ({ customer, setCustomer }) => {
         src2: base642,
         alt2: e.target.files[0].name,
       });
-      setCustomer({
-        ...customer,
-        image2: base642,
-      });
+      setImage2(file);
     } else {
       toast.info("Image size should not exceed 500kb", {
         position: toast.POSITION.TOP_CENTER,
@@ -139,10 +142,7 @@ const AddTodo = ({ customer, setCustomer }) => {
         src3: base64,
         alt3: e.target.files[0].name,
       });
-      setCustomer({
-        ...customer,
-        image3: base64,
-      });
+      setImage3(file);
     } else {
       toast.info("Selfie size must not exceed 1Mb", {
         position: toast.POSITION.TOP_CENTER,
@@ -166,11 +166,24 @@ const AddTodo = ({ customer, setCustomer }) => {
   };
 
   const onSubmit = (data) => {
-    const newCustomer = {
+    const formData = new FormData();
+
+    formData.append("image1", image1);
+    formData.append("image2", image2);
+    formData.append("image3", image3);
+    formData.append("fullname", fullname);
+    formData.append("accountNo", accountNo);
+    formData.append("ghanacard", ghanacard);
+    formData.append("phone", phone);
+    formData.append("dateOfBirth", dateOfBirth);
+
+    /* const newCustomer = {
       ...customer,
       date: new Date(),
-    };
-    dispatch(addImage(newCustomer)).then(() => {
+    }; */
+    dispatch(addImage(formData)).then(() => {
+      console.log(formData);
+
       resetField("fullname");
       resetField("accountNo");
       resetField("phone");
@@ -179,17 +192,12 @@ const AddTodo = ({ customer, setCustomer }) => {
       resetField("image1");
       resetField("image2");
       resetField("image3");
-      setCustomer({
-        ...customer,
-        fullname: "",
-        accountNo: "",
-        phone: "",
-        ghanacard: "",
-        dateOfBirth: "",
-        image1: "",
-        image2: "",
-        image3: "",
-      });
+
+      setFullname("");
+      setAccountNo("");
+      setGhanacard("");
+      setPhone("");
+
       setImg({
         src: placeholder,
         alt: "",
@@ -247,6 +255,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                 Complete the form below to proceed
               </Div>
               <form
+                encType="multipart/form-data"
                 className={classes.form}
                 noValidate
                 onSubmit={handleSubmit(onSubmit)}>
@@ -270,10 +279,8 @@ const AddTodo = ({ customer, setCustomer }) => {
                       label="First name -- Other names -- Surname"
                       type={"text"}
                       autoFocus
-                      value={customer.fullname}
-                      onChange={(e) =>
-                        setCustomer({ ...customer, fullname: e.target.value })
-                      }
+                      value={fullname}
+                      onChange={(e) => setFullname(e.target.value)}
                     />
                     {errors.fullname && (
                       <Alert variant="outlined" severity="error">
@@ -304,10 +311,8 @@ const AddTodo = ({ customer, setCustomer }) => {
                       id="accountNo"
                       label="GAP Account Number"
                       type={"tel"}
-                      value={customer.accountNo}
-                      onChange={(e) =>
-                        setCustomer({ ...customer, accountNo: e.target.value })
-                      }
+                      value={accountNo}
+                      onChange={(e) => setAccountNo(e.target.value)}
                     />
                     {errors.accountNo && (
                       <Alert variant="outlined" severity="error">
@@ -333,10 +338,8 @@ const AddTodo = ({ customer, setCustomer }) => {
                       fullWidth
                       id="ghanacard"
                       label="Ghana Card Number"
-                      value={customer.ghanacard}
-                      onChange={(e) =>
-                        setCustomer({ ...customer, ghanacard: e.target.value })
-                      }
+                      value={ghanacard}
+                      onChange={(e) => setGhanacard(e.target.value)}
                     />
                     {errors.ghanacard && (
                       <Alert variant="outlined" severity="error">
@@ -361,10 +364,8 @@ const AddTodo = ({ customer, setCustomer }) => {
                       id="phone"
                       type={"tel"}
                       label="Phone Number"
-                      value={customer.phone}
-                      onChange={(e) =>
-                        setCustomer({ ...customer, phone: e.target.value })
-                      }
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                     />
                     {errors.phone && (
                       <Alert variant="outlined" severity="error">
@@ -390,12 +391,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                         shrink: true,
                       }}
                       value={customer.date}
-                      onChange={(e) =>
-                        setCustomer({
-                          ...customer,
-                          dateOfBirth: e.target.value,
-                        })
-                      }
+                      onChange={(e) => setDateOfBirth(e.target.value)}
                     />
 
                     {errors.dateOfBirth && (
@@ -423,7 +419,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                           type="file"
                           accept=".png, .jpg, .jpeg"
                           id="photo1"
-                          className="visually-hidden"
+                          className="visually-hidden form-control-file"
                           onChange={(e) => {
                             handleImg(e);
                           }}
@@ -473,7 +469,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                           type="file"
                           accept=".png, .jpg, .jpeg"
                           id="photo2"
-                          className="visually-hidden"
+                          className="visually-hidden form-control-file"
                           onChange={(e) => {
                             handleImg2(e);
                           }}
@@ -521,7 +517,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                           type="file"
                           accept=".png, .jpg, .jpeg"
                           id="photo3"
-                          className="visually-hidden"
+                          className="visually-hidden form-control-file"
                           onChange={(e) => {
                             handleImg3(e);
                           }}
@@ -562,7 +558,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                 <LoadingButton
                   style={{ marginTop: "20px" }}
                   size="large"
-                  onClick={handleSubmit(onSubmit)}
+                  type="submit"
                   endIcon={<SendIcon />}
                   loading={isSubmitting}
                   loadingPosition="end"

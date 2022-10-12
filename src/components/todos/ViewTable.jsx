@@ -1,4 +1,4 @@
-import MUIDataTable from "mui-datatables";
+/* import MUIDataTable from "mui-datatables";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "@mui/material/styles";
@@ -184,3 +184,4 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
+ */
