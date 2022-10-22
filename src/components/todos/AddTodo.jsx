@@ -29,6 +29,8 @@ import placeholder from "../todos/placeholder.png";
 import sending1 from "../todos/sending12.jpg";
 
 import "../todos/image.css";
+//import { addImage } from "../../store/actions/imageAction";
+//import { addFile } from "../../store/actions/filesAction";
 
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.body1,
@@ -181,7 +183,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       ...customer,
       date: new Date(),
     }; */
-    dispatch(addImage(formData)).then(() => {
+    dispatch(addImage(formData)); /* .then(() => {
       console.log(formData);
 
       resetField("fullname");
@@ -210,7 +212,7 @@ const AddTodo = ({ customer, setCustomer }) => {
         src3: placeholder,
         alt3: "",
       });
-    });
+    }); */
 
     return new Promise((resolve) => {
       setTimeout(() => {

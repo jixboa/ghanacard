@@ -35,7 +35,7 @@ import { styled } from "@mui/material/styles";
 //import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-//import newImg from "../../uploads/1665582999154-982142665_download.jpg";
+//import newImg from "../../../../routes/api/files";
 
 const style = {
   position: "absolute",
@@ -151,6 +151,7 @@ const ListImages = ({ setImage }) => {
   const [searched, setSearched] = useState("");
 
   const images = useSelector((state) => state.images);
+  const files = useSelector((state) => state.files);
 
   const handleOpen = (oneID) => {
     setOpen(true);
@@ -177,7 +178,7 @@ const ListImages = ({ setImage }) => {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - images.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - files.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -235,7 +236,7 @@ const ListImages = ({ setImage }) => {
                     <Avatar
                       onClick={() => handleOpen(image._id)}
                       alt="Remy Sharp"
-                      src={require(`../../uploads/${image.image3}`)}
+                      src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${image.image3}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
                     />
                   </Stack>
                 </StyledTableCell>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loadUser } from "./store/actions/authAction";
+import { getFiles } from "./store/actions/filesAction";
 import { getImages } from "./store/actions/imageAction";
 import "./App.css";
 
@@ -33,12 +34,12 @@ function App() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  /*   useEffect(() => {
-    dispatch(GET_IMAGE_ERROR);
-  }, [dispatch]);
- */
   useEffect(() => {
     dispatch(getImages());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getFiles());
   }, [dispatch]);
 
   useEffect(() => {

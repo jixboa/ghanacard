@@ -22,7 +22,7 @@ const ViewImages2 = (setMuiData) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 6000);
+    }, 1000);
   }, []);
 
   useEffect(() => {

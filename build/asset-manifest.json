@@ -1,34 +1,11 @@
 {
   "files": {
     "main.css": "/static/css/main.9b5db794.css",
-    "main.js": "/static/js/main.bf6c16a2.js",
+    "main.js": "/static/js/main.879a72df.js",
     "static/js/787.90be3668.chunk.js": "/static/js/787.90be3668.chunk.js",
     "static/media/background-main.jpg": "/static/media/background-main.e01fc0a63a441582b429.jpg",
-    "static/media/1665592593361-897232681_sample-profile-pic.png": "/static/media/1665592593361-897232681_sample-profile-pic.20971cd94b270109cc6b.png",
     "static/media/sending12.jpg": "/static/media/sending12.2caf57ecea3ea913afa7.jpg",
-    "static/media/1665598796326-412117804_jpg": "/static/media/1665598796326-412117804_113202211505213555.d4cb6a5a92a5bb6374da.jpg",
-    "static/media/1665598914198-466578058_jpg": "/static/media/1665598914198-466578058_113202211505213555.d4cb6a5a92a5bb6374da.jpg",
-    "static/media/1665597704049-439026960_jpg": "/static/media/1665597704049-439026960_9520221756402132597.474605785b2292430188.jpg",
-    "static/media/1665598796321-420413657_jpg": "/static/media/1665598796321-420413657_9520221756402132597.474605785b2292430188.jpg",
-    "static/media/1665598914193-463177953_jpg": "/static/media/1665598914193-463177953_9520221756402132597.474605785b2292430188.jpg",
-    "static/media/1665597704051-503670538_jpg": "/static/media/1665597704051-503670538_262022126582132997.48dc4118b28426795306.jpg",
-    "static/media/1665597704055-989168531_jpg": "/static/media/1665597704055-989168531_262022126582132997.48dc4118b28426795306.jpg",
-    "static/media/1665598796322-713704855_jpg": "/static/media/1665598796322-713704855_262022126582132997.48dc4118b28426795306.jpg",
-    "static/media/1665598914195-422552642_jpg": "/static/media/1665598914195-422552642_262022126582132997.48dc4118b28426795306.jpg",
-    "static/media/1665592593357-303128213_Ama Ghana Card   front.jpeg": "/static/media/1665592593357-303128213_Ama Ghana Card   front.2a739fc76519506c20f8.jpeg",
-    "static/media/1665592904500-32380863_Ama Ghana Card   front.jpeg": "/static/media/1665592904500-32380863_Ama Ghana Card   front.2a739fc76519506c20f8.jpeg",
-    "static/media/1665600530934-232890463_Ama Ghana Card   front.jpeg": "/static/media/1665600530934-232890463_Ama Ghana Card   front.2a739fc76519506c20f8.jpeg",
-    "static/media/1665600530936-646912505_Ama Ghana Card   front.jpeg": "/static/media/1665600530936-646912505_Ama Ghana Card   front.2a739fc76519506c20f8.jpeg",
-    "static/media/1665600530940-773836892_Ama Ghana Card   front.jpeg": "/static/media/1665600530940-773836892_Ama Ghana Card   front.2a739fc76519506c20f8.jpeg",
-    "static/media/1665600576202-95709386_Ama Ghana Card   front.jpeg": "/static/media/1665600576202-95709386_Ama Ghana Card   front.2a739fc76519506c20f8.jpeg",
-    "static/media/1665600576205-394891578_Ama Ghana Card   front.jpeg": "/static/media/1665600576205-394891578_Ama Ghana Card   front.2a739fc76519506c20f8.jpeg",
-    "static/media/1665600576211-331367273_Ama Ghana Card   front.jpeg": "/static/media/1665600576211-331367273_Ama Ghana Card   front.2a739fc76519506c20f8.jpeg",
-    "static/media/1665600875658-643486605_kwame gh card ft.jpeg": "/static/media/1665600875658-643486605_kwame gh card ft.7007fe414f48c2f0d958.jpeg",
-    "static/media/1665600875661-79093489_kwame gh card ft.jpeg": "/static/media/1665600875661-79093489_kwame gh card ft.7007fe414f48c2f0d958.jpeg",
-    "static/media/1665592593358-592172836_Ama Ghana Card back.jpeg": "/static/media/1665592593358-592172836_Ama Ghana Card back.aea3e914c9fdca9c0fcf.jpeg",
-    "static/media/1665592904504-428999045_Ama Ghana Card back.jpeg": "/static/media/1665592904504-428999045_Ama Ghana Card back.aea3e914c9fdca9c0fcf.jpeg",
     "static/media/roboto-all-500-normal.woff": "/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
-    "static/media/1665600875657-962291473_Image 2022-05-04 at 8.13.46 PM.jpeg": "/static/media/1665600875657-962291473_Image 2022-05-04 at 8.13.46 PM.948f89a624e6235aa48e.jpeg",
     "static/media/roboto-latin-500-normal.woff2": "/static/media/roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2",
     "static/media/roboto-cyrillic-ext-500-normal.woff2": "/static/media/roboto-cyrillic-ext-500-normal.62ced72e5832f02c2796.woff2",
     "static/media/roboto-latin-ext-500-normal.woff2": "/static/media/roboto-latin-ext-500-normal.9165081d10e1ba601384.woff2",
@@ -38,11 +15,11 @@
     "static/media/roboto-greek-ext-500-normal.woff2": "/static/media/roboto-greek-ext-500-normal.6fb9cffb1d3e72bf9293.woff2",
     "index.html": "/index.html",
     "main.9b5db794.css.map": "/static/css/main.9b5db794.css.map",
-    "main.bf6c16a2.js.map": "/static/js/main.bf6c16a2.js.map",
+    "main.879a72df.js.map": "/static/js/main.879a72df.js.map",
     "787.90be3668.chunk.js.map": "/static/js/787.90be3668.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9b5db794.css",
-    "static/js/main.bf6c16a2.js"
+    "static/js/main.879a72df.js"
   ]
 }

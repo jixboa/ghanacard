@@ -3,15 +3,16 @@ import API from "../../api/root";
 import { toast } from "react-toastify";
 //import { setHeaders } from "../../api";
 
-export const getImages = () => {
+export const getFiles = (filename) => {
   return (dispatch) => {
     API()
-      .get("/images")
-      .then((images) => {
+      .get("/files")
+      .then((files) => {
         dispatch({
-          type: "GET_IMAGES",
-          images,
+          type: "GET_FILES",
+          files,
         });
+        console.log(files);
       })
       .catch((error) => {
         console.log(error.response);
@@ -23,16 +24,16 @@ export const getImages = () => {
   };
 };
 
-export const addImage = (formData) => (dispatch, getState) =>
+export const addFile = (formData) => (dispatch, getState) =>
   new Promise((resolve, reject) => {
     API()
-      .post("/images", formData)
-      .then((image) => {
+      .post("/files/upload", formData)
+      .then((file) => {
         dispatch({
-          type: "ADD_IMAGE",
-          image,
+          type: "ADD_FILE",
+          file,
         });
-        resolve(image);
+        resolve(file);
       })
       .catch((error) => {
         const errors = error.response?.data;
