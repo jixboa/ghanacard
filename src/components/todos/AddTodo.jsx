@@ -183,7 +183,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       ...customer,
       date: new Date(),
     }; */
-    dispatch(addImage(formData)); /* .then(() => {
+    dispatch(addImage(formData)).then(() => {
       console.log(formData);
 
       resetField("fullname");
@@ -212,7 +212,7 @@ const AddTodo = ({ customer, setCustomer }) => {
         src3: placeholder,
         alt3: "",
       });
-    }); */
+    });
 
     return new Promise((resolve) => {
       setTimeout(() => {

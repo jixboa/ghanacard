@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loadUser } from "./store/actions/authAction";
-import { getFiles } from "./store/actions/filesAction";
+//import { getFiles } from "./store/actions/filesAction";
 import { getImages } from "./store/actions/imageAction";
 import "./App.css";
 
@@ -38,10 +38,10 @@ function App() {
     dispatch(getImages());
   }, [dispatch]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     dispatch(getFiles());
   }, [dispatch]);
-
+ */
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch]);
