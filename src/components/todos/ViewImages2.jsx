@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 //import { useDispatch } from "react-redux";
-import ListImages from "./ListImages";
-//import ListImages3 from "./ListImages3";
+//import ListImages from "./ListImages";
+import ListImages3 from "./ListImages3";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
@@ -50,8 +50,8 @@ const ViewImages2 = (setMuiData) => {
           {/* <AddTodo todo={todo} setTodo={setTodo} /> */}
           {/* <ListTodos setTodo={setTodo} /> */}
           <Slide>
-            <ListImages />
-            {/* <ListImages3 /> */}
+            {/*  <ListImages /> */}
+            <ListImages3 />
           </Slide>
         </>
       )}

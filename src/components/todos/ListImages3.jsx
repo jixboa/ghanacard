@@ -12,7 +12,24 @@ import { useSelector } from "react-redux";
 //import { useEffect } from "react";
 
 import * as React from "react";
-//import { useState } from "react";
+import { Avatar } from "@mui/material";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+
+import { useState } from "react";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const muiCache = createCache({
   key: "mui-datatables",
@@ -28,11 +45,21 @@ const ListImages3 = ({ setImage }) => {
 
   const images = useSelector((state) => state.images);
 
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+
+  const handleOpen = (rowData) => {
+    setOpen(true);
+    const custData = rowData;
+    console.log(custData);
+  };
+
   const newImages = images.map((imagee) => [
     imagee.fullname,
     imagee.accountNo,
     imagee.ghanacard,
     imagee.date,
+    imagee.image3,
   ]);
 
   const columns = [
@@ -40,6 +67,18 @@ const ListImages3 = ({ setImage }) => {
     "Account number",
     "Ghana card",
     "Date Created",
+    {
+      name: "Avatar",
+      label: "Image",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => (
+          <Avatar
+            variant="rounded"
+            src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
+            alt="Alt"></Avatar>
+        ),
+      },
+    },
   ];
   //const [muidata, setMuiData] = useState([]);
 
@@ -52,6 +91,9 @@ const ListImages3 = ({ setImage }) => {
     responsive: "standard",
     onTableChange: (action, state) => {
       state = { newImages };
+    },
+    onRowClick: (rowData) => {
+      handleOpen(rowData);
     },
   };
 
@@ -144,6 +186,21 @@ const ListImages3 = ({ setImage }) => {
           />
         </ThemeProvider>
       </CacheProvider>
+      <Modal
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description">
+        <Box sx={style}>
+          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
+            Customer Details
+          </Typography>
+          <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
+            Ghana card images here
+          </Typography>
+        </Box>
+      </Modal>
     </>
   );
 };
