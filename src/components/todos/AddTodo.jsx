@@ -102,7 +102,7 @@ const AddTodo = ({ customer, setCustomer }) => {
 
   const handleImg = async (e) => {
     const file = e.target.files[0];
-    if (file.size < 510000) {
+    if (file.size < 2010000) {
       const base641 = await convertBase64(file);
 
       setImg({
@@ -111,7 +111,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       });
       setImage1(file);
     } else {
-      toast.info("Image size should not exceed 500kb", {
+      toast.info("Image size should not exceed 200Mb", {
         position: toast.POSITION.TOP_CENTER,
       });
       resetField("image1");
@@ -120,7 +120,7 @@ const AddTodo = ({ customer, setCustomer }) => {
 
   const handleImg2 = async (e) => {
     const file = e.target.files[0];
-    if (file.size < 510000) {
+    if (file.size < 2010000) {
       const base642 = await convertBase64(file);
       setImg2({
         src2: base642,
@@ -128,7 +128,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       });
       setImage2(file);
     } else {
-      toast.info("Image size should not exceed 500kb", {
+      toast.info("Image size should not exceed 2Mb", {
         position: toast.POSITION.TOP_CENTER,
       });
       resetField("image2");
@@ -137,7 +137,7 @@ const AddTodo = ({ customer, setCustomer }) => {
   const handleImg3 = async (e) => {
     const file = e.target.files[0];
 
-    if (file.size < 1010000) {
+    if (file.size < 2010000) {
       const base64 = await convertBase64(file);
 
       setImg3({
@@ -146,7 +146,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       });
       setImage3(file);
     } else {
-      toast.info("Selfie size must not exceed 1Mb", {
+      toast.info("Selfie size must not exceed 2Mb", {
         position: toast.POSITION.TOP_CENTER,
       });
       resetField("image3");
