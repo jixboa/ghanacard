@@ -13,7 +13,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
 
 import IconButton from "@mui/material/IconButton";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
@@ -232,13 +231,11 @@ const ListImages = ({ setImage }) => {
                   {image.ghanacard}
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  <Stack direction="row" spacing={2}>
-                    <Avatar
-                      onClick={() => handleOpen(image._id)}
-                      alt="Remy Sharp"
-                      src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${image.image3}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
-                    />
-                  </Stack>
+                  <Avatar
+                    onClick={() => handleOpen(image._id)}
+                    alt="Remy Sharp"
+                    src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${image.image3}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
+                  />
                 </StyledTableCell>
               </StyledTableRow>
             ))}

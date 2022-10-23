@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import Todos from "./components/todos/Todos";
 import ViewImages from "./components/todos/ViewImages";
+import Footer from "./components/todos/Footer";
 import ViewImages2 from "./components/todos/ViewImages2";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
@@ -64,6 +65,7 @@ function App() {
               <Route path="/viewimages2" exact element={<ViewImages2 />} />
             </Routes>
           </Container>
+          <Footer />
           {/* <Footer /> */}
         </Container>
       </BrowserRouter>

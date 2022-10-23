@@ -27,6 +27,7 @@ import { CardActionArea } from "@mui/material";
 //import { addTodo, updateTodo } from "../../store/actions/todoActions";
 import placeholder from "../todos/placeholder.png";
 import sending1 from "../todos/sending12.jpg";
+import "@fontsource/roboto/400.css";
 
 import "../todos/image.css";
 //import { addImage } from "../../store/actions/imageAction";
@@ -81,9 +82,14 @@ const AddTodo = ({ customer, setCustomer }) => {
   const [phone, setPhone] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
 
-  const { register, resetField, handleSubmit, formState } = useForm();
-  const { isSubmitting } = formState;
-  const { errors } = formState;
+  const {
+    resetField,
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  //const { isSubmitting } = formState;
+  //const { errors } = formState;
 
   const [{ alt, src }, setImg] = useState({
     src: placeholder,
@@ -102,7 +108,7 @@ const AddTodo = ({ customer, setCustomer }) => {
 
   const handleImg = async (e) => {
     const file = e.target.files[0];
-    if (file.size < 2010000) {
+    if (file.size < 4010000) {
       const base641 = await convertBase64(file);
 
       setImg({
@@ -111,7 +117,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       });
       setImage1(file);
     } else {
-      toast.info("Image size should not exceed 200Mb", {
+      toast.info("Image size should not exceed 4Mb", {
         position: toast.POSITION.TOP_CENTER,
       });
       resetField("image1");
@@ -120,7 +126,7 @@ const AddTodo = ({ customer, setCustomer }) => {
 
   const handleImg2 = async (e) => {
     const file = e.target.files[0];
-    if (file.size < 2010000) {
+    if (file.size < 4010000) {
       const base642 = await convertBase64(file);
       setImg2({
         src2: base642,
@@ -128,7 +134,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       });
       setImage2(file);
     } else {
-      toast.info("Image size should not exceed 2Mb", {
+      toast.info("Image size should not exceed 4Mb", {
         position: toast.POSITION.TOP_CENTER,
       });
       resetField("image2");
@@ -137,7 +143,7 @@ const AddTodo = ({ customer, setCustomer }) => {
   const handleImg3 = async (e) => {
     const file = e.target.files[0];
 
-    if (file.size < 2010000) {
+    if (file.size < 4010000) {
       const base64 = await convertBase64(file);
 
       setImg3({
@@ -146,7 +152,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       });
       setImage3(file);
     } else {
-      toast.info("Selfie size must not exceed 2Mb", {
+      toast.info("Selfie size must not exceed 4Mb", {
         position: toast.POSITION.TOP_CENTER,
       });
       resetField("image3");
@@ -240,12 +246,12 @@ const AddTodo = ({ customer, setCustomer }) => {
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      Keep the following Steps
+                      Please follow the steps below
                     </Typography>
                     <Typography variant="body2">
                       1. Complete the form here<br></br>
                       2. Click on Submit to send your details<br></br>
-                      Note: Image size for Ghanacard must not exceed 500kb
+                      Note: Size of each Image should not exceed 4Mb
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -261,7 +267,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                 className={classes.form}
                 noValidate
                 onSubmit={handleSubmit(onSubmit)}>
-                <Grid container spacing={2}>
+                <Grid container spacing={2} className="form-group">
                   <Grid item xs={12}>
                     <TextField
                       {...register("fullname", {
@@ -271,9 +277,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                           message: "Full name must have more characters",
                         },
                       })}
-                      required={true}
-                      autoComplete="fullname"
-                      name="fullname"
+                      aria-invalid={errors.fullname ? "true" : "false"}
                       variant="outlined"
                       className="form-control"
                       fullWidth
@@ -286,7 +290,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                     />
                     {errors.fullname && (
                       <Alert variant="outlined" severity="error">
-                        {errors.fullname.message}
+                        {errors.fullname?.message}
                       </Alert>
                     )}
                   </Grid>
@@ -403,7 +407,6 @@ const AddTodo = ({ customer, setCustomer }) => {
                     )}
                   </Grid>
                 </Grid>
-
                 <Grid
                   style={{ marginTop: "20px" }}
                   container
@@ -562,7 +565,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                   size="large"
                   type="submit"
                   endIcon={<SendIcon />}
-                  loading={isSubmitting}
+                  loading={false}
                   loadingPosition="end"
                   variant="contained">
                   Submit

@@ -18,13 +18,16 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 import { useState } from "react";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+//import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 550,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -43,6 +46,11 @@ const ListImages3 = ({ setImage }) => {
   const [printBtn, setPrintBtn] = useState(true);
   const [filterBtn, setFilterBtn] = useState(true); */
 
+  const [custName, setCustName] = useState("");
+  const [custSelfie, setCustSelfie] = useState("");
+  const [custFrontImage, setCustFrontImage] = useState("");
+  const [custBackImage, setCustBackImage] = useState("");
+
   const images = useSelector((state) => state.images);
 
   const [open, setOpen] = useState(false);
@@ -51,6 +59,11 @@ const ListImages3 = ({ setImage }) => {
   const handleOpen = (rowData) => {
     setOpen(true);
     const custData = rowData;
+    setCustName(custData[0]);
+    setCustSelfie(custData[4].props.src);
+    setCustFrontImage(custData[5].props.src);
+    setCustBackImage(custData[6].props.src);
+
     console.log(custData);
   };
 
@@ -60,6 +73,8 @@ const ListImages3 = ({ setImage }) => {
     imagee.ghanacard,
     imagee.date,
     imagee.image3,
+    imagee.image1,
+    imagee.image2,
   ]);
 
   const columns = [
@@ -69,7 +84,7 @@ const ListImages3 = ({ setImage }) => {
     "Date Created",
     {
       name: "Avatar",
-      label: "Image",
+      label: "Selfie",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => (
           <Avatar
@@ -77,6 +92,32 @@ const ListImages3 = ({ setImage }) => {
             src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
             alt="Alt"></Avatar>
         ),
+      },
+    },
+    {
+      name: "Avatar1",
+      label: "Front Image",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => (
+          <Avatar
+            variant="rounded"
+            src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
+            alt="Alt"></Avatar>
+        ),
+        display: false,
+      },
+    },
+    {
+      name: "Avatar2",
+      label: "Back Image",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => (
+          <Avatar
+            variant="rounded"
+            src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
+            alt="Alt"></Avatar>
+        ),
+        display: false,
       },
     },
   ];
@@ -179,7 +220,7 @@ const ListImages3 = ({ setImage }) => {
             </Select>
           </FormControl> */}
           <MUIDataTable
-            title={"GAP CUSTOMER DETAILS(GAHANA CARD)"}
+            title={"Ghana Card Details"}
             data={newImages}
             columns={columns}
             options={options}
@@ -193,12 +234,33 @@ const ListImages3 = ({ setImage }) => {
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description">
         <Box sx={style}>
+          <label>
+            <Avatar variant="rounded" src={custSelfie} alt="Alt"></Avatar>
+          </label>
           <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            Customer Details
+            {custName}
           </Typography>
-          <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-            Ghana card images here
-          </Typography>
+          <Box sx={{ width: 550, height: 150 }}>
+            <ImageList
+              variant="masonry"
+              sx={{ width: 500, height: 450 }}
+              cols={2}
+              rowHeight={150}
+              gap={8}>
+              <ImageListItem>
+                <img
+                  src={`${custFrontImage}?w=248&fit=crop&auto=format`}
+                  srcSet={`${custFrontImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  alt={custName}
+                />
+                <img
+                  src={`${custBackImage}?w=248&fit=crop&auto=format`}
+                  srcSet={`${custBackImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  alt={custName}
+                />
+              </ImageListItem>
+            </ImageList>
+          </Box>
         </Box>
       </Modal>
     </>
