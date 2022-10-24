@@ -2,10 +2,9 @@ import { React, useState } from "react";
 import { TextField, Typography, Container } from "@material-ui/core";
 import { makeStyles, CssBaseline } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-//import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { addImage } from "../../store/actions/imageAction";
-//import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
 
 import FormHelperText from "@mui/material/FormHelperText";
@@ -23,18 +22,14 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 
-//import { useDispatch } from "react-redux";
-//import { addTodo, updateTodo } from "../../store/actions/todoActions";
 import placeholder from "../todos/placeholder.png";
-import sending1 from "../todos/sending12.jpg";
+import sending1 from "../todos/ghcard.jpg";
 import "@fontsource/roboto/400.css";
+//import Resizer from "react-image-file-resizer";
 
 import "../todos/image.css";
-//import { addImage } from "../../store/actions/imageAction";
-//import { addFile } from "../../store/actions/filesAction";
 
 const Div = styled("div")(({ theme }) => ({
-  ...theme.typography.body1,
   backgroundColor: "#20b113",
   padding: theme.spacing(1),
   marginBottom: "20px",
@@ -172,6 +167,22 @@ const AddTodo = ({ customer, setCustomer }) => {
       };
     });
   };
+
+  /*  const resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "base64"
+      );
+    }); */
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -412,7 +423,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                   container
                   rowspacing={1}
                   columnspacing={{ xs: 1, sm: 2, md: 3 }}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12}>
                     <Item>
                       <div className="form__img-input-container">
                         <input
@@ -462,7 +473,14 @@ const AddTodo = ({ customer, setCustomer }) => {
                       </div>
                     </Item>
                   </Grid>
-                  <Grid item xs={6}>
+                </Grid>
+
+                <Grid
+                  style={{ marginTop: "25px" }}
+                  container
+                  rowspacing={1}
+                  columnspacing={{ xs: 1, sm: 2, md: 3 }}>
+                  <Grid item xs={12}>
                     <Item>
                       <div className="form__img-input-container">
                         <input
@@ -510,8 +528,13 @@ const AddTodo = ({ customer, setCustomer }) => {
                       </div>
                     </Item>
                   </Grid>
-                  <Grid item xs={3}></Grid>
-                  <Grid item xs={6}>
+                </Grid>
+                <Grid
+                  style={{ marginTop: "25px" }}
+                  container
+                  rowspacing={1}
+                  columnspacing={{ xs: 1, sm: 2, md: 3 }}>
+                  <Grid item xs={12}>
                     <Item>
                       <div className="form__img-input-container">
                         <input

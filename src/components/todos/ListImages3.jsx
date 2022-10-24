@@ -71,7 +71,7 @@ const ListImages3 = ({ setImage }) => {
     imagee.fullname,
     imagee.accountNo,
     imagee.ghanacard,
-    imagee.date,
+    imagee.dateOfBirth,
     imagee.image3,
     imagee.image1,
     imagee.image2,

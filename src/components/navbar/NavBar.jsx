@@ -43,7 +43,7 @@ const NavBar = () => {
         <Toolbar>
           <Typography variant="h4" className={classes.root}>
             <Link className={classes.linkStyle} to="/">
-              <Typography>GAP Ghana Card Update</Typography>
+              <Typography>GAP Microfinance Ghana Card Linkage</Typography>
             </Link>
           </Typography>
           {auth._id ? (
