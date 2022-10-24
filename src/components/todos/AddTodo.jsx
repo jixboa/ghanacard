@@ -73,7 +73,7 @@ const AddTodo = ({ customer, setCustomer }) => {
   const [image3, setImage3] = useState("");
   const [fullname, setFullname] = useState("");
   const [accountNo, setAccountNo] = useState("");
-  const [ghanacard, setGhanacard] = useState("");
+  const [ghanacard, setGhanacard] = useState("GHA-");
   const [phone, setPhone] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
 
