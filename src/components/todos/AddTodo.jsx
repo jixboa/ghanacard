@@ -190,7 +190,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       date: new Date(),
     }; */
     dispatch(addImage(formData)).then(() => {
-      console.log(formData);
+      //console.log(formData);
 
       resetField("fullname");
       resetField("accountNo");
