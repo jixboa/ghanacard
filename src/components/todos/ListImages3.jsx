@@ -57,14 +57,14 @@ const ListImages3 = ({ setImage }) => {
   const handleClose = () => setOpen(false);
 
   const handleOpen = (rowData) => {
-    setOpen(true);
     const custData = rowData;
     setCustName(custData[0]);
     setCustSelfie(custData[4].props.src);
     setCustFrontImage(custData[5].props.src);
     setCustBackImage(custData[6].props.src);
+    setOpen(true);
 
-    console.log(custData);
+    //console.log(custData);
   };
 
   const newImages = images.map((imagee) => [
@@ -244,6 +244,7 @@ const ListImages3 = ({ setImage }) => {
             <ImageList
               variant="masonry"
               sx={{ width: 500, height: 450 }}
+              sm={{ width: 350, height: 450 }}
               cols={2}
               rowHeight={150}
               gap={8}>

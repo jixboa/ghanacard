@@ -85,7 +85,7 @@ const AddTodo = ({ customer, setCustomer }) => {
   const {
     resetField,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm();
   //const { isSubmitting } = formState;
@@ -565,7 +565,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                   size="large"
                   type="submit"
                   endIcon={<SendIcon />}
-                  loading={false}
+                  loading={isSubmitting}
                   loadingPosition="end"
                   variant="contained">
                   Submit
