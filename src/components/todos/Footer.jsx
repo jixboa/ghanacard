@@ -24,7 +24,7 @@ export default function StickyFooter() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "20vh",
+        minHeight: "50px",
       }}>
       <CssBaseline />
       {/* <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
