@@ -25,6 +25,9 @@ import { CardActionArea } from "@mui/material";
 import placeholder from "../todos/placeholder.png";
 import sending1 from "../todos/ghcard.jpg";
 import "@fontsource/roboto/400.css";
+
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 //import Resizer from "react-image-file-resizer";
 
 import "../todos/image.css";
@@ -596,6 +599,13 @@ const AddTodo = ({ customer, setCustomer }) => {
               </form>
             </Grid>
           </Grid>
+        </div>
+        <div>
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={isSubmitting}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
       </Container>
     </>

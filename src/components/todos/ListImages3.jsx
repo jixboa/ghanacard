@@ -130,11 +130,15 @@ const ListImages3 = ({ setImage }) => {
     filter: false,
     filterType: "dropdown",
     responsive: "standard",
+    selectableRows: "none",
     onTableChange: (action, state) => {
       state = { newImages };
     },
     onRowClick: (rowData) => {
       handleOpen(rowData);
+    },
+    onRowsDelete: (rowData) => {
+      console.log(rowData);
     },
   };
 
