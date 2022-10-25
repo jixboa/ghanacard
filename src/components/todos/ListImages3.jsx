@@ -120,7 +120,7 @@ const ListImages3 = ({ setImage }) => {
     imagee.fullname,
     imagee.accountNo,
     imagee.ghanacard,
-    imagee.dateOfBirth,
+    imagee.date,
     imagee.image3,
     imagee.image1,
     imagee.image2,
