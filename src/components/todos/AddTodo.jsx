@@ -419,7 +419,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                   </Grid>
                 </Grid>
                 <Grid
-                  style={{ marginTop: "20px" }}
+                  style={{ marginTop: "10px" }}
                   container
                   rowspacing={1}
                   columnspacing={{ xs: 1, sm: 2, md: 3 }}>
