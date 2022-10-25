@@ -171,7 +171,7 @@ const AddTodo = ({ customer, setCustomer }) => {
     });
   };
 
-  /*  const resizeFile = (file) =>
+  /* const resizeFile = (file) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
@@ -591,7 +591,7 @@ const AddTodo = ({ customer, setCustomer }) => {
                   size="large"
                   type="submit"
                   endIcon={<SendIcon />}
-                  loading={isSubmitting}
+                  loading={false}
                   loadingPosition="end"
                   variant="contained">
                   Submit

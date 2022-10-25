@@ -22,6 +22,55 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 //import ImageListItemBar from "@mui/material/ImageListItemBar";
 
+import PropTypes from "prop-types";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import CloseIcon from "@mui/icons-material/Close";
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
+
+function BootstrapDialogTitle(props) {
+  const { children, onClose, ...other } = props;
+
+  return (
+    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+      {children}
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </DialogTitle>
+  );
+}
+
+BootstrapDialogTitle.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+};
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -88,7 +137,6 @@ const ListImages3 = ({ setImage }) => {
       options: {
         customBodyRender: (value, tableMeta, updateValue) => (
           <Avatar
-            variant="rounded"
             src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
             alt="Alt"></Avatar>
         ),
@@ -100,7 +148,6 @@ const ListImages3 = ({ setImage }) => {
       options: {
         customBodyRender: (value, tableMeta, updateValue) => (
           <Avatar
-            variant="rounded"
             src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
             alt="Alt"></Avatar>
         ),
@@ -113,7 +160,6 @@ const ListImages3 = ({ setImage }) => {
       options: {
         customBodyRender: (value, tableMeta, updateValue) => (
           <Avatar
-            variant="rounded"
             src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
             alt="Alt"></Avatar>
         ),
@@ -233,7 +279,7 @@ const ListImages3 = ({ setImage }) => {
       </CacheProvider>
       <Modal
         keepMounted
-        open={open}
+        open={false}
         onClose={handleClose}
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description">
@@ -268,6 +314,74 @@ const ListImages3 = ({ setImage }) => {
           </Box>
         </Box>
       </Modal>
+
+      <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}>
+        <BootstrapDialogTitle
+          id="customized-dialog-title"
+          onClose={handleClose}
+          style={{ justifyContent: "center", display: "flex" }}>
+          <br></br>
+          {/* <Avatar
+            src={custSelfie}
+            alt="Alt"
+            sx={{ width: 80, height: 80 }}></Avatar>
+          <br></br>
+          {custName} */}
+          <Stack direction="row" spacing={1}>
+            <Chip
+              sx={{ width: 250, height: 110 }}
+              avatar={
+                <Avatar
+                  alt="Natacha"
+                  src={custSelfie}
+                  style={{ width: "70px", height: "70px" }}
+                />
+              }
+              label={custName}
+              variant="outlined"
+            />
+          </Stack>
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+          <Box
+            sx={{
+              height: "fit-content",
+              display: "flex",
+              flexDirection: "column",
+              m: "auto",
+              width: "fit-content",
+            }}>
+            <ImageList
+              variant="masonry"
+              /* sx={{ width: 500, height: 250 }}
+              sm={{ width: 350, height: 250 }} */
+              cols={2}
+              rowHeight={150}
+              gap={8}>
+              <ImageListItem>
+                <img
+                  src={`${custFrontImage}?w=248&fit=crop&auto=format`}
+                  srcSet={`${custFrontImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  alt={custName}
+                />
+                <img
+                  src={`${custBackImage}?w=248&fit=crop&auto=format`}
+                  srcSet={`${custBackImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  alt={custName}
+                />
+              </ImageListItem>
+            </ImageList>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            Save changes
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
     </>
   );
 };
