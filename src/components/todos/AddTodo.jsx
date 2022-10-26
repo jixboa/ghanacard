@@ -237,7 +237,7 @@ const AddTodo = ({ customer, setCustomer }) => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve();
-      }, 6500);
+      }, 8000);
     });
   };
   /* const filterBySize = (file) => {

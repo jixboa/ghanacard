@@ -9,6 +9,11 @@ import { Typography, TextField, Button, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { Zoom } from "react-awesome-reveal";
 
+import { useForm } from "react-hook-form";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+
 const useStyle = makeStyles({
   formStyle: {
     margin: "0px auto",
@@ -37,13 +42,26 @@ const SignIn = () => {
   });
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = () => {
+    //e.preventDefault();
     dispatch(signIn(creds));
 
-    setCreds({
-      email: "",
-      password: "",
+    if (!errors) {
+      setCreds({
+        email: "",
+        password: "",
+      });
+    }
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 2000);
     });
   };
 
@@ -65,9 +83,12 @@ const SignIn = () => {
             className={classes.formStyle}
             noValidate
             autoComplete="off"
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit(onSubmit)}>
             <Typography variant="h5">Sign In</Typography>
             <TextField
+              {...register("email", {
+                required: "Enter email address",
+              })}
               className={classes.spacing}
               id="enter-email"
               label="Enter email"
@@ -77,7 +98,15 @@ const SignIn = () => {
               onChange={(e) => setCreds({ ...creds, email: e.target.value })}
               autoComplete="email"
             />
+            {errors.email && (
+              <Alert variant="outlined" severity="error">
+                {errors.email.message}
+              </Alert>
+            )}
             <TextField
+              {...register("password", {
+                required: "Enter user password",
+              })}
               className={classes.spacing}
               id="enter-password"
               label="Enter password"
@@ -88,6 +117,11 @@ const SignIn = () => {
               onChange={(e) => setCreds({ ...creds, password: e.target.value })}
               autoComplete="off"
             />
+            {errors.password && (
+              <Alert variant="outlined" severity="error">
+                {errors.password.message}
+              </Alert>
+            )}
             <Button
               className={classes.spacing}
               variant="contained"
@@ -96,6 +130,7 @@ const SignIn = () => {
               Sign In
             </Button>
             <Button
+              type="submit"
               className={classes.spacing}
               variant="text"
               color="primary"
@@ -105,6 +140,13 @@ const SignIn = () => {
               </Link>
             </Button>
           </form>
+          <div>
+            <Backdrop
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={isSubmitting}>
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          </div>
         </Container>
       </Zoom>
     </>
