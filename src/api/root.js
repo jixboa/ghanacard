@@ -12,6 +12,8 @@ const root = () => {
       "Access-Control-Allow-Origin": "*",
       Accept: "application/json",
       "Content-Type": "application/json",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
     },
   });
 };

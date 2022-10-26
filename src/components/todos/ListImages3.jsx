@@ -34,6 +34,11 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import CloseIcon from "@mui/icons-material/Close";
 
+//import { saveAs, FileSaver } from "file-saver";
+//import * as htmlToImage from "html-to-image";
+//import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
+//const download = require("download");
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -94,6 +99,35 @@ const ListImages3 = ({ setImage }) => {
   const [downloadBtn, setDownloadBtn] = useState(true);
   const [printBtn, setPrintBtn] = useState(true);
   const [filterBtn, setFilterBtn] = useState(true); */
+
+  /* const download = (url) => {
+    const a = document.createElement("a");
+    a.href = toDataURL(url);
+    a.download = "myImage.png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  const toDataURL = (url) => {
+    return fetch(url)
+      .then((response) => {
+        return response.blob();
+      })
+      .then((blob) => {
+        return URL.createObjectURL(blob);
+      });
+  };
+
+  const downloadImage = () => {
+    //saveAs(`${custSelfie}`, `image.jpeg`); // Put your image url here.
+    //FileSaver.saveAs(`${custSelfie}`, "image.jpg");
+    const xhr = new XMLHttpRequest();
+    const url = `${custSelfie}`;
+    xhr.open("GET", url);
+    xhr.onreadystatechange = download;
+    xhr.send();
+  }; */
 
   const [custName, setCustName] = useState("");
   const [custSelfie, setCustSelfie] = useState("");
@@ -316,6 +350,7 @@ const ListImages3 = ({ setImage }) => {
       </Modal>
 
       <BootstrapDialog
+        id="image-canvas"
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}>
@@ -378,7 +413,7 @@ const ListImages3 = ({ setImage }) => {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            Save changes
+            Close
           </Button>
         </DialogActions>
       </BootstrapDialog>
