@@ -34,6 +34,7 @@ import IconButton from "@mui/material/IconButton";
 //import Chip from "@mui/material/Chip";
 //import Stack from "@mui/material/Stack";
 import CloseIcon from "@mui/icons-material/Close";
+import { Zoom } from "react-awesome-reveal";
 
 import "@fontsource/roboto/400.css";
 
@@ -168,8 +169,8 @@ const ListImages3 = ({ setImage }) => {
   const images = useSelector((state) => state.images);
 
   const [open, setOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [zoomedImage, setZoomedImage] = useState("");
+  //const [openModal, setOpenModal] = useState(false);
+  //const [zoomedImage, setZoomedImage] = useState("");
   const handleClose = () => setOpen(false);
 
   const handleOpen = (rowData) => {
@@ -185,11 +186,11 @@ const ListImages3 = ({ setImage }) => {
 
     //console.log(custData);
   };
-  const zoomImage = (data) => {
+  /* const zoomImage = (data) => {
     const newZoom = data;
     setZoomedImage(newZoom);
     setOpenModal(true);
-  };
+  }; */
 
   const newImages = images.map((imagee) => [
     imagee.fullname,
@@ -354,7 +355,7 @@ const ListImages3 = ({ setImage }) => {
       </CacheProvider>
       <Modal
         keepMounted
-        open={openModal}
+        open={false}
         onClose={handleClose}
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description">
@@ -369,8 +370,8 @@ const ListImages3 = ({ setImage }) => {
               gap={8}>
               <ImageListItem>
                 <img
-                  src={`${zoomedImage}?w=248&fit=crop&auto=format`}
-                  srcSet={`${zoomedImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  src={`${custFrontImage}?w=248&fit=crop&auto=format`}
+                  srcSet={`${custFrontImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   alt={custName}
                 />
               </ImageListItem>
@@ -438,27 +439,28 @@ const ListImages3 = ({ setImage }) => {
                 {custGhanaCard}
               </Typography>
             </div>
-            <ImageList
-              variant="masonry"
-              /* sx={{ width: 500, height: 250 }}
+            <Zoom>
+              <ImageList
+                variant="masonry"
+                /* sx={{ width: 500, height: 250 }}
               sm={{ width: 350, height: 250 }} */
-              cols={2}
-              rowHeight={150}
-              gap={8}>
-              <ImageListItem>
-                <img
-                  src={`${custFrontImage}?w=248&fit=crop&auto=format`}
-                  srcSet={`${custFrontImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  alt={custName}
-                  onClick={zoomImage}
-                />
-                <img
-                  src={`${custBackImage}?w=248&fit=crop&auto=format`}
-                  srcSet={`${custBackImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  alt={custName}
-                />
-              </ImageListItem>
-            </ImageList>
+                cols={2}
+                rowHeight={150}
+                gap={8}>
+                <ImageListItem>
+                  <img
+                    src={`${custFrontImage}?w=248&fit=crop&auto=format`}
+                    srcSet={`${custFrontImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    alt={custName}
+                  />
+                  <img
+                    src={`${custBackImage}?w=248&fit=crop&auto=format`}
+                    srcSet={`${custBackImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    alt={custName}
+                  />
+                </ImageListItem>
+              </ImageList>
+            </Zoom>
           </Box>
         </DialogContent>
         <DialogActions>
