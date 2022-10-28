@@ -286,10 +286,6 @@ const AddTodo = ({ customer, setCustomer }) => {
                     <TextField
                       {...register("fullname", {
                         required: "Please Enter your Full name",
-                        pattern: {
-                          value: /^[A-Za-z]+$/i,
-                          message: "Accepts alphabets only",
-                        },
                         minLength: {
                           value: 3,
                           message: "Full name must have more characters",
@@ -321,10 +317,10 @@ const AddTodo = ({ customer, setCustomer }) => {
                           value: 10,
                           message:
                             "Account number cannot be less than ten characters",
-                          pattern: {
-                            value: /^[1-9]\d*(\d+)?$/i,
-                            message: "Only numbers are accepted on this field",
-                          },
+                        },
+                        pattern: {
+                          value: /^[0-9]\d*(\d+)?$/i,
+                          message: "Only numbers are accepted on this field",
                         },
                       })}
                       autoComplete="Account No."

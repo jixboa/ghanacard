@@ -31,8 +31,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
-//import Chip from "@mui/material/Chip";
-//import Stack from "@mui/material/Stack";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 import CloseIcon from "@mui/icons-material/Close";
 import { Zoom } from "react-awesome-reveal";
 
@@ -225,7 +225,8 @@ const ListImages3 = ({ setImage }) => {
         customBodyRender: (value, tableMeta, updateValue) => (
           <Avatar
             src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
-            alt="Alt"></Avatar>
+            alt="Alt"
+            variant="rounded"></Avatar>
         ),
         display: false,
       },
@@ -237,7 +238,8 @@ const ListImages3 = ({ setImage }) => {
         customBodyRender: (value, tableMeta, updateValue) => (
           <Avatar
             src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
-            alt="Alt"></Avatar>
+            alt="Alt"
+            variant="rounded"></Avatar>
         ),
         display: false,
       },
@@ -390,9 +392,9 @@ const ListImages3 = ({ setImage }) => {
           style={{ justifyContent: "center", display: "flex" }}>
           <br></br>
 
-          {/* <Stack direction="row" spacing={1}>
+          <Stack direction="row" spacing={1}>
             <Chip
-              sx={{ width: 250, height: 110 }}
+              sx={{ width: 150, height: 80 }}
               avatar={
                 <Avatar
                   alt="Natacha"
@@ -400,10 +402,9 @@ const ListImages3 = ({ setImage }) => {
                   style={{ width: "70px", height: "70px" }}
                 />
               }
-              label={custName}
               variant="outlined"
             />
-          </Stack> */}
+          </Stack>
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Box
@@ -422,14 +423,17 @@ const ListImages3 = ({ setImage }) => {
                 margin: "0 auto",
                 alignItems: "center",
               }}>
-              <Avatar
+              {/*  <Avatar
                 align="center"
                 alt="Image"
                 src={custSelfie}
                 style={{ width: "60px", height: "60px", marginLeft: "28px" }}
-              />
+              /> */}
 
-              <Typography align="center" variant="subtitle2">
+              <Typography
+                align="center"
+                variant="subtitle2"
+                sx={{ fontWeight: "bold" }}>
                 {custName}
               </Typography>
               <Typography align="center" variant="subtitle2">
@@ -464,7 +468,7 @@ const ListImages3 = ({ setImage }) => {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={downloadImage}>
+          <Button variant="outlined" size="small" onClick={downloadImage}>
             Save Profile
           </Button>
         </DialogActions>
