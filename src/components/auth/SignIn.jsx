@@ -89,6 +89,7 @@ const SignIn = () => {
               {...register("email", {
                 required: "Enter email address",
               })}
+              name="email"
               className={classes.spacing}
               id="enter-email"
               label="Enter email"
@@ -107,6 +108,7 @@ const SignIn = () => {
               {...register("password", {
                 required: "Enter user password",
               })}
+              name="password"
               className={classes.spacing}
               id="enter-password"
               label="Enter password"
@@ -140,15 +142,14 @@ const SignIn = () => {
               </Link>
             </Button>
           </form>
-          <div>
-            <Backdrop
-              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              open={isSubmitting}>
-              <CircularProgress color="inherit" />
-            </Backdrop>
-          </div>
+          <div></div>
         </Container>
       </Zoom>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isSubmitting}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </>
   );
 };

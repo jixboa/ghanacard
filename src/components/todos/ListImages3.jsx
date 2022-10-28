@@ -7,6 +7,7 @@ import { createTheme } from "@mui/material/styles";
 //import Select from "@mui/material/Select";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+//import { Navigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 //import { useEffect } from "react";
@@ -30,11 +31,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
+//import Chip from "@mui/material/Chip";
+//import Stack from "@mui/material/Stack";
 import CloseIcon from "@mui/icons-material/Close";
 
-//import { saveAs, FileSaver } from "file-saver";
+import "@fontsource/roboto/400.css";
+
+//import { FileSaver } from "file-saver";
 //import * as htmlToImage from "html-to-image";
 //import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 //const download = require("download");
@@ -100,10 +103,10 @@ const ListImages3 = ({ setImage }) => {
   const [printBtn, setPrintBtn] = useState(true);
   const [filterBtn, setFilterBtn] = useState(true); */
 
-  /* const download = (url) => {
+  /*  const download = (url) => {
     const a = document.createElement("a");
     a.href = toDataURL(url);
-    a.download = "myImage.png";
+    a.download = "myImage.jpg";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -117,37 +120,75 @@ const ListImages3 = ({ setImage }) => {
       .then((blob) => {
         return URL.createObjectURL(blob);
       });
-  };
+  }; */
+
+  const header = new Headers();
+  header.append("Access-Control-Allow-Origin", "*");
+  header.append("Content-Type", "application/json");
+  header.append("Access-Control-Allow-Origin", "*");
+  header.append(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
 
   const downloadImage = () => {
     //saveAs(`${custSelfie}`, `image.jpeg`); // Put your image url here.
     //FileSaver.saveAs(`${custSelfie}`, "image.jpg");
-    const xhr = new XMLHttpRequest();
+    /* const xhr = new XMLHttpRequest();
     const url = `${custSelfie}`;
-    xhr.open("GET", url);
+    xhr.open("GET", header, url);
     xhr.onreadystatechange = download;
-    xhr.send();
-  }; */
+    xhr.send(); */
+
+    /* let printContents = document.getElementById("image-canvas").innerHTML;
+    let originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents; */
+
+    var myCoolDiv = document.createElement("div");
+    // Don't reall need this: myCoolDiv.id = "MyCoolDiv";
+
+    document.getElementById("image-canvas").appendChild(myCoolDiv);
+    window.print();
+
+    // No need for this, we already have it from the above:
+    // var myCoolDiv = document.getElementById("MyCoolDiv");
+    document.getElementById("image-canvas").removeChild(myCoolDiv);
+  };
 
   const [custName, setCustName] = useState("");
   const [custSelfie, setCustSelfie] = useState("");
   const [custFrontImage, setCustFrontImage] = useState("");
   const [custBackImage, setCustBackImage] = useState("");
+  const [custGhanaCard, setCustGhanaCard] = useState("");
+  //const [custDateOfBirth, setcustDateOfBirth] = useState("");
+  const [custAccountNo, setcustAccountNo] = useState("");
 
   const images = useSelector((state) => state.images);
 
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState("");
   const handleClose = () => setOpen(false);
 
   const handleOpen = (rowData) => {
     const custData = rowData;
     setCustName(custData[0]);
+    setcustAccountNo(custData[1]);
+    setCustGhanaCard(custData[2]);
+
     setCustSelfie(custData[4].props.src);
     setCustFrontImage(custData[5].props.src);
     setCustBackImage(custData[6].props.src);
     setOpen(true);
 
     //console.log(custData);
+  };
+  const zoomImage = (data) => {
+    const newZoom = data;
+    setZoomedImage(newZoom);
+    setOpenModal(true);
   };
 
   const newImages = images.map((imagee) => [
@@ -313,17 +354,11 @@ const ListImages3 = ({ setImage }) => {
       </CacheProvider>
       <Modal
         keepMounted
-        open={false}
+        open={openModal}
         onClose={handleClose}
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description">
         <Box sx={style}>
-          <label>
-            <Avatar variant="rounded" src={custSelfie} alt="Alt"></Avatar>
-          </label>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            {custName}
-          </Typography>
           <Box sx={{ width: 550, height: 150 }}>
             <ImageList
               variant="masonry"
@@ -334,13 +369,8 @@ const ListImages3 = ({ setImage }) => {
               gap={8}>
               <ImageListItem>
                 <img
-                  src={`${custFrontImage}?w=248&fit=crop&auto=format`}
-                  srcSet={`${custFrontImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  alt={custName}
-                />
-                <img
-                  src={`${custBackImage}?w=248&fit=crop&auto=format`}
-                  srcSet={`${custBackImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  src={`${zoomedImage}?w=248&fit=crop&auto=format`}
+                  srcSet={`${zoomedImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   alt={custName}
                 />
               </ImageListItem>
@@ -350,7 +380,6 @@ const ListImages3 = ({ setImage }) => {
       </Modal>
 
       <BootstrapDialog
-        id="image-canvas"
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}>
@@ -359,13 +388,8 @@ const ListImages3 = ({ setImage }) => {
           onClose={handleClose}
           style={{ justifyContent: "center", display: "flex" }}>
           <br></br>
-          {/* <Avatar
-            src={custSelfie}
-            alt="Alt"
-            sx={{ width: 80, height: 80 }}></Avatar>
-          <br></br>
-          {custName} */}
-          <Stack direction="row" spacing={1}>
+
+          {/* <Stack direction="row" spacing={1}>
             <Chip
               sx={{ width: 250, height: 110 }}
               avatar={
@@ -378,7 +402,7 @@ const ListImages3 = ({ setImage }) => {
               label={custName}
               variant="outlined"
             />
-          </Stack>
+          </Stack> */}
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Box
@@ -388,7 +412,32 @@ const ListImages3 = ({ setImage }) => {
               flexDirection: "column",
               m: "auto",
               width: "fit-content",
+              alignItems: "center",
             }}>
+            <div
+              id="image-canvas"
+              style={{
+                justifyContent: "center",
+                margin: "0 auto",
+                alignItems: "center",
+              }}>
+              <Avatar
+                align="center"
+                alt="Image"
+                src={custSelfie}
+                style={{ width: "60px", height: "60px", marginLeft: "28px" }}
+              />
+
+              <Typography align="center" variant="subtitle2">
+                {custName}
+              </Typography>
+              <Typography align="center" variant="subtitle2">
+                {custAccountNo}
+              </Typography>
+              <Typography align="center" variant="subtitle2">
+                {custGhanaCard}
+              </Typography>
+            </div>
             <ImageList
               variant="masonry"
               /* sx={{ width: 500, height: 250 }}
@@ -401,6 +450,7 @@ const ListImages3 = ({ setImage }) => {
                   src={`${custFrontImage}?w=248&fit=crop&auto=format`}
                   srcSet={`${custFrontImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   alt={custName}
+                  onClick={zoomImage}
                 />
                 <img
                   src={`${custBackImage}?w=248&fit=crop&auto=format`}
@@ -412,8 +462,8 @@ const ListImages3 = ({ setImage }) => {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Close
+          <Button autoFocus onClick={downloadImage}>
+            Save Profile
           </Button>
         </DialogActions>
       </BootstrapDialog>

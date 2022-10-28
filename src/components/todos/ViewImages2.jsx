@@ -49,7 +49,7 @@ const ViewImages2 = (setMuiData) => {
         <>
           {/* <AddTodo todo={todo} setTodo={setTodo} /> */}
           {/* <ListTodos setTodo={setTodo} /> */}
-          <Slide>
+          <Slide triggerOnce={true}>
             {/*  <ListImages /> */}
             <ListImages3 />
           </Slide>

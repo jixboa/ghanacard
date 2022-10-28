@@ -286,6 +286,10 @@ const AddTodo = ({ customer, setCustomer }) => {
                     <TextField
                       {...register("fullname", {
                         required: "Please Enter your Full name",
+                        pattern: {
+                          value: /^[A-Za-z]+$/i,
+                          message: "Accepts alphabets only",
+                        },
                         minLength: {
                           value: 3,
                           message: "Full name must have more characters",
@@ -374,6 +378,14 @@ const AddTodo = ({ customer, setCustomer }) => {
                         minLength: {
                           value: 9,
                           message: "Phone number must be at least 9 charactors",
+                        },
+                        maxLength: {
+                          value: 12,
+                          message: "Must not be more than 12",
+                        },
+                        pattern: {
+                          value: /^[1-9]\d*(\d+)?$/i,
+                          message: "Only numbers are accepted here",
                         },
                       })}
                       autoComplete="Phone"
@@ -600,14 +612,13 @@ const AddTodo = ({ customer, setCustomer }) => {
             </Grid>
           </Grid>
         </div>
-        <div>
-          <Backdrop
-            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={isSubmitting}>
-            <CircularProgress color="inherit" />
-          </Backdrop>
-        </div>
+        <div></div>
       </Container>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isSubmitting}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </>
   );
 };
