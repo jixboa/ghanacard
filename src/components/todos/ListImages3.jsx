@@ -244,6 +244,26 @@ const ListImages3 = ({ setImage }) => {
         display: false,
       },
     },
+    /* {
+      name: "Delete",
+      options: {
+        filter: false,
+        sort: false,
+        empty: true,
+        customBodyRenderLite: (dataIndex) => {
+          return (
+            <button
+              onClick={() => {
+                const { data } = this.state;
+                data.shift();
+                this.setState({ data });
+              }}>
+              Delete
+            </button>
+          );
+        },
+      },
+    }, */
   ];
   //const [muidata, setMuiData] = useState([]);
 
@@ -442,6 +462,9 @@ const ListImages3 = ({ setImage }) => {
               <Typography align="center" variant="subtitle2">
                 {custGhanaCard}
               </Typography>
+              {/* <Button variant="outlined" size="small" align="center" onClick={setTextEditable}>
+                Edit
+              </Button> */}
             </div>
             <Zoom>
               <ImageList

@@ -1,15 +1,75 @@
 import React, { useState, useEffect } from "react";
-//import { useDispatch } from "react-redux";
-//import ListImages from "./ListImages";
 import ListImages3 from "./ListImages3";
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
-//import { getImages } from "../../store/actions/imageAction";
-//import { Typography } from "@material-ui/core";
 import { Slide } from "react-awesome-reveal";
+import { useIdleTimer } from "react-idle-timer";
+import { signOut } from "../../store/actions/authAction";
 
 const ViewImages2 = (setMuiData) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const HandleSignOut = () => {
+    //signOut the user
+    dispatch(signOut());
+    navigate("/signin");
+  };
+
+  const onPrompt = () => {
+    // Fire a Modal Prompt
+  };
+
+  const onIdle = () => {
+    // Close Modal Prompt
+    // Do some idle action like log out your user
+    HandleSignOut();
+  };
+
+  const onActive = (event) => {
+    start();
+    // Close Modal Prompt
+    // Do some active action
+  };
+
+  const onAction = (event) => {
+    // Do something when a user triggers a watched event
+  };
+
+  const { start } = useIdleTimer({
+    onPrompt,
+    onIdle,
+    onActive,
+    onAction,
+    timeout: 5 * 1000 * 60,
+    promptTimeout: 0,
+    events: [
+      "mousemove",
+      "keydown",
+      "wheel",
+      "DOMMouseScroll",
+      "mousewheel",
+      "mousedown",
+      "touchstart",
+      "touchmove",
+      "MSPointerDown",
+      "MSPointerMove",
+      "visibilitychange",
+    ],
+    immediateEvents: [],
+    debounce: 0,
+    throttle: 0,
+    eventsThrottle: 200,
+    element: document,
+    startOnMount: true,
+    startManually: false,
+    stopOnIdle: false,
+    crossTab: false,
+    name: "idle-timer",
+    syncTimers: 0,
+    leaderElection: false,
+  });
+
   //const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);

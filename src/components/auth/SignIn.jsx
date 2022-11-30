@@ -49,7 +49,6 @@ const SignIn = () => {
   } = useForm();
 
   const onSubmit = () => {
-    //e.preventDefault();
     dispatch(signIn(creds));
 
     if (!errors) {
@@ -64,14 +63,6 @@ const SignIn = () => {
       }, 2000);
     });
   };
-
-  // <div>
-  //   <Backdrop
-  //     sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-  //     open={true}>
-  //     <CircularProgress color="inherit" />
-  //   </Backdrop>
-  // </div>
 
   if (auth._id) return <Navigate to="/viewimages2" />;
 

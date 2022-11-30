@@ -279,7 +279,6 @@ const AddTodo = ({ customer, setCustomer }) => {
               <form
                 encType="multipart/form-data"
                 className={classes.form}
-                noValidate
                 onSubmit={handleSubmit(onSubmit)}>
                 <Grid container spacing={2} className="form-group">
                   <Grid item xs={12}>
@@ -302,10 +301,19 @@ const AddTodo = ({ customer, setCustomer }) => {
                       value={fullname}
                       onChange={(e) => setFullname(e.target.value)}
                     />
-                    {errors.fullname && (
+                    {/* {errors.fullname && (
                       <Alert variant="outlined" severity="error">
                         {errors.fullname?.message}
                       </Alert>
+                    )} */}
+                    {errors.fullname ? (
+                      <>
+                        <Alert variant="outlined" severity="error">
+                          {errors.fullname?.message}
+                        </Alert>
+                      </>
+                    ) : (
+                      <></>
                     )}
                   </Grid>
 
@@ -326,7 +334,6 @@ const AddTodo = ({ customer, setCustomer }) => {
                       autoComplete="Account No."
                       name="accountNo"
                       variant="outlined"
-                      required
                       fullWidth
                       id="accountNo"
                       label="GAP Account Number"
@@ -354,7 +361,6 @@ const AddTodo = ({ customer, setCustomer }) => {
                       autoComplete="ghanaCardNo"
                       name="ghanacard"
                       variant="outlined"
-                      required
                       fullWidth
                       id="ghanacard"
                       label="Ghana Card Number"
@@ -387,7 +393,6 @@ const AddTodo = ({ customer, setCustomer }) => {
                       autoComplete="Phone"
                       name="phone"
                       variant="outlined"
-                      required
                       fullWidth
                       id="phone"
                       type={"tel"}
@@ -412,7 +417,6 @@ const AddTodo = ({ customer, setCustomer }) => {
                       label="Date of birth"
                       type="date"
                       variant="outlined"
-                      required
                       fullWidth
                       sx={{ width: 220 }}
                       InputLabelProps={{
@@ -615,6 +619,16 @@ const AddTodo = ({ customer, setCustomer }) => {
         open={isSubmitting}>
         <CircularProgress color="inherit" />
       </Backdrop>
+      {/* <details>
+        <summary> Pronouns</summary>
+        <p>YOU</p>
+        <p>Me</p>
+        <p>Us</p>
+        <p>
+          <a href="tel:0542521836">Them</a>
+        </p>
+        <p>They</p>
+      </details> */}
     </>
   );
 };
