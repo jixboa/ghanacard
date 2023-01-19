@@ -1,12 +1,12 @@
 //import axios from "axios"
 import API from "../../api/root";
 import { toast } from "react-toastify";
-import { setHeaders } from "../../api";
+import { setHeader } from "../../api";
 
 export const getImages = () => {
   return (dispatch) => {
     API()
-      .get("/images", setHeaders())
+      .get("/images", setHeader())
       .then((images) => {
         dispatch({
           type: "GET_IMAGES",

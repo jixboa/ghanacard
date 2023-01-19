@@ -9,7 +9,6 @@ const root = () => {
     withCredentials: false,
     headers: {
       "Access-Control-Allow-Origin": "*",
-      Accept: "application/json",
       "Content-Type": "application/json",
       "Access-Control-Allow-Methods": "POST, GET, OPTION, DELETE, PUT",
       "Access-Control-Allow-Headers":
