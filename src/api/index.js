@@ -5,7 +5,7 @@ export const setHeaders = () => {
   const header = {
     headers: {
       "x-auth-token": localStorage.getItem("token"),
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "https://gapghanacard.netlify.app",
     },
   };
   return header;
