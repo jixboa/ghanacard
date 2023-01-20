@@ -8,7 +8,7 @@ const root = () => {
     baseURL: IP_URL,
     withCredentials: false,
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "https://gapghanacard.netlify.app",
       "Content-Type": "application/json",
       "Access-Control-Allow-Methods": "POST, GET, OPTION, DELETE, PUT",
       "Access-Control-Allow-Headers":

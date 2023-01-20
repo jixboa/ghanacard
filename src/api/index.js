@@ -10,17 +10,3 @@ export const setHeaders = () => {
   };
   return header;
 };
-
-export const setHeader = () => {
-  const header = {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Methods": "POST, GET, OPTION, DELETE, PUT",
-      "Access-Control-Allow-Headers":
-        "Origin, X-Requested-With, Content-Type, Accept",
-    },
-  };
-  return header;
-};

@@ -385,10 +385,6 @@ const AddTodo = ({ customer, setCustomer }) => {
                           value: 12,
                           message: "Must not be more than 12",
                         },
-                        pattern: {
-                          value: /^[1-9]\d*(\d+)?$/i,
-                          message: "Only numbers are accepted here",
-                        },
                       })}
                       autoComplete="Phone"
                       name="phone"
