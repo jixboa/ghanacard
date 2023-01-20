@@ -6,11 +6,14 @@ export const IP_URL = "https://jix-todo-app.herokuapp.com/api";
 const root = () => {
   return axios.create({
     baseURL: IP_URL,
-    withCredentials: true,
+    withCredentials: false,
     headers: {
-      "Access-Control-Allow-Origin": "https://gapghanacard.netlify.app",
+      "Access-Control-Allow-Origin": "*",
       Accept: "application/json",
       "Content-Type": "application/json",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers":
+        "Origin, Access-control-allow-headers, X-Requested-With, x-auth-token, Content-Type, Accept, Authorization, Access-Control-Allow-Origin,Access-Control-Allow-Methods",
     },
   });
 };
