@@ -26,7 +26,7 @@ export const getImages = () => {
 export const addImage = (formData) => (dispatch, getState) =>
   new Promise((resolve, reject) => {
     API()
-      .post("/images", formData)
+      .post("/images", formData, setHeaders())
       .then((image) => {
         dispatch({
           type: "ADD_IMAGE",
