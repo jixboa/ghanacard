@@ -2,10 +2,12 @@ import axios from "axios";
 
 export const BASE_URL = "http://localhost:5000/api";
 export const IP_URL = "https://jix-todo-app.herokuapp.com/api";
+export const AWS_IP =
+  "http://ghanacardlinkage-env.eba-qya8a8pr.us-east-1.elasticbeanstalk.com/api";
 
 const root = () => {
   return axios.create({
-    baseURL: IP_URL,
+    baseURL: AWS_IP,
     withCredentials: false,
     headers: {
       "Access-Control-Allow-Origin": "*",
