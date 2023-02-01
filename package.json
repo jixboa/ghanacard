@@ -1,5 +1,6 @@
 {
   "name": "reportdesigner",
+  "homepage": "https://jixboa.github.io/ghanacard/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
