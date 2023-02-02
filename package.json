@@ -1,8 +1,7 @@
 {
   "name": "reportdesigner",
-  "homepage": "https://jixboa.github.io/ghanacard",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@emotion/cache": "^11.10.3",
     "@emotion/react": "^11.10.4",
