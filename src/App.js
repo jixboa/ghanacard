@@ -16,7 +16,7 @@ import SignUp from "./components/auth/SignUp";
 import NavBar from "./components/navbar/NavBar";
 //import Footer from "./components/navbar/Footer";
 import { makeStyles } from "@material-ui/styles";
-//import GET_IMAGE_ERROR from "../src/store/reducers/errorReducer";
+//import GET_IMAGE_ERROR from "../src/store/reducers/errorReducers";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
