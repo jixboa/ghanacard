@@ -7,7 +7,7 @@ export const AWS_IP =
 
 const root = () => {
   return axios.create({
-    baseURL: AWS_IP,
+    baseURL: IP_URL,
     withCredentials: false,
     headers: {
       "Access-Control-Allow-Origin": "*",
