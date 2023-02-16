@@ -9,7 +9,8 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 //import { Navigate } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteImage } from "../../store/actions/imageAction";
 //import { useEffect } from "react";
 
 import * as React from "react";
@@ -98,6 +99,7 @@ const muiCache = createCache({
 });
 
 const ListImages3 = ({ setImage }) => {
+  const dispatch = useDispatch();
   /*   const [responsive, setResponsive] = useState("standard");
   const [searchBtn, setSearchBtn] = useState(true);
   const [downloadBtn, setDownloadBtn] = useState(true);
@@ -156,6 +158,7 @@ const ListImages3 = ({ setImage }) => {
     // No need for this, we already have it from the above:
     // var myCoolDiv = document.getElementById("MyCoolDiv");
     document.getElementById("image-canvas").removeChild(myCoolDiv);
+    console.log(custGhanaCard);
   };
 
   const [custName, setCustName] = useState("");
@@ -183,14 +186,7 @@ const ListImages3 = ({ setImage }) => {
     setCustFrontImage(custData[5].props.src);
     setCustBackImage(custData[6].props.src);
     setOpen(true);
-
-    //console.log(custData);
   };
-  /* const zoomImage = (data) => {
-    const newZoom = data;
-    setZoomedImage(newZoom);
-    setOpenModal(true);
-  }; */
 
   const newImages = images.map((imagee) => [
     imagee.fullname,
@@ -284,6 +280,11 @@ const ListImages3 = ({ setImage }) => {
     onRowsDelete: (rowData) => {
       console.log(rowData);
     },
+  };
+
+  const handleDelete = (id) => {
+    //dispatch(deleteImage(id));
+    console.log(id);
   };
 
   return (
@@ -491,6 +492,12 @@ const ListImages3 = ({ setImage }) => {
           </Box>
         </DialogContent>
         <DialogActions>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={handleDelete(custGhanaCard)}>
+            Delete
+          </Button>
           <Button variant="outlined" size="small" onClick={downloadImage}>
             Save Profile
           </Button>

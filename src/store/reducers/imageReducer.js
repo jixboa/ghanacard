@@ -14,6 +14,12 @@ const imageReducer = (state = [], action) => {
     case "GET_IMAGES":
       return action.images.data;
 
+    case "DELETE_IMAGE":
+      toast.success("Data Was delete", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return state.filter((image) => image._id !== action.id);
+
     default:
       return state;
   }

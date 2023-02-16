@@ -3,7 +3,7 @@ import { TextField, Typography, Container } from "@material-ui/core";
 import { makeStyles, CssBaseline } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { useDispatch } from "react-redux";
-import { addImage } from "../../store/actions/imageAction";
+import { addImage, getImages } from "../../store/actions/imageAction";
 
 import { toast } from "react-toastify";
 
@@ -188,6 +188,8 @@ const AddTodo = ({ customer, setCustomer }) => {
     }); */
 
   const onSubmit = (data) => {
+    dispatch(getImages());
+
     const formData = new FormData();
 
     formData.append("image1", image1);
@@ -205,8 +207,7 @@ const AddTodo = ({ customer, setCustomer }) => {
     }; */
     dispatch(addImage(formData)).then(() => {
       //console.log(formData);
-
-      resetField("fullname");
+      /* resetField("fullname");
       resetField("accountNo");
       resetField("phone");
       resetField("ghanacard");
@@ -231,7 +232,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       setImg3({
         src3: placeholder,
         alt3: "",
-      });
+      }); */
     });
 
     return new Promise((resolve) => {

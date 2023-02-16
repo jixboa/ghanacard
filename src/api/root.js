@@ -4,10 +4,11 @@ export const BASE_URL = "http://localhost:5000/api";
 export const IP_URL = "https://jix-todo-app.herokuapp.com/api";
 export const AWS_IP =
   "http://ghcardserver-env.eba-kearpmr8.us-east-1.elasticbeanstalk.com/api";
+export const CYCLIC_API = "https://fine-pink-worm-tie.cyclic.app/api";
 
 const root = () => {
   return axios.create({
-    baseURL: IP_URL,
+    baseURL: CYCLIC_API,
     withCredentials: false,
     headers: {
       "Access-Control-Allow-Origin": "*",

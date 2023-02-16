@@ -43,3 +43,22 @@ export const addImage = (formData) => (dispatch, getState) =>
         });
       });
   });
+
+export const deleteImage = (id) => {
+  return (dispatch) => {
+    API()
+      .delete(`/images/${id}`, setHeaders())
+      .then(() => {
+        dispatch({
+          type: "DELETE_IMAGE",
+          id,
+        });
+      })
+      .catch((error) => {
+        console.log(error.response);
+        toast.error(error.response?.data, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      });
+  };
+};
