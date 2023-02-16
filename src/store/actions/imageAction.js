@@ -45,6 +45,7 @@ export const addImage = (formData) => (dispatch, getState) =>
   });
 
 export const deleteImage = (id) => {
+  console.log(id);
   return (dispatch) => {
     API()
       .delete(`/images/${id}`, setHeaders())

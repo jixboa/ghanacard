@@ -19,7 +19,7 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 //import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -100,30 +100,12 @@ const muiCache = createCache({
 
 const ListImages3 = ({ setImage }) => {
   const dispatch = useDispatch();
+
   /*   const [responsive, setResponsive] = useState("standard");
   const [searchBtn, setSearchBtn] = useState(true);
   const [downloadBtn, setDownloadBtn] = useState(true);
   const [printBtn, setPrintBtn] = useState(true);
   const [filterBtn, setFilterBtn] = useState(true); */
-
-  /*  const download = (url) => {
-    const a = document.createElement("a");
-    a.href = toDataURL(url);
-    a.download = "myImage.jpg";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
-
-  const toDataURL = (url) => {
-    return fetch(url)
-      .then((response) => {
-        return response.blob();
-      })
-      .then((blob) => {
-        return URL.createObjectURL(blob);
-      });
-  }; */
 
   const header = new Headers();
   header.append("Access-Control-Allow-Origin", "*");
@@ -135,20 +117,6 @@ const ListImages3 = ({ setImage }) => {
   );
 
   const downloadImage = () => {
-    //saveAs(`${custSelfie}`, `image.jpeg`); // Put your image url here.
-    //FileSaver.saveAs(`${custSelfie}`, "image.jpg");
-    /* const xhr = new XMLHttpRequest();
-    const url = `${custSelfie}`;
-    xhr.open("GET", header, url);
-    xhr.onreadystatechange = download;
-    xhr.send(); */
-
-    /* let printContents = document.getElementById("image-canvas").innerHTML;
-    let originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents; */
-
     var myCoolDiv = document.createElement("div");
     // Don't reall need this: myCoolDiv.id = "MyCoolDiv";
 
@@ -160,7 +128,7 @@ const ListImages3 = ({ setImage }) => {
     document.getElementById("image-canvas").removeChild(myCoolDiv);
     console.log(custGhanaCard);
   };
-
+  const [tableData, setTableData] = useState([]);
   const [custName, setCustName] = useState("");
   const [custSelfie, setCustSelfie] = useState("");
   const [custFrontImage, setCustFrontImage] = useState("");
@@ -171,12 +139,43 @@ const ListImages3 = ({ setImage }) => {
 
   const images = useSelector((state) => state.images);
 
+  useEffect(() => {
+    // Fetch data from API
+
+    // Transform the data into the format expected by the table
+    const newTableData = images.map((image) => [
+      image.fullname,
+      image.accountNo,
+      image.ghanacard,
+      image.date,
+      image.image3,
+      image.image1,
+      image.image2,
+      image._id,
+    ]);
+
+    // Set the new table data
+    setTableData(newTableData);
+  }, [images]);
+
+  const handleDeleteRows = (rowsDeleted) => {
+    const deletedRowData = rowsDeleted.data.map(
+      (row) => tableData[row.dataIndex]
+    );
+    const itemToDelete = deletedRowData[0][7];
+
+    console.log("Deleted row data:", deletedRowData);
+    console.log("Deleted row data:", itemToDelete);
+    dispatch(deleteImage(itemToDelete));
+  };
+
   const [open, setOpen] = useState(false);
   //const [openModal, setOpenModal] = useState(false);
   //const [zoomedImage, setZoomedImage] = useState("");
   const handleClose = () => setOpen(false);
 
   const handleOpen = (rowData) => {
+    console.log(rowData);
     const custData = rowData;
     setCustName(custData[0]);
     setcustAccountNo(custData[1]);
@@ -188,7 +187,7 @@ const ListImages3 = ({ setImage }) => {
     setOpen(true);
   };
 
-  const newImages = images.map((imagee) => [
+  /*  const newImages = images.map((imagee) => [
     imagee.fullname,
     imagee.accountNo,
     imagee.ghanacard,
@@ -196,7 +195,7 @@ const ListImages3 = ({ setImage }) => {
     imagee.image3,
     imagee.image1,
     imagee.image2,
-  ]);
+  ]); */
 
   const columns = [
     { name: "Customer Name", options: { filterOptions: { fullWidth: true } } },
@@ -270,21 +269,16 @@ const ListImages3 = ({ setImage }) => {
     filter: false,
     filterType: "dropdown",
     responsive: "standard",
-    selectableRows: "none",
+    selectableRows: "multiple",
+    selectableRowsOnClick: false,
+
     onTableChange: (action, state) => {
-      state = { newImages };
+      state = { tableData };
     },
     onRowClick: (rowData) => {
       handleOpen(rowData);
     },
-    onRowsDelete: (rowData) => {
-      console.log(rowData);
-    },
-  };
-
-  const handleDelete = (id) => {
-    //dispatch(deleteImage(id));
-    console.log(id);
+    onRowsDelete: handleDeleteRows,
   };
 
   return (
@@ -370,7 +364,7 @@ const ListImages3 = ({ setImage }) => {
           </FormControl> */}
           <MUIDataTable
             title={"Ghana Card Details"}
-            data={newImages}
+            data={tableData}
             columns={columns}
             options={options}
           />
@@ -492,12 +486,6 @@ const ListImages3 = ({ setImage }) => {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={handleDelete(custGhanaCard)}>
-            Delete
-          </Button>
           <Button variant="outlined" size="small" onClick={downloadImage}>
             Save Profile
           </Button>
