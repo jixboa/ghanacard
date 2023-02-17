@@ -207,7 +207,7 @@ const AddTodo = ({ customer, setCustomer }) => {
     }; */
     dispatch(addImage(formData)).then(() => {
       //console.log(formData);
-      /* resetField("fullname");
+      resetField("fullname");
       resetField("accountNo");
       resetField("phone");
       resetField("ghanacard");
@@ -232,7 +232,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       setImg3({
         src3: placeholder,
         alt3: "",
-      }); */
+      });
     });
 
     return new Promise((resolve) => {
