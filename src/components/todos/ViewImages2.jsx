@@ -81,9 +81,11 @@ const ViewImages2 = (setMuiData) => {
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setLoading(false);
     }, 1000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   /*  useEffect(() => {

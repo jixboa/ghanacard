@@ -15,7 +15,7 @@ import { deleteImage } from "../../store/actions/imageAction";
 
 import * as React from "react";
 import { Avatar } from "@mui/material";
-import Modal from "@mui/material/Modal";
+//import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
@@ -30,6 +30,7 @@ import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import Chip from "@mui/material/Chip";
@@ -37,8 +38,13 @@ import Stack from "@mui/material/Stack";
 import CloseIcon from "@mui/icons-material/Close";
 import { Zoom } from "react-awesome-reveal";
 
+import Slide from "@mui/material/Slide";
+
 import "@fontsource/roboto/400.css";
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 //import { FileSaver } from "file-saver";
 //import * as htmlToImage from "html-to-image";
 //import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
@@ -81,7 +87,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-const style = {
+/* const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -91,7 +97,7 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
-};
+}; */
 
 const muiCache = createCache({
   key: "mui-datatables",
@@ -137,6 +143,10 @@ const ListImages3 = ({ setImage }) => {
   //const [custDateOfBirth, setcustDateOfBirth] = useState("");
   const [custAccountNo, setcustAccountNo] = useState("");
 
+  const [open, setOpen] = useState(false);
+  const [deleteDialogue, setDeleteDialogueOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState("");
+
   const images = useSelector((state) => state.images);
 
   useEffect(() => {
@@ -162,20 +172,27 @@ const ListImages3 = ({ setImage }) => {
     const deletedRowData = rowsDeleted.data.map(
       (row) => tableData[row.dataIndex]
     );
-    const itemToDelete = deletedRowData[0][7];
 
-    console.log("Deleted row data:", deletedRowData);
-    console.log("Deleted row data:", itemToDelete);
-    dispatch(deleteImage(itemToDelete));
+    const itemToDelete = deletedRowData[0][7];
+    setItemToDelete(itemToDelete);
+    handleDeleteDialogueOpen();
   };
 
-  const [open, setOpen] = useState(false);
+  const handleConfirmDelete = () => {
+    dispatch(deleteImage(itemToDelete));
+    handleDeleteDialogClose();
+  };
+
   //const [openModal, setOpenModal] = useState(false);
   //const [zoomedImage, setZoomedImage] = useState("");
   const handleClose = () => setOpen(false);
+  const handleDeleteDialogClose = () => setDeleteDialogueOpen(false);
+
+  const handleDeleteDialogueOpen = () => {
+    setDeleteDialogueOpen(true);
+  };
 
   const handleOpen = (rowData) => {
-    console.log(rowData);
     const custData = rowData;
     setCustName(custData[0]);
     setcustAccountNo(custData[1]);
@@ -370,34 +387,9 @@ const ListImages3 = ({ setImage }) => {
           />
         </ThemeProvider>
       </CacheProvider>
-      <Modal
-        keepMounted
-        open={false}
-        onClose={handleClose}
-        aria-labelledby="keep-mounted-modal-title"
-        aria-describedby="keep-mounted-modal-description">
-        <Box sx={style}>
-          <Box sx={{ width: 550, height: 150 }}>
-            <ImageList
-              variant="masonry"
-              sx={{ width: 500, height: 450 }}
-              sm={{ width: 350, height: 450 }}
-              cols={2}
-              rowHeight={150}
-              gap={8}>
-              <ImageListItem>
-                <img
-                  src={`${custFrontImage}?w=248&fit=crop&auto=format`}
-                  srcSet={`${custFrontImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  alt={custName}
-                />
-              </ImageListItem>
-            </ImageList>
-          </Box>
-        </Box>
-      </Modal>
 
       <BootstrapDialog
+        TransitionComponent={Transition}
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}>
@@ -472,12 +464,10 @@ const ListImages3 = ({ setImage }) => {
                 <ImageListItem>
                   <img
                     src={`${custFrontImage}?w=248&fit=crop&auto=format`}
-                    srcSet={`${custFrontImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     alt={custName}
                   />
                   <img
                     src={`${custBackImage}?w=248&fit=crop&auto=format`}
-                    srcSet={`${custBackImage}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     alt={custName}
                   />
                 </ImageListItem>
@@ -491,6 +481,36 @@ const ListImages3 = ({ setImage }) => {
           </Button>
         </DialogActions>
       </BootstrapDialog>
+
+      <Dialog
+        open={deleteDialogue}
+        maxWidth="xs"
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description">
+        <DialogTitle>{"Do you wish to confirm delete?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Clicking on "Yes" willl delete this Customer's data perminantly.
+            Click "No" if you dont want to.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleDeleteDialogClose}>
+            No
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={handleConfirmDelete}>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
