@@ -62,3 +62,22 @@ export const deleteImage = (id) => {
       });
   };
 };
+
+export const editImage = (formData, id) => {
+  return (dispatch) => {
+    API()
+      .put(`/images/${id}`, formData, setHeaders())
+      .then((image) => {
+        dispatch({
+          type: "UPDATE_IMAGE",
+          image,
+        });
+      })
+      .catch((error) => {
+        console.log(error.response);
+        toast.error(error.response?.data, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      });
+  };
+};

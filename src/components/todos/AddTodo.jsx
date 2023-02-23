@@ -190,6 +190,24 @@ const AddTodo = ({ customer, setCustomer }) => {
   const onSubmit = (data) => {
     dispatch(getImages());
 
+    const timestamp = Date.now();
+    const dateWow = new Date(timestamp);
+    const formattedDateNow = dateWow.toLocaleString("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+    const inputDate = new Date(dateOfBirth);
+    const formattedDate = inputDate.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
     const formData = new FormData();
 
     formData.append("image1", image1);
@@ -199,7 +217,8 @@ const AddTodo = ({ customer, setCustomer }) => {
     formData.append("accountNo", accountNo);
     formData.append("ghanacard", ghanacard);
     formData.append("phone", phone);
-    formData.append("dateOfBirth", dateOfBirth);
+    formData.append("dateOfBirth", formattedDate);
+    formData.append("dateCreated", formattedDateNow);
 
     /* const newCustomer = {
       ...customer,
@@ -207,7 +226,7 @@ const AddTodo = ({ customer, setCustomer }) => {
     }; */
     dispatch(addImage(formData)).then(() => {
       //console.log(formData);
-      resetField("fullname");
+      /* resetField("fullname");
       resetField("accountNo");
       resetField("phone");
       resetField("ghanacard");
@@ -232,7 +251,7 @@ const AddTodo = ({ customer, setCustomer }) => {
       setImg3({
         src3: placeholder,
         alt3: "",
-      });
+      }); */
     });
 
     return new Promise((resolve) => {

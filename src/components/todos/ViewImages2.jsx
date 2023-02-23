@@ -41,7 +41,7 @@ const ViewImages2 = (setMuiData) => {
     onIdle,
     onActive,
     onAction,
-    timeout: 10 * 24 * 1000,
+    timeout: 10 * 2400 * 1000,
     promptTimeout: 0,
     events: [
       "mousemove",

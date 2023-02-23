@@ -20,6 +20,14 @@ const imageReducer = (state = [], action) => {
       });
       return state.filter((image) => image._id !== action.id);
 
+    case "UPDATE_IMAGE":
+      toast.success("Data Updated Successfully", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return state.map((image) =>
+        image._id === action.image.data._id ? action.image.data : image
+      );
+
     default:
       return state;
   }

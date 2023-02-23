@@ -10,7 +10,7 @@ import createCache from "@emotion/cache";
 //import { Navigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { deleteImage } from "../../store/actions/imageAction";
+import { deleteImage, editImage } from "../../store/actions/imageAction";
 //import { useEffect } from "react";
 
 import * as React from "react";
@@ -37,6 +37,15 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import CloseIcon from "@mui/icons-material/Close";
 import { Zoom } from "react-awesome-reveal";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import TextField from "@mui/material/TextField";
+
+/* import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar"; */
 
 import Slide from "@mui/material/Slide";
 
@@ -45,10 +54,10 @@ import "@fontsource/roboto/400.css";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
-//import { FileSaver } from "file-saver";
-//import * as htmlToImage from "html-to-image";
-//import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
-//const download = require("download");
+
+const EditTransition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -142,9 +151,12 @@ const ListImages3 = ({ setImage }) => {
   const [custGhanaCard, setCustGhanaCard] = useState("");
   //const [custDateOfBirth, setcustDateOfBirth] = useState("");
   const [custAccountNo, setcustAccountNo] = useState("");
+  //const [custPhoneNo, setCustPhoneNO] = useState("");
+  const [custId, setCustId] = useState("");
 
   const [open, setOpen] = useState(false);
   const [deleteDialogue, setDeleteDialogueOpen] = useState(false);
+  const [editDialogue, setEditDialogueOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState("");
 
   const images = useSelector((state) => state.images);
@@ -157,7 +169,7 @@ const ListImages3 = ({ setImage }) => {
       image.fullname,
       image.accountNo,
       image.ghanacard,
-      image.date,
+      image.dateOfBirth,
       image.image3,
       image.image1,
       image.image2,
@@ -183,10 +195,48 @@ const ListImages3 = ({ setImage }) => {
     handleDeleteDialogClose();
   };
 
+  const handleEdit = (rowData) => {
+    const custData = rowData;
+
+    const custName = custData[0];
+    const custAccountNo = custData[1];
+    const custGhanaCard = custData[2];
+    const custId = custData[7];
+
+    setCustName(custName);
+    setcustAccountNo(custAccountNo);
+    setCustGhanaCard(custGhanaCard);
+    setCustId(custId);
+
+    setEditDialogueOpen(true);
+    //dispatch(editImage(editData));
+  };
+
+  const handleUpdate = () => {
+    const id = custId;
+
+    const updateData = {
+      fullname: custName,
+      ghanacard: custGhanaCard,
+      accountNo: custAccountNo,
+    };
+    const formData = new FormData();
+
+    formData.append("fullname", custName);
+    formData.append("ghanacardNo", custGhanaCard);
+    formData.append("accountNo", custAccountNo);
+
+    //console.log(formData);
+    dispatch(editImage(updateData, id));
+
+    handleEditDialogClose();
+  };
+
   //const [openModal, setOpenModal] = useState(false);
   //const [zoomedImage, setZoomedImage] = useState("");
   const handleClose = () => setOpen(false);
   const handleDeleteDialogClose = () => setDeleteDialogueOpen(false);
+  const handleEditDialogClose = () => setEditDialogueOpen(false);
 
   const handleDeleteDialogueOpen = () => {
     setDeleteDialogueOpen(true);
@@ -194,13 +244,21 @@ const ListImages3 = ({ setImage }) => {
 
   const handleOpen = (rowData) => {
     const custData = rowData;
-    setCustName(custData[0]);
-    setcustAccountNo(custData[1]);
-    setCustGhanaCard(custData[2]);
 
-    setCustSelfie(custData[4].props.src);
-    setCustFrontImage(custData[5].props.src);
-    setCustBackImage(custData[6].props.src);
+    const custName = custData[0];
+    const custAccountNo = custData[1];
+    const custGhanaCard = custData[2];
+    const custSelfie = custData[4];
+    const custFrontImage = custData[5];
+    const custBackImage = custData[6];
+
+    setCustName(custName);
+    setcustAccountNo(custAccountNo);
+    setCustGhanaCard(custGhanaCard);
+
+    setCustSelfie(custSelfie);
+    setCustFrontImage(custFrontImage);
+    setCustBackImage(custBackImage);
     setOpen(true);
   };
 
@@ -215,16 +273,23 @@ const ListImages3 = ({ setImage }) => {
   ]); */
 
   const columns = [
-    { name: "Customer Name", options: { filterOptions: { fullWidth: true } } },
+    {
+      name: "Customer Name",
+      options: {
+        filterOptions: { fullWidth: true },
+      },
+    },
     "Account number",
     "Ghana card",
-    "Date Created",
+    "Date of Birth",
     {
       name: "Avatar",
       label: "Selfie",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => (
           <Avatar
+            style={{ cursor: "pointer" }}
+            onClick={() => handleOpen(tableMeta.rowData)}
             src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${value}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
             alt="Alt"></Avatar>
         ),
@@ -254,6 +319,17 @@ const ListImages3 = ({ setImage }) => {
             variant="rounded"></Avatar>
         ),
         display: false,
+      },
+    },
+
+    {
+      name: "Edit",
+      label: "-",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => (
+          <EditOutlinedIcon onClick={() => handleEdit(tableMeta.rowData)} />
+        ),
+        display: true,
       },
     },
     /* {
@@ -288,12 +364,23 @@ const ListImages3 = ({ setImage }) => {
     responsive: "standard",
     selectableRows: "multiple",
     selectableRowsOnClick: false,
+    onRowClick: (rowData, rowMeta) => {},
+    editable: {
+      onRowUpdate: (updatedData, dataIndex) => {
+        console.log(updatedData, dataIndex);
+        // You can perform any update operation here using updatedData
+      },
+    },
+    /* customToolbar: () => {
+      return (
+        <span onClick={() => console.log("Custom toolbar clicked")}>
+          Custom Toolbar!
+        </span>
+      );
+    }, */
 
     onTableChange: (action, state) => {
       state = { tableData };
-    },
-    onRowClick: (rowData) => {
-      handleOpen(rowData);
     },
     onRowsDelete: handleDeleteRows,
   };
@@ -405,7 +492,7 @@ const ListImages3 = ({ setImage }) => {
               avatar={
                 <Avatar
                   alt="Natacha"
-                  src={custSelfie}
+                  src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${custSelfie}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
                   style={{ width: "70px", height: "70px" }}
                 />
               }
@@ -463,11 +550,11 @@ const ListImages3 = ({ setImage }) => {
                 gap={8}>
                 <ImageListItem>
                   <img
-                    src={`${custFrontImage}?w=248&fit=crop&auto=format`}
+                    src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${custFrontImage}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
                     alt={custName}
                   />
                   <img
-                    src={`${custBackImage}?w=248&fit=crop&auto=format`}
+                    src={`https://firebasestorage.googleapis.com/v0/b/mycard-uploads.appspot.com/o/${custBackImage}?alt=media&token=86a1e483-8966-4f5c-8ff0-e45972e3c12b`}
                     alt={custName}
                   />
                 </ImageListItem>
@@ -509,6 +596,90 @@ const ListImages3 = ({ setImage }) => {
             onClick={handleConfirmDelete}>
             Yes
           </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* <Dialog
+        fullScreen
+        open={editDialogue}
+        onClose={handleEditDialogClose}
+        TransitionComponent={EditTransition}>
+        <AppBar sx={{ position: "relative" }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleEditDialogClose}
+              aria-label="close">
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Update Customer Information
+            </Typography>
+            <Button autoFocus color="inherit" onClick={handleUpdate}>
+              Update
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <List>
+          <ListItem button>
+            <ListItemText primary={custName} secondary="Titania" />
+          </ListItem>
+          <Divider />
+          <ListItem button>
+            <ListItemText primary={custAccountNo} secondary="Tethys" />
+          </ListItem>
+        </List>
+      </Dialog> */}
+
+      <Dialog
+        open={editDialogue}
+        onClose={handleEditDialogClose}
+        TransitionComponent={EditTransition}>
+        <DialogTitle>Edit Customer Data</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Only Customer name, Account number, Phone number and date of Birth
+            can be updated here. Any further changes may require Deletion of
+            customer's details for re-submission by customer.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="fullname"
+            label="Full name"
+            value={custName}
+            onChange={(e) => setCustName(e.target.value)}
+            type="name"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="accountNo"
+            label="Account Number"
+            value={custAccountNo}
+            onChange={(e) => setcustAccountNo(e.target.value)}
+            type="name"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="ghanacardNo"
+            label="Ghana Card Number"
+            value={custGhanaCard}
+            onChange={(e) => setCustGhanaCard(e.target.value)}
+            type="email"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleEditDialogClose}>Cancel</Button>
+          <Button onClick={handleUpdate}>Update</Button>
         </DialogActions>
       </Dialog>
     </>
