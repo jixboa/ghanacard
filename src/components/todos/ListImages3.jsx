@@ -40,6 +40,8 @@ import { Zoom } from "react-awesome-reveal";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import TextField from "@mui/material/TextField";
 
+import { MdDelete } from "react-icons/md";
+
 /* import ListItemText from "@mui/material/ListItemText";
 import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
@@ -153,11 +155,12 @@ const ListImages3 = ({ setImage }) => {
   const [custAccountNo, setcustAccountNo] = useState("");
   //const [custPhoneNo, setCustPhoneNO] = useState("");
   const [custId, setCustId] = useState("");
+  const [custPhone, setCustPhone] = useState("");
 
   const [open, setOpen] = useState(false);
   const [deleteDialogue, setDeleteDialogueOpen] = useState(false);
   const [editDialogue, setEditDialogueOpen] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState("");
+  const [itemToDelete, setItemToDelete] = useState([]);
 
   const images = useSelector((state) => state.images);
 
@@ -169,6 +172,7 @@ const ListImages3 = ({ setImage }) => {
       image.fullname,
       image.accountNo,
       image.ghanacard,
+      image.phone,
       image.dateOfBirth,
       image.image3,
       image.image1,
@@ -181,13 +185,17 @@ const ListImages3 = ({ setImage }) => {
   }, [images]);
 
   const handleDeleteRows = (rowsDeleted) => {
-    const deletedRowData = rowsDeleted.data.map(
-      (row) => tableData[row.dataIndex]
-    );
-
-    const itemToDelete = deletedRowData[0][7];
-    setItemToDelete(itemToDelete);
+    console.log(rowsDeleted);
+    const itemsToDelete = rowsDeleted;
+    setItemToDelete(itemsToDelete);
     handleDeleteDialogueOpen();
+    /* const deletedRowData = rowsDeleted.data.map(
+      (row) => tableData[row.dataIndex]
+      );
+      
+      const itemToDelete = deletedRowData[0][8];
+      setItemToDelete(itemToDelete);
+      handleDeleteDialogueOpen(); */
   };
 
   const handleConfirmDelete = () => {
@@ -201,11 +209,13 @@ const ListImages3 = ({ setImage }) => {
     const custName = custData[0];
     const custAccountNo = custData[1];
     const custGhanaCard = custData[2];
-    const custId = custData[7];
+    const custPhone = custData[3];
+    const custId = custData[8];
 
     setCustName(custName);
     setcustAccountNo(custAccountNo);
     setCustGhanaCard(custGhanaCard);
+    setCustPhone(custPhone);
     setCustId(custId);
 
     setEditDialogueOpen(true);
@@ -217,16 +227,9 @@ const ListImages3 = ({ setImage }) => {
 
     const updateData = {
       fullname: custName,
-      ghanacard: custGhanaCard,
+      phone: custPhone,
       accountNo: custAccountNo,
     };
-    const formData = new FormData();
-
-    formData.append("fullname", custName);
-    formData.append("ghanacardNo", custGhanaCard);
-    formData.append("accountNo", custAccountNo);
-
-    //console.log(formData);
     dispatch(editImage(updateData, id));
 
     handleEditDialogClose();
@@ -248,9 +251,9 @@ const ListImages3 = ({ setImage }) => {
     const custName = custData[0];
     const custAccountNo = custData[1];
     const custGhanaCard = custData[2];
-    const custSelfie = custData[4];
-    const custFrontImage = custData[5];
-    const custBackImage = custData[6];
+    const custSelfie = custData[5];
+    const custFrontImage = custData[6];
+    const custBackImage = custData[7];
 
     setCustName(custName);
     setcustAccountNo(custAccountNo);
@@ -281,6 +284,7 @@ const ListImages3 = ({ setImage }) => {
     },
     "Account number",
     "Ghana card",
+    "Phone number",
     "Date of Birth",
     {
       name: "Avatar",
@@ -383,6 +387,20 @@ const ListImages3 = ({ setImage }) => {
       state = { tableData };
     },
     onRowsDelete: handleDeleteRows,
+
+    customToolbarSelect: (selectedRows, displayData, setSelectedRows) => (
+      <div style={{ marginRight: "20px" }}>
+        <MdDelete
+          onClick={() => {
+            const selectedIds = selectedRows.data.map(
+              (item) => tableData[item.index][8]
+            );
+            handleDeleteRows(selectedIds);
+            setSelectedRows([]);
+          }}
+        />
+      </div>
+    ),
   };
 
   return (
@@ -467,7 +485,7 @@ const ListImages3 = ({ setImage }) => {
             </Select>
           </FormControl> */}
           <MUIDataTable
-            title={"Ghana Card Details"}
+            title={<Typography variant="h6">Ghana Card Data</Typography>}
             data={tableData}
             columns={columns}
             options={options}
@@ -639,9 +657,9 @@ const ListImages3 = ({ setImage }) => {
         <DialogTitle>Edit Customer Data</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Only Customer name, Account number, Phone number and date of Birth
-            can be updated here. Any further changes may require Deletion of
-            customer's details for re-submission by customer.
+            Only Customer name, Account number and Phone number can be updated
+            here. Any further changes may require Deletion of customer's details
+            for re-submission by customer.
           </DialogContentText>
           <TextField
             autoFocus
@@ -669,9 +687,9 @@ const ListImages3 = ({ setImage }) => {
             autoFocus
             margin="dense"
             id="ghanacardNo"
-            label="Ghana Card Number"
-            value={custGhanaCard}
-            onChange={(e) => setCustGhanaCard(e.target.value)}
+            label="Phone Number"
+            value={custPhone}
+            onChange={(e) => setCustPhone(e.target.value)}
             type="email"
             fullWidth
             variant="standard"

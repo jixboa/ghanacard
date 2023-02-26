@@ -44,14 +44,14 @@ export const addImage = (formData) => (dispatch, getState) =>
       });
   });
 
-export const deleteImage = (id) => {
+export const deleteImage = (ids) => {
   return (dispatch) => {
     API()
-      .delete(`/images/${id}`, setHeaders())
+      .delete(`/images/${ids}`, setHeaders())
       .then(() => {
         dispatch({
           type: "DELETE_IMAGE",
-          id,
+          payload: { ids },
         });
       })
       .catch((error) => {

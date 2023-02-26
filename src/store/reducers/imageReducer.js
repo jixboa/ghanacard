@@ -15,10 +15,12 @@ const imageReducer = (state = [], action) => {
       return action.images.data;
 
     case "DELETE_IMAGE":
-      toast.success("Data Was delete", {
+      const { ids } = action.payload;
+      const remainingImages = state.filter((image) => !ids.includes(image._id));
+      toast.success("Images Deleted Successfully", {
         position: toast.POSITION.TOP_CENTER,
       });
-      return state.filter((image) => image._id !== action.id);
+      return remainingImages;
 
     case "UPDATE_IMAGE":
       toast.success("Data Updated Successfully", {
